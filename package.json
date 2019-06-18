@@ -1,0 +1,28 @@
+{
+  "name": "glimmer-lite",
+  "version": "0.1.0",
+  "description": "Lightweight runtime for Glimmer components",
+  "main": "dist/index.js",
+  "repository": "https://github.com/tomdale/glimmer-lite",
+  "author": "Tom Dale <tom@tomdale.net>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "webpack"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "lerna": "^3.15.0",
+    "ts-loader": "^6.0.2",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.5.1",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.1"
+  }
+}
