@@ -2,7 +2,10 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  entry: './packages/glimmer-lite-test-app/index.ts',
+  entry: {
+    app: './packages/glimmer-lite-test-app/index.ts',
+    tests: './packages/glimmer-lite-core/tests/index.ts'
+  },
   mode: 'development',
   module: {
     rules: [
@@ -18,7 +21,7 @@ module.exports = {
     extensions: [ '.ts', '.js' ]
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   }
 };

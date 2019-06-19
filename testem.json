@@ -1,0 +1,11 @@
+{
+  "framework": "qunit",
+  "test_page": "tests.html",
+  "on_start": {
+    "command": "webpack --watch",
+    "wait_for_text": "Built at:"
+  },
+  "watch_files": [
+    "dist/tests.bundle.js"
+  ]
+}

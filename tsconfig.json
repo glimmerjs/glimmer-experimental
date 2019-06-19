@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "module": "commonjs",
     "declaration": true,
+    "moduleResolution": "node",
     "rootDir": ".",
     "outDir": "dist",
     "baseUrl": ".",
