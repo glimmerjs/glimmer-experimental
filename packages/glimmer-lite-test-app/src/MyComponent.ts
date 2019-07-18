@@ -1,10 +1,18 @@
-import Component from '@glimmer/component';
+import { Component } from 'glimmer-lite-core';
 import { withTemplate } from './utils';
 import OtherComponent from './OtherComponent';
+import { tracked } from '@glimmer/component';
 
 class MyComponent extends Component {
   message = "hello world";
-  count = 55;
+  @tracked count = 55;
+
+  constructor(owner: unknown, args: object) {
+    super(owner, args);
+    setInterval(() => {
+      this.count++;
+    }, 16);
+  }
 }
 
 export default withTemplate(MyComponent, 

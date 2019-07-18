@@ -1,12 +1,10 @@
 import { Option, CompileTimeComponent, Dict, } from '@glimmer/interfaces';
-import { ComponentManager } from '@glimmer/component';
 import { ResolverDelegate, templateFactory } from '@glimmer/opcode-compiler';
 import { TemplateMeta, ComponentConstructor, definitionFor } from '../index';
-import { getComponentTemplate } from './component-templates';
 import RuntimeResolverDelegate from './runtime-resolver';
 
 export default class CompileTimeResolver implements ResolverDelegate {
-  constructor(private manager: ComponentManager, private runtimeResolver: RuntimeResolverDelegate) {}
+  constructor(private runtimeResolver: RuntimeResolverDelegate) {}
   registry: Dict<any> = {};
 
   lookupHelper(_name: string, _referrer: unknown): Option<number> {
@@ -20,15 +18,15 @@ export default class CompileTimeResolver implements ResolverDelegate {
   lookupComponent(name: string, referrer: TemplateMeta): Option<CompileTimeComponent> {
     const scope = referrer.scope();
     const ComponentClass = scope[name] as any as ComponentConstructor;
-    const definition = definitionFor(ComponentClass, this.manager);
-    const template = getComponentTemplate(ComponentClass);
-    this.runtimeResolver.registry[definition.state.handle] = definition;
+    const definition = definitionFor(ComponentClass) as any;
+    const { state } = definition;
+    const { template, handle, capabilities } = state;
 
-    console.log({ ComponentClass, definition, template });
+    this.runtimeResolver.registry[handle] = definition;
 
     return {
-      handle: definition.state.handle,
-      capabilities: definition.state.capabilities,
+      handle,
+      capabilities,
       compilable: templateFactory(template!)
         .create()
         .asLayout()

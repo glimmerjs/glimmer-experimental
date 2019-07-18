@@ -16,6 +16,7 @@ function compileWithScope(templateSource: string, scopeFn: ScopeFn) {
 }
 
 export function withTemplate(ComponentClass: Constructor<Component>, templateSource: string, scope: ScopeFn) {
-  setComponentTemplate(ComponentClass, compileWithScope(templateSource, scope))
+  setComponentTemplate(ComponentClass, compileWithScope(templateSource, scope));
+  (ComponentClass as any).template = compileWithScope(templateSource, scope);
   return ComponentClass;
 }
