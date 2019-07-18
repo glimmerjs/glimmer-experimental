@@ -11,7 +11,7 @@
     "build": "webpack",
     "start": "webpack-dev-server",
     "test": "testem ci",
-    "test:watch": "testem ci"
+    "test:watch": "testem"
   },
   "workspaces": [
     "packages/*"
