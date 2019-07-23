@@ -1,11 +1,6 @@
 import Component from '@glimmer/component';
-import { withTemplate } from './utils';
+import { hbs } from './utils';
 
-class OtherComponent extends Component {
-
+export default class OtherComponent extends Component {
+  static template = hbs('<b>hi {{@count}}</b>');
 }
-
-export default withTemplate(OtherComponent,
-  '<b>hi {{@count}}</b>',
-  () => ({})
-);
