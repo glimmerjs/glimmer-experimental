@@ -1,7 +1,9 @@
 import { Option, CompileTimeComponent, Dict, } from '@glimmer/interfaces';
 import { ResolverDelegate, templateFactory } from '@glimmer/opcode-compiler';
-import { TemplateMeta, ComponentConstructor, definitionFor } from '../index';
 import RuntimeResolverDelegate from './runtime-resolver';
+import { TemplateMeta, Constructor } from './interfaces';
+import Component from './component';
+import { definitionFor } from './render-component';
 
 export default class CompileTimeResolver implements ResolverDelegate {
   constructor(private runtimeResolver: RuntimeResolverDelegate) {}
@@ -17,7 +19,7 @@ export default class CompileTimeResolver implements ResolverDelegate {
 
   lookupComponent(name: string, referrer: TemplateMeta): Option<CompileTimeComponent> {
     const scope = referrer.scope();
-    const ComponentClass = scope[name] as any as ComponentConstructor;
+    const ComponentClass = scope[name] as any as Constructor<Component>;
     const definition = definitionFor(ComponentClass) as any;
     const { state } = definition;
     const { template, handle, capabilities } = state;

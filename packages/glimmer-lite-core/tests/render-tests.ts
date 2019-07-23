@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 
 import { renderComponent, setComponentManager, LiteComponentManager } from '..';
-import { withTemplate, hbs } from './utils';
+import { hbs } from './utils';
 
 const { module, test } = QUnit
 
@@ -38,17 +38,21 @@ module('rendering', () => {
   });
 
   test('a component can render multiple nested components', async (assert) => {
-    const Foo = withTemplate(class extends Component {
-    }, `Foo`, () => ({}));
+    class Foo extends Component {
+      static template = hbs(`Foo`);
+    }
 
-    const Bar = withTemplate(class extends Component {
-    }, `Bar`, () => ({}));
+    class Bar extends Component {
+      static template = hbs(`Bar`);
+    }
 
-    const OtherComponent = withTemplate(class extends Component {
-    }, `Hello world <Foo /><Bar />`, () => ({ Foo, Bar }));
+    class OtherComponent extends Component {
+      static template = hbs(`Hello world <Foo /><Bar />`, () => ({ Foo, Bar }));
+    }
 
-    const MyComponent = withTemplate(class extends Component {
-    }, `<h1><OtherComponent /></h1>`, () => ({ OtherComponent }));
+    class MyComponent extends Component {
+      static template = hbs(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent }));
+    }
 
     const elem = document.getElementById('qunit-fixture')!;
     await renderComponent(MyComponent, elem);
