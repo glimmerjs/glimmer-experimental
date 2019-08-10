@@ -1,2 +1,2 @@
-import "./component-manager-tests";
-import "./render-tests";
+import './component-manager-tests';
+import './render-tests';
