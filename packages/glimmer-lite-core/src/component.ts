@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
-import { setComponentManager, LiteComponentManager } from './component-managers';
+import { setComponentManager } from './component-managers';
+import LiteComponentManager from './lite-component-manager';
 
 setComponentManager(Component, new LiteComponentManager());
 

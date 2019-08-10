@@ -2,12 +2,13 @@ import { SerializedTemplateWithLazyBlock } from "@glimmer/interfaces";
 import { Constructor, TemplateMeta } from './interfaces';
 import Component from './component';
 
-const templateMap = new WeakMap<Constructor<Component>, SerializedTemplateWithLazyBlock<TemplateMeta>>();
-export function setComponentTemplate<T extends Constructor<Component>>(ComponentClass: T, template: SerializedTemplateWithLazyBlock<TemplateMeta>): T {
-  templateMap.set(ComponentClass, template);  
+const TEMPLATE_MAP = new WeakMap<object, SerializedTemplateWithLazyBlock<TemplateMeta>>();
+
+export function setComponentTemplate<T extends object>(ComponentClass: T, template: SerializedTemplateWithLazyBlock<TemplateMeta>): T {
+  TEMPLATE_MAP.set(ComponentClass, template);  
   return ComponentClass;
 }
 
-export function getComponentTemplate(ComponentClass: Constructor<Component>) {
-  return templateMap.get(ComponentClass);
+export function getComponentTemplate<T extends object>(ComponentClass: T) {
+  return TEMPLATE_MAP.get(ComponentClass);
 }

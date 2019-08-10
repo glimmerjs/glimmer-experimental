@@ -3,7 +3,7 @@ import { ResolverDelegate, templateFactory } from '@glimmer/opcode-compiler';
 import RuntimeResolverDelegate from './runtime-resolver';
 import { TemplateMeta, Constructor } from './interfaces';
 import Component from './component';
-import { definitionFor } from './render-component';
+import { definitionFor } from './component-definitions';
 
 export default class CompileTimeResolver implements ResolverDelegate {
   constructor(private runtimeResolver: RuntimeResolverDelegate) {}

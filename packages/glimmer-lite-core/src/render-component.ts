@@ -4,7 +4,6 @@ import { clientBuilder, renderJitComponent, CustomJitRuntime } from '@glimmer/ru
 import {
   Cursor as GlimmerCursor,
   RenderResult,
-  ComponentDefinition
 } from '@glimmer/interfaces';
 import { JitContext } from '@glimmer/opcode-compiler';
 
@@ -12,8 +11,8 @@ import CompileTimeResolver from './compile-time-resolver';
 import RuntimeResolver from './runtime-resolver';
 
 import Component from './component';
-import { getComponentManager } from './component-managers';
 import { Constructor } from './interfaces';
+import { definitionFor } from './component-definitions';
 
 interface RenderComponentOptions {
   element: Element;
@@ -79,18 +78,4 @@ function getTemplateIterator(ComponentClass: Constructor<Component>, element: El
   resolver.register('root', definition);
 
   return renderJitComponent(runtime, builder, context, 0, 'root');
-}
-
-const DEFINITIONS = new WeakMap<Constructor<Component>, ComponentDefinition>();
-
-export function definitionFor(ComponentClass: Constructor<Component>): ComponentDefinition {
-  let definition = DEFINITIONS.get(ComponentClass);
-  if (definition) {
-    return definition;
-  }
-
-  const manager = getComponentManager(ComponentClass)!;
-  definition = manager.createComponentDefinition(ComponentClass);
-  DEFINITIONS.set(ComponentClass, definition);
-  return definition;
 }

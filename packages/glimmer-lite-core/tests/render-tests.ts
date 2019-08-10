@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 
 import { renderComponent, setComponentManager, LiteComponentManager } from '..';
 import { hbs } from './utils';
+import { setComponentTemplate } from '../src/component-templates';
 
 const { module, test } = QUnit
 
@@ -10,8 +11,9 @@ setComponentManager(Component, new LiteComponentManager());
 module('rendering', () => {
   test('it renders a component', async (assert) => {
     class MyComponent extends Component {
-      static template = hbs(`<h1>Hello world</h1>`)
     }
+
+    setComponentTemplate(MyComponent, hbs(`<h1>Hello world</h1>`));
 
     const elem = document.getElementById('qunit-fixture')!;
     await renderComponent(MyComponent, elem);
