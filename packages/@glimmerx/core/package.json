@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/core",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Core rendering functionality",
   "main": "dist/index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",
@@ -11,8 +11,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/component": "^0.14.0-alpha.11",
     "@glimmer/application": "^0.14.0-alpha.11",
+    "@glimmer/component": "^0.14.0-alpha.11",
     "@glimmer/opcode-compiler": "^0.41.0",
     "@glimmer/runtime": "^0.41.0",
     "@simple-dom/interface": "^1.4.0"

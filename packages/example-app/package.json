@@ -1,6 +1,6 @@
 {
   "name": "example-app",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Example application using @glimmerx packages",
   "main": "dist/index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",
@@ -14,8 +14,8 @@
     "glimmer-lite-core": "^0.1.0"
   },
   "devDependencies": {
-    "@glimmer/interfaces": "^0.40.1",
     "@glimmer/bundle-compiler": "^0.40.1",
-    "@glimmer/compiler": "^0.40.1"
+    "@glimmer/compiler": "^0.40.1",
+    "@glimmer/interfaces": "^0.40.1"
   }
 }
