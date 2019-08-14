@@ -3,8 +3,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './packages/glimmer-lite-test-app/index.ts',
-    tests: './packages/glimmer-lite-core/tests/index.ts',
+    app: './packages/example-app/index.ts',
+    tests: './packages/@glimmerx/core/tests/index.ts',
   },
   mode: 'development',
   module: {
@@ -12,7 +12,7 @@ module.exports = {
       {
         test: /\.ts$/,
         include: [
-          path.resolve(__dirname, 'packages/glimmer-lite-core')
+          path.resolve(__dirname, 'packages/@glimmerx')
         ],
         use: {
           loader: 'babel-loader',
@@ -28,13 +28,13 @@ module.exports = {
       {
         test: /\.ts$/,
         include: [
-          path.resolve(__dirname, 'packages/glimmer-lite-test-app')
+          path.resolve(__dirname, 'packages/example-app')
         ],
         use: {
           loader: 'babel-loader',
           options: {
             plugins: [
-              'babel-plugin-glimmer-component',
+              '@glimmerx/babel-plugin-component-templates',
               ['@babel/plugin-proposal-decorators', { legacy: true }],
               ['@babel/plugin-proposal-class-properties', { loose: true }],
             ],

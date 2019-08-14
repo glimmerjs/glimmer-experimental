@@ -8,13 +8,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "build": "scripts/build.js",
     "start": "webpack-dev-server",
     "test": "testem ci",
     "test:watch": "testem"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/@glimmerx/*"
   ],
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",

@@ -2,12 +2,13 @@
   "compilerOptions": {
     "target": "es2018",
     "declaration": true,
+    "declarationMap": true,
     "moduleResolution": "node",
     "rootDir": ".",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "~/*": ["packages/*"]
+      "*": ["packages/*"]
     },
 
     "strict": true,                           /* Enable all strict type-checking options. */
