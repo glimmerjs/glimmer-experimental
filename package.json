@@ -1,5 +1,5 @@
 {
-  "name": "glimmer-lite",
+  "name": "glimmerx",
   "version": "0.1.0",
   "description": "Lightweight runtime for Glimmer components",
   "main": "dist/index.js",
