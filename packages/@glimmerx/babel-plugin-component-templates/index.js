@@ -1,5 +1,6 @@
 const { precompile } = require('@glimmer/compiler');
 const { addNamed } = require('@babel/helper-module-imports');
+const { extractComponentFromClassMethod } = require('ember-meta-explorer');
 
 module.exports = function(babel, options) {
   const { types: t, parse } = babel;
@@ -33,6 +34,14 @@ module.exports = function(babel, options) {
             insertTemplateWrapper(path, setter);
             path.remove();
           },
+          ClassMethod(path) {
+            if (!path.node.static || path.node.key.name !== 'template') {
+              return;
+            }
+            let setter = maybeAddTemplateSetterImport(state, programPath);
+            insertTemplateWrapper(path, setter);
+            path.remove();
+          }
         });
         // Babel TypeScript transform strips any bindings that aren't
         // referenced, so we need to retain any values referenced in the
@@ -99,6 +108,10 @@ module.exports = function(babel, options) {
   }
 
   function getTemplateString(path) {
+    if (t.isClassMethod(path.node)) {
+      return extractComponentFromClassMethod(path);
+    }
+   
     const stringNode = path.node.value;
 
     if (t.isTaggedTemplateExpression(stringNode)) {
