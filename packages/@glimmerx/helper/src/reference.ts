@@ -1,10 +1,10 @@
 import { TagWrapper, RevisionTag } from '@glimmer/reference';
 import { CachedReference } from '@glimmer/component';
-import { Dict, VMArguments, CapturedArguments, Helper as GlimmerHelper } from '@glimmer/interfaces';
+import { Dict, VMArguments, CapturedArguments } from '@glimmer/interfaces';
 
 export type UserHelper = (args: ReadonlyArray<unknown>, named: Dict<unknown>) => any;
 
-class HelperReference extends CachedReference<unknown> {
+export default class HelperReference extends CachedReference<unknown> {
   public tag: TagWrapper<RevisionTag | null>;
   private args: CapturedArguments;
 
@@ -19,8 +19,4 @@ class HelperReference extends CachedReference<unknown> {
 
     return helper(args.positional.value(), args.named.value());
   }
-}
-
-export default function helper(helperFn: UserHelper): GlimmerHelper {
-  return args => new HelperReference(helperFn, args);
 }

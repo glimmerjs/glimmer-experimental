@@ -15,7 +15,6 @@
     "@glimmer/component": "^0.14.0-alpha.11",
     "@glimmer/interfaces": "^0.41.0",
     "@glimmer/opcode-compiler": "^0.41.0",
-    "@glimmer/reference": "^0.41.0",
     "@glimmer/runtime": "^0.41.0",
     "@simple-dom/interface": "^1.4.0"
   },

@@ -1,5 +1,5 @@
-import { helper } from '@glimmerx/core';
 import Component, { tracked, hbs } from '@glimmerx/component';
+import helper from '@glimmerx/helper';
 import OtherComponent from './OtherComponent';
 
 const myHelper = helper(function ([name], {greeting}) {

@@ -61,7 +61,7 @@ module('rendering', () => {
   });
 
   test('a component can render with helpers', async assert => {
-    const myHelper = ([name], {greeting}) => {
+    const myHelper = ([name]: [string], {greeting}: {greeting: string}) => {
       return `helper ${greeting} ${name}`;
     };
 

@@ -115,6 +115,29 @@ export default class extends Component {
 }
 ```
 
+### `@glimmerx/helper`
+
+#### `helper`
+Wrapper function to tag functions as helpers
+
+`import { helper } from @glimmerx/core`
+
+```js
+import Component, { hbs } from '@glimmerx/component';
+import { helper } from '@glimmerx/helper';
+
+const myHelper = helper(([name], { greeting }) => {
+  return `${greeting} ${name}`;
+});
+
+
+export default class extends Component {
+    static template = hbs`
+      {{myHelper "foo" greeting="Hello"}}
+    `
+}
+```
+
 ### `@glimmerx/core`
 
 #### `renderComponent`
@@ -128,25 +151,6 @@ import { renderComponent } from '@glimmerx/core';
 import MyComponent from './MyComponent';
 
 renderComponent(MyComponent, document.getElementById('app'));
-```
-
-#### `helper`
-`import { helper } from @glimmerx/core`
-
-```js
-import Component, { hbs } from '@glimmerx/component';
-import { helper } from '@glimmerx/core';
-
-const myHelper = helper(([name], { greeting }) => {
-  return `${greeting} ${name}`;
-});
-
-
-export default class extends Component {
-    static template = hbs`
-      {{myHelper "foo" greeting="Hello"}}
-    `
-}
 ```
 
 ## Development
