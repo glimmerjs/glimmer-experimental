@@ -130,6 +130,25 @@ import MyComponent from './MyComponent';
 renderComponent(MyComponent, document.getElementById('app'));
 ```
 
+#### `helper`
+`import { helper } from @glimmerx/core`
+
+```js
+import Component, { hbs } from '@glimmerx/component';
+import { helper } from '@glimmerx/core';
+
+const myHelper = helper(([name], { greeting }) => {
+  return `${greeting} ${name}`;
+});
+
+
+export default class extends Component {
+    static template = hbs`
+      {{myHelper "foo" greeting="Hello"}}
+    `
+}
+```
+
 ## Development
 
 ### Setup

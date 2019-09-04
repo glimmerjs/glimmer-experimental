@@ -59,4 +59,20 @@ module('rendering', () => {
 
     assert.strictEqual(elem.innerHTML, '<h1>Hello world FooBar</h1>', 'the template was rendered');
   });
+
+  test('a component can render with helpers', async assert => {
+    const myHelper = ([name], {greeting}) => {
+      return `helper ${greeting} ${name}`;
+    };
+
+    class MyComponent extends Component {}
+    setComponentTemplate(
+      MyComponent,
+      compileTemplate('<h1>{{myHelper "foo" greeting="Hello"}}</h1>', () => ({ myHelper }))
+    );
+
+    const elem = document.getElementById('qunit-fixture')!;
+    await renderComponent(MyComponent, elem);
+    assert.strictEqual(elem.innerHTML, '<h1>helper Hello foo</h1>', 'the template was rendered');
+  });
 });

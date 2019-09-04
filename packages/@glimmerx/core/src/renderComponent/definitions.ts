@@ -1,20 +1,32 @@
-import { ComponentDefinition } from '@glimmer/interfaces';
 import { CAPABILITIES } from '@glimmer/component';
 import Component from '@glimmerx/component';
+import { ComponentDefinition, Helper as GlimmerHelper } from '@glimmer/interfaces';
 
 import { getComponentManager } from '../setComponentManager';
 import { getComponentTemplate } from '../setComponentTemplate';
 import { Constructor } from '../interfaces';
 
-const DEFINITIONS = new WeakMap<Constructor<Component>, ComponentDefinition>();
+interface HelperDefinition {
+  state: {
+    fn: GlimmerHelper;
+    handle: number;
+  }
+}
 
-export function definitionFor(ComponentClass: Constructor<Component>): ComponentDefinition {
-  return DEFINITIONS.get(ComponentClass) || createDefinition(ComponentClass);
+const COMPONENT_DEFINITIONS = new WeakMap<Constructor<Component>, ComponentDefinition>();
+const HELPER_DEFINITIONS = new WeakMap<GlimmerHelper, HelperDefinition>();
+
+export function definitionForComponent(ComponentClass: Constructor<Component>): ComponentDefinition {
+  return COMPONENT_DEFINITIONS.get(ComponentClass) || createComponentDefinition(ComponentClass);
+}
+
+export function definitionForHelper(Helper: GlimmerHelper): HelperDefinition {
+  return HELPER_DEFINITIONS.get(Helper) || createHelperDefinition(Helper);
 }
 
 let HANDLE = 0;
 
-function createDefinition(ComponentClass: Constructor<Component>): ComponentDefinition {
+function createComponentDefinition(ComponentClass: Constructor<Component>): ComponentDefinition {
   const manager = getComponentManager(ComponentClass)!;
   const template = getComponentTemplate(ComponentClass);
 
@@ -28,7 +40,20 @@ function createDefinition(ComponentClass: Constructor<Component>): ComponentDefi
     manager
   };
 
-  DEFINITIONS.set(ComponentClass, definition);
+  COMPONENT_DEFINITIONS.set(ComponentClass, definition);
 
+  return definition;
+}
+
+
+function createHelperDefinition(Helper: GlimmerHelper): HelperDefinition {
+  const definition = {
+    state: {
+      fn: Helper,
+      handle: HANDLE++
+    }
+  }
+
+  HELPER_DEFINITIONS.set(Helper, definition);
   return definition;
 }
