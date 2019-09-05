@@ -12,7 +12,7 @@ import CompileTimeResolver from './CompileTimeResolver';
 import RuntimeResolver from './RuntimeResolver';
 
 import { Constructor } from '../interfaces';
-import { definitionFor } from './definitions';
+import { definitionForComponent } from './definitions';
 
 interface RenderComponentOptions {
   element: Element;
@@ -74,7 +74,7 @@ function getTemplateIterator(ComponentClass: Constructor<Component>, element: El
     nextSibling: null,
   } as GlimmerCursor);
 
-  const definition = definitionFor(ComponentClass);
+  const definition = definitionForComponent(ComponentClass);
   resolver.register('root', definition);
 
   return renderJitComponent(runtime, builder, context, 0, 'root');
