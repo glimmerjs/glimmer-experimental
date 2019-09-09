@@ -13,6 +13,8 @@ interface HelperDefinition {
   }
 }
 
+CAPABILITIES.dynamicScope = true;
+
 const COMPONENT_DEFINITIONS = new WeakMap<Constructor<Component>, ComponentDefinition>();
 const HELPER_DEFINITIONS = new WeakMap<GlimmerHelper, HelperDefinition>();
 
