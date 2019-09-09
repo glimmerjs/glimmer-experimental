@@ -1,4 +1,4 @@
-import { CAPABILITIES } from '@glimmer/component';
+import { CAPABILITIES } from './capabilities';
 import Component from '@glimmerx/component';
 import { ComponentDefinition, Helper as GlimmerHelper } from '@glimmer/interfaces';
 
@@ -12,8 +12,6 @@ interface HelperDefinition {
     handle: number;
   }
 }
-
-CAPABILITIES.dynamicScope = true;
 
 const COMPONENT_DEFINITIONS = new WeakMap<Constructor<Component>, ComponentDefinition>();
 const HELPER_DEFINITIONS = new WeakMap<GlimmerHelper, HelperDefinition>();
