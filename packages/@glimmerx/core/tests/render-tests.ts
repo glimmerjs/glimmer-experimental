@@ -3,6 +3,7 @@ import Component from '@glimmerx/component';
 import { renderComponent } from '..';
 import { compileTemplate } from './utils';
 import { setComponentTemplate } from '../src/setComponentTemplate';
+import { service } from '@glimmerx/service';
 
 const { module, test } = QUnit;
 
@@ -74,5 +75,34 @@ module('rendering', () => {
     const elem = document.getElementById('qunit-fixture')!;
     await renderComponent(MyComponent, elem);
     assert.strictEqual(elem.innerHTML, '<h1>helper Hello foo</h1>', 'the template was rendered');
+  });
+
+  test('a component can inject services', async assert => {
+    class LocaleService {
+      get currentLocale() {
+        return 'en_US'
+      }
+    }
+
+    class MyComponent extends Component {
+      @service locale: LocaleService
+      get myLocale() {
+        return this.locale.currentLocale;
+      }
+    }
+
+    setComponentTemplate(
+      MyComponent,
+      compileTemplate('<h1>{{this.myLocale}}</h1>')
+    )
+
+    const elem = document.getElementById('qunit-fixture')!;
+    await renderComponent(MyComponent, {
+      element: elem!,
+      services: {
+        locale: new LocaleService()
+      }
+    });
+    assert.strictEqual(elem.innerHTML, '<h1>en_US</h1>');
   });
 });

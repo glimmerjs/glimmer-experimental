@@ -1,10 +1,11 @@
 import Component from '@glimmerx/component';
 import { setPropertyDidChange } from '@glimmer/tracking';
 import { Environment } from '@glimmer/application';
-import { clientBuilder, renderJitComponent, CustomJitRuntime } from '@glimmer/runtime';
+import { clientBuilder, renderJitComponent, CustomJitRuntime, DefaultDynamicScope } from '@glimmer/runtime';
 import {
   Cursor as GlimmerCursor,
   RenderResult,
+  Dict,
 } from '@glimmer/interfaces';
 import { JitContext } from '@glimmer/opcode-compiler';
 
@@ -13,9 +14,12 @@ import RuntimeResolver from './RuntimeResolver';
 
 import { Constructor } from '../interfaces';
 import { definitionForComponent } from './definitions';
+import { DYNAMIC_SCOPE_SERVICES_KEY } from '@glimmerx/service';
+import { RootReference } from '@glimmer/reference';
 
 interface RenderComponentOptions {
   element: Element;
+  services?: Dict<unknown>;
 }
 
 async function renderComponent(
@@ -32,8 +36,8 @@ async function renderComponent(
 ): Promise<void> {
   const options: RenderComponentOptions =
     optionsOrElement instanceof HTMLElement ? { element: optionsOrElement } : optionsOrElement;
-  const { element } = options;
-  const iterator = getTemplateIterator(ComponentClass, element);
+  const { element, services } = options;
+  const iterator = getTemplateIterator(ComponentClass, element, services);
   const result = iterator.sync();
   results.push(result);
 }
@@ -64,7 +68,7 @@ function revalidate() {
   }
 }
 
-function getTemplateIterator(ComponentClass: Constructor<Component>, element: Element) {
+function getTemplateIterator(ComponentClass: Constructor<Component>, element: Element, services: Dict<unknown>) {
   const env = Environment.create();
   const resolver = new RuntimeResolver();
   const context = JitContext(new CompileTimeResolver(resolver));
@@ -77,5 +81,13 @@ function getTemplateIterator(ComponentClass: Constructor<Component>, element: El
   const definition = definitionForComponent(ComponentClass);
   resolver.register('root', definition);
 
-  return renderJitComponent(runtime, builder, context, 0, 'root');
+  let dynamicScope;
+
+  if (services) {
+    dynamicScope = new DefaultDynamicScope({
+      [DYNAMIC_SCOPE_SERVICES_KEY]: new RootReference(services)
+    });
+  }
+
+  return renderJitComponent(runtime, builder, context, 0, 'root', undefined, dynamicScope);
 }

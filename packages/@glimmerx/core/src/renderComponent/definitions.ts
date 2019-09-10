@@ -1,4 +1,4 @@
-import { CAPABILITIES } from '@glimmer/component';
+import { CAPABILITIES } from './capabilities';
 import Component from '@glimmerx/component';
 import { ComponentDefinition, Helper as GlimmerHelper } from '@glimmer/interfaces';
 

@@ -138,6 +138,27 @@ export default class extends Component {
 }
 ```
 
+### `@glimmerx/services`
+
+#### `service`
+`import { service } from '@glimmerx/service';`
+
+Decorator to inject services into a component.
+
+```js
+  import Component, { hbs } from '@glimmerx/component';
+  import { service } from '@glimmerx/service';
+  export default class extends Component {
+      static template = hbs`
+        {{this.currentLocale}}
+      `
+      @service locale;
+      get currentLocale() {
+        return this.locale.currentLocale;
+      }
+  }
+```
+
 ### `@glimmerx/core`
 
 #### `renderComponent`
@@ -151,6 +172,19 @@ import { renderComponent } from '@glimmerx/core';
 import MyComponent from './MyComponent';
 
 renderComponent(MyComponent, document.getElementById('app'));
+```
+
+Service implementations for injection in components/helpers can be provided when calling renderComponent.
+
+```js
+import { renderComponent } from '@glimmerx/core';
+import LocaleService from './services/LocaleService';
+renderComponent(MyComponent, {
+  element: document.getElementById('app'),
+  services: {
+    locale: new LocaleService('en_US')
+  }
+});
 ```
 
 ## Development
