@@ -1,4 +1,3 @@
-
 import { Helper as GlimmerHelper } from '@glimmer/interfaces';
 import HelperReference, { UserHelper } from './reference';
 

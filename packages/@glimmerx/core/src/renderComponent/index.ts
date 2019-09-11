@@ -1,12 +1,13 @@
 import Component from '@glimmerx/component';
 import { setPropertyDidChange } from '@glimmer/tracking';
 import { Environment } from '@glimmer/application';
-import { clientBuilder, renderJitComponent, CustomJitRuntime, DefaultDynamicScope } from '@glimmer/runtime';
 import {
-  Cursor as GlimmerCursor,
-  RenderResult,
-  Dict,
-} from '@glimmer/interfaces';
+  clientBuilder,
+  renderJitComponent,
+  CustomJitRuntime,
+  DefaultDynamicScope,
+} from '@glimmer/runtime';
+import { Cursor as GlimmerCursor, RenderResult, Dict } from '@glimmer/interfaces';
 import { JitContext } from '@glimmer/opcode-compiler';
 
 import CompileTimeResolver from './CompileTimeResolver';
@@ -50,7 +51,9 @@ setPropertyDidChange(scheduleRevalidation);
 
 let scheduled = false;
 function scheduleRevalidation() {
-  if (scheduled) { return; }
+  if (scheduled) {
+    return;
+  }
 
   scheduled = true;
   setTimeout(() => {
@@ -68,7 +71,11 @@ function revalidate() {
   }
 }
 
-function getTemplateIterator(ComponentClass: Constructor<Component>, element: Element, services: Dict<unknown>) {
+function getTemplateIterator(
+  ComponentClass: Constructor<Component>,
+  element: Element,
+  services: Dict<unknown>
+) {
   const env = Environment.create();
   const resolver = new RuntimeResolver();
   const context = JitContext(new CompileTimeResolver(resolver));
@@ -85,7 +92,7 @@ function getTemplateIterator(ComponentClass: Constructor<Component>, element: El
 
   if (services) {
     dynamicScope = new DefaultDynamicScope({
-      [DYNAMIC_SCOPE_SERVICES_KEY]: new RootReference(services)
+      [DYNAMIC_SCOPE_SERVICES_KEY]: new RootReference(services),
     });
   }
 
