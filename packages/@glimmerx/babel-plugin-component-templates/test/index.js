@@ -4,5 +4,5 @@ import path from 'path';
 
 pluginTester({
   plugin,
-  fixtures: path.join(__dirname, 'fixtures')
+  fixtures: path.join(__dirname, 'fixtures'),
 });

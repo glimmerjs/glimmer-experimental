@@ -3,17 +3,16 @@ const { addNamed } = require('@babel/helper-module-imports');
 
 module.exports = function(babel, options) {
   const { types: t, parse } = babel;
-  const {
-    importPath = '@glimmerx/core',
-    importName = 'setComponentTemplate'
-  } = options || {};
+  const { importPath = '@glimmerx/core', importName = 'setComponentTemplate' } = options || {};
 
   function maybeAddTemplateSetterImport(state, programPath) {
     if (state.templateSetter) {
       return state.templateSetter;
     }
 
-    return state.templateSetter = addNamed(programPath, importName, importPath, { importedType: 'es6' });
+    return (state.templateSetter = addNamed(programPath, importName, importPath, {
+      importedType: 'es6',
+    }));
   }
 
   return {
@@ -42,7 +41,7 @@ module.exports = function(babel, options) {
         bindings.forEach(binding => {
           binding.reference(programPath);
         });
-      }
+      },
     },
   };
 
@@ -51,9 +50,7 @@ module.exports = function(babel, options) {
     const template = buildTemplate(path);
 
     if (klass.isClassExpression()) {
-      klass.replaceWith(
-        t.callExpression(setter, [klass.node, template])
-      );
+      klass.replaceWith(t.callExpression(setter, [klass.node, template]));
     } else {
       const klassId = klass.node.id;
 
@@ -106,4 +103,4 @@ module.exports = function(babel, options) {
     }
     return path.node.value.quasis[0].value.raw;
   }
-}
+};

@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "build": "scripts/build.js",
-    "format": "prettier --write 'packages/**/*.ts'",
+    "format": "prettier --write 'packages/**/*.{js,ts}'",
     "start": "webpack-dev-server",
     "test": "testem ci",
     "test:watch": "testem"
