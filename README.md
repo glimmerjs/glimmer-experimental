@@ -187,6 +187,52 @@ renderComponent(MyComponent, {
 });
 ```
 
+---
+
+<details>
+  <summary>Bundlers</summary>
+
+### Parcel
+
+`.babelrc`
+```json
+{
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "@glimmerx/babel-plugin-component-templates"
+   ]
+}
+```
+</details>
+
+---
+
+<details>
+  <summary>Experiments</summary>
+
+
+### JSX
+
+instal [`babel-plugin-glimmerx-jsx-templates`](https://github.com/lifeart/babel-plugin-glimmerx-jsx-templates) and `@babel/plugin-syntax-jsx` plugins.
+
+`.babelrc`
+```json
+{
+  "plugins": [
+    "@babel/plugin-syntax-jsx",
+    "babel-plugin-glimmerx-jsx-templates",
+    "@glimmerx/babel-plugin-component-templates"
+  ]
+}
+```
+</details>
+
+---
+
 ## Development
 
 ### Setup
