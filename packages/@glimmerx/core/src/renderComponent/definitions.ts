@@ -10,13 +10,15 @@ interface HelperDefinition {
   state: {
     fn: GlimmerHelper;
     handle: number;
-  }
+  };
 }
 
 const COMPONENT_DEFINITIONS = new WeakMap<Constructor<Component>, ComponentDefinition>();
 const HELPER_DEFINITIONS = new WeakMap<GlimmerHelper, HelperDefinition>();
 
-export function definitionForComponent(ComponentClass: Constructor<Component>): ComponentDefinition {
+export function definitionForComponent(
+  ComponentClass: Constructor<Component>
+): ComponentDefinition {
   return COMPONENT_DEFINITIONS.get(ComponentClass) || createComponentDefinition(ComponentClass);
 }
 
@@ -35,9 +37,9 @@ function createComponentDefinition(ComponentClass: Constructor<Component>): Comp
       ComponentClass,
       template,
       handle: HANDLE++,
-      capabilities: CAPABILITIES
+      capabilities: CAPABILITIES,
     },
-    manager
+    manager,
   };
 
   COMPONENT_DEFINITIONS.set(ComponentClass, definition);
@@ -45,14 +47,13 @@ function createComponentDefinition(ComponentClass: Constructor<Component>): Comp
   return definition;
 }
 
-
 function createHelperDefinition(Helper: GlimmerHelper): HelperDefinition {
   const definition = {
     state: {
       fn: Helper,
-      handle: HANDLE++
-    }
-  }
+      handle: HANDLE++,
+    },
+  };
 
   HELPER_DEFINITIONS.set(Helper, definition);
   return definition;

@@ -10,8 +10,10 @@ export function getComponentManager(obj: {}): ComponentManager | null {
   let target = obj;
 
   while (target !== null) {
-    let manager = COMPONENT_MANAGER_MAP.get(target)
-    if (manager) { return manager; }
+    let manager = COMPONENT_MANAGER_MAP.get(target);
+    if (manager) {
+      return manager;
+    }
     target = Object.getPrototypeOf(target);
   }
 

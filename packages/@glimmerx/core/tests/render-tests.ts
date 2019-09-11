@@ -62,7 +62,7 @@ module('rendering', () => {
   });
 
   test('a component can render with helpers', async assert => {
-    const myHelper = ([name]: [string], {greeting}: {greeting: string}) => {
+    const myHelper = ([name]: [string], { greeting }: { greeting: string }) => {
       return `helper ${greeting} ${name}`;
     };
 
@@ -80,28 +80,25 @@ module('rendering', () => {
   test('a component can inject services', async assert => {
     class LocaleService {
       get currentLocale() {
-        return 'en_US'
+        return 'en_US';
       }
     }
 
     class MyComponent extends Component {
-      @service locale: LocaleService
+      @service locale: LocaleService;
       get myLocale() {
         return this.locale.currentLocale;
       }
     }
 
-    setComponentTemplate(
-      MyComponent,
-      compileTemplate('<h1>{{this.myLocale}}</h1>')
-    )
+    setComponentTemplate(MyComponent, compileTemplate('<h1>{{this.myLocale}}</h1>'));
 
     const elem = document.getElementById('qunit-fixture')!;
     await renderComponent(MyComponent, {
       element: elem!,
       services: {
-        locale: new LocaleService()
-      }
+        locale: new LocaleService(),
+      },
     });
     assert.strictEqual(elem.innerHTML, '<h1>en_US</h1>');
   });
