@@ -12,6 +12,7 @@
     },
 
     "strict": true,                           /* Enable all strict type-checking options. */
+    "strictPropertyInitialization": false,    /* Disable strict property initialization check since services are initialized by the manager */
 
     "noUnusedLocals": true,                   /* Report errors on unused locals. */
     "noUnusedParameters": true,               /* Report errors on unused parameters. */

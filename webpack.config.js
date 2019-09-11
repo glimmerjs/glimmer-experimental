@@ -7,6 +7,9 @@ module.exports = {
     tests: './packages/@glimmerx/core/tests/index.ts',
   },
   mode: 'development',
+  externals: {
+    fs: 'fs'
+  },
   module: {
     rules: [
       {

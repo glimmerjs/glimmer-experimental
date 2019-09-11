@@ -1,4 +1,3 @@
-export { tracked } from '@glimmer/component';
 export { default as renderComponent } from './src/renderComponent';
 
 export { getComponentManager, setComponentManager } from './src/setComponentManager';
