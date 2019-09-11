@@ -1,0 +1,16 @@
+
+import OtherComponent from './OtherComponent';
+import PhantomComponent from './PhantomComponent';
+import SecondPhantomComponent from './SecondPhantomComponent'
+
+
+class MyComponent extends Component {
+  static template = hbs`
+    <h1>Hello world 
+        {{#OtherComponent as  |SecondPhantomComponent|}}
+            <SecondPhantomComponent />
+            {{SecondPhantomComponent}}
+        {{/OtherComponent}}
+        <SecondPhantomComponent />
+    </h1>`;
+}

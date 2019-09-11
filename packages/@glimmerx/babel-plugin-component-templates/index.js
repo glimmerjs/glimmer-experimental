@@ -1,19 +1,93 @@
 const { precompile } = require('@glimmer/compiler');
 const { addNamed } = require('@babel/helper-module-imports');
+const { traverse, preprocess } = require('@glimmer/syntax');
+
+function tokensFromType(node, scopedTokens) {
+  const tokensMap = {
+    PathExpression: (node) => {
+      if (node.data === true || node.this === true) {
+        return;
+      }
+      const [possbleToken] = node.parts;
+      if (!scopedTokens.includes(possbleToken)) {
+        return possbleToken;
+      }
+    },
+    ElementNode: ({ tag }) => {
+      const char = tag.charAt(0);
+      if (char !== char.toUpperCase()) {
+        return;
+      }
+      if (scopedTokens.includes(tag)) {
+        return;
+      }
+      return tag;
+    },
+  };
+  if (node.type in tokensMap) {
+    return tokensMap[node.type](node);
+  }
+}
+
+function addTokens(tokensSet, node, scopedTokens) {
+  const maybeTokens = tokensFromType(node, scopedTokens);
+  (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach(maybeToken => {
+    if (maybeToken !== undefined) {
+      tokensSet.add(maybeToken);
+    }
+  });
+}
+
+function getTemplateTokens(html) {
+  const ast = preprocess(html);
+  const tokensSet = new Set();
+  const scopedTokens = [];
+
+  traverse(ast, {
+    Block: {
+      enter({ blockParams }) {
+        blockParams.forEach(param => {
+          scopedTokens.push(param);
+        });
+      },
+      exit({ blockParams }) {
+        blockParams.forEach(() => {
+          scopedTokens.pop();
+        });
+      },
+    },
+    ElementNode: {
+      enter(node) {
+        node.blockParams.forEach(param => {
+          scopedTokens.push(param);
+        });
+        addTokens(tokensSet, node, scopedTokens);
+      },
+      exit({ blockParams }) {
+        blockParams.forEach(() => {
+          scopedTokens.pop();
+        });
+      },
+    },
+    All(node) {
+      addTokens(tokensSet, node, scopedTokens);
+    },
+  });
+  return Array.from(tokensSet);
+}
 
 module.exports = function(babel, options) {
   const { types: t, parse } = babel;
-  const {
-    importPath = '@glimmerx/core',
-    importName = 'setComponentTemplate'
-  } = options || {};
+  const { importPath = '@glimmerx/core', importName = 'setComponentTemplate' } = options || {};
 
   function maybeAddTemplateSetterImport(state, programPath) {
     if (state.templateSetter) {
       return state.templateSetter;
     }
 
-    return state.templateSetter = addNamed(programPath, importName, importPath, { importedType: 'es6' });
+    return (state.templateSetter = addNamed(programPath, importName, importPath, {
+      importedType: 'es6',
+    }));
   }
 
   return {
@@ -42,7 +116,7 @@ module.exports = function(babel, options) {
         bindings.forEach(binding => {
           binding.reference(programPath);
         });
-      }
+      },
     },
   };
 
@@ -51,9 +125,7 @@ module.exports = function(babel, options) {
     const template = buildTemplate(path);
 
     if (klass.isClassExpression()) {
-      klass.replaceWith(
-        t.callExpression(setter, [klass.node, template])
-      );
+      klass.replaceWith(t.callExpression(setter, [klass.node, template]));
     } else {
       const klassId = klass.node.id;
 
@@ -63,13 +135,14 @@ module.exports = function(babel, options) {
 
   function buildTemplate(path) {
     const templateSource = getTemplateString(path);
+    const templateScopeTokens = getTemplateTokens(templateSource);
     const compiled = precompile(templateSource);
     const ast = parse(`(${compiled})`);
 
     t.traverseFast(ast, node => {
       if (t.isObjectProperty(node)) {
         if (node.key.value === 'meta') {
-          node.value.properties.push(buildScopeFunction(path));
+          node.value.properties.push(buildScopeFunction(path, templateScopeTokens));
         }
         if (t.isStringLiteral(node.key)) {
           node.key = t.identifier(node.key.value);
@@ -79,7 +152,7 @@ module.exports = function(babel, options) {
     return ast.program.body[0].expression;
   }
 
-  function buildScopeFunction(path) {
+  function buildScopeFunction(path, templateScopeTokens) {
     const parentScope = path.scope.getProgramParent();
     const bindings = Object.values(parentScope.bindings);
 
@@ -88,11 +161,13 @@ module.exports = function(babel, options) {
       t.arrowFunctionExpression(
         [],
         t.objectExpression(
-          bindings.map(binding => {
-            const { identifier } = binding;
-            binding.reference(path);
-            return t.objectProperty(identifier, identifier, false, true);
-          })
+          bindings
+            .map(binding => {
+              const { identifier } = binding;
+              binding.reference(path);
+              return t.objectProperty(t.identifier(identifier.name), identifier, false, false);
+            })
+            .filter(prop => templateScopeTokens.includes(prop.key.name))
         )
       )
     );
@@ -106,4 +181,4 @@ module.exports = function(babel, options) {
     }
     return path.node.value.quasis[0].value.raw;
   }
-}
+};

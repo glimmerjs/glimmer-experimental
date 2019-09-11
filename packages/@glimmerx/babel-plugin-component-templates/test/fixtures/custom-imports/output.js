@@ -6,12 +6,7 @@ _dangerouslySetComponentTemplate(Class1Declaration, {
   id: "pX6MO7j4",
   block: "{\"symbols\":[],\"statements\":[[7,\"h1\",true],[9],[0,\"Hello world\"],[10]],\"hasEval\":false}",
   meta: {
-    scope: () => ({
-      Class1Declaration,
-      Class1Expression,
-      Class2Declaration,
-      Class2Expression
-    })
+    scope: () => ({})
   }
 })
 
@@ -19,12 +14,7 @@ const Class1Expression = _dangerouslySetComponentTemplate(class extends Componen
   id: "pX6MO7j4",
   block: "{\"symbols\":[],\"statements\":[[7,\"h1\",true],[9],[0,\"Hello world\"],[10]],\"hasEval\":false}",
   meta: {
-    scope: () => ({
-      Class1Declaration,
-      Class1Expression,
-      Class2Declaration,
-      Class2Expression
-    })
+    scope: () => ({})
   }
 });
 
@@ -34,24 +24,16 @@ _dangerouslySetComponentTemplate(Class2Declaration, {
   id: "K+OefGFw",
   block: "{\"symbols\":[],\"statements\":[[7,\"h2\",true],[9],[0,\"\\n    Goodbye world\\n  \"],[10]],\"hasEval\":false}",
   meta: {
-    scope: () => ({
-      Class1Declaration,
-      Class1Expression,
-      Class2Declaration,
-      Class2Expression
-    })
+    scope: () => ({})
   }
 })
 
 const Class2Expression = _dangerouslySetComponentTemplate(class extends Component {}, {
-  id: "K+OefGFw",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h2\",true],[9],[0,\"\\n    Goodbye world\\n  \"],[10]],\"hasEval\":false}",
+  id: "DRF9keh2",
+  block: "{\"symbols\":[],\"statements\":[[7,\"h2\",true],[9],[0,\"\\n    Goodbye world\"],[5,\"Class2Declaration\",[],[[],[]],null],[0,\"\\n  \"],[10]],\"hasEval\":false}",
   meta: {
     scope: () => ({
-      Class1Declaration,
-      Class1Expression,
-      Class2Declaration,
-      Class2Expression
+      Class2Declaration: Class2Declaration
     })
   }
 });

@@ -15,6 +15,6 @@ class Class2Declaration extends Component {
 
 const Class2Expression = class extends Component {
   static template = hbs`<h2>
-    Goodbye world
+    Goodbye world<Class2Declaration />
   </h2>`;
 }
