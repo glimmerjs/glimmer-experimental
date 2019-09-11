@@ -12,7 +12,7 @@ export default class CompileTimeResolver implements ResolverDelegate {
 
   lookupHelper(name: string, referrer: TemplateMeta): Option<number> {
     const scope = referrer.scope();
-    const Helper = scope[name] as any as GlimmerHelper;
+    const Helper = (scope[name] as any) as GlimmerHelper;
     const { state } = definitionForHelper(Helper);
     const { fn, handle } = state;
 
@@ -21,12 +21,12 @@ export default class CompileTimeResolver implements ResolverDelegate {
   }
 
   lookupModifier(_name: string, _referrer: unknown): Option<number> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   lookupComponent(name: string, referrer: TemplateMeta): Option<CompileTimeComponent> {
     const scope = referrer.scope();
-    const ComponentClass = scope[name] as any as Constructor<Component>;
+    const ComponentClass = (scope[name] as any) as Constructor<Component>;
     const definition = definitionForComponent(ComponentClass) as any;
     const { state } = definition;
     const { template, handle, capabilities } = state;
@@ -38,12 +38,12 @@ export default class CompileTimeResolver implements ResolverDelegate {
       capabilities,
       compilable: templateFactory(template!)
         .create()
-        .asLayout()
-    }
+        .asLayout(),
+    };
   }
 
   lookupPartial(_name: string, _referrer: unknown): Option<number> {
-    throw new Error("Method not implemented.");
+    throw new Error('Method not implemented.');
   }
 
   resolve(handle: number): unknown {

@@ -4,7 +4,7 @@ import OtherComponent from './OtherComponent';
 import { service } from '@glimmerx/service';
 import LocaleService from './services/LocaleService';
 
-const myHelper = helper(function ([name], {greeting}) {
+const myHelper = helper(function([name], { greeting }) {
   return `Helper: ${greeting} ${name}`;
 });
 
@@ -14,7 +14,7 @@ class MyComponent extends Component {
     <OtherComponent @count={{this.count}} />
     {{myHelper "foo" greeting="Hello"}}
     <p>Current locale: {{this.currentLocale}}</p>
-  `
+  `;
 
   message = 'hello world';
   @tracked count = 55;
