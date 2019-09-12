@@ -3,6 +3,7 @@ import Component from '@glimmerx/component';
 import { renderComponent } from '..';
 import { compileTemplate } from './utils';
 import { setComponentTemplate } from '../src/setComponentTemplate';
+import { helper } from '@glimmerx/helper';
 import { service } from '@glimmerx/service';
 
 const { module, test } = QUnit;
@@ -62,9 +63,9 @@ module('rendering', () => {
   });
 
   test('a component can render with helpers', async assert => {
-    const myHelper = ([name]: [string], { greeting }: { greeting: string }) => {
+    const myHelper = helper(([name]: [string], { greeting }: { greeting: string }) => {
       return `helper ${greeting} ${name}`;
-    };
+    });
 
     class MyComponent extends Component {}
     setComponentTemplate(
@@ -101,5 +102,33 @@ module('rendering', () => {
       },
     });
     assert.strictEqual(elem.innerHTML, '<h1>en_US</h1>');
+  });
+
+  test('a helper can inject services', async assert => {
+    class LocaleService {
+      get currentLocale() {
+        return 'en_US';
+      }
+    }
+
+    const myHelper = helper((args, hash, { services }) => {
+      const localeService = services!.locale as LocaleService;
+      return `The locale is ${localeService.currentLocale}`;
+    });
+
+    class MyComponent extends Component {}
+    setComponentTemplate(
+      MyComponent,
+      compileTemplate('<h1>{{myHelper}}</h1>', () => ({ myHelper }))
+    );
+
+    const elem = document.getElementById('qunit-fixture')!;
+    await renderComponent(MyComponent, {
+      element: elem!,
+      services: {
+        locale: new LocaleService(),
+      },
+    });
+    assert.strictEqual(elem.innerHTML, '<h1>The locale is en_US</h1>');
   });
 });
