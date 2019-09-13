@@ -78,7 +78,11 @@ function getTemplateTokens(html) {
 
 module.exports = function(babel, options) {
   const { types: t, parse } = babel;
-  const { importPath = '@glimmerx/core', importName = 'setComponentTemplate' } = options || {};
+  const {
+    importPath = '@glimmerx/core',
+    importName = 'setComponentTemplate',
+    precompile: precompileOptions,
+  } = options || {};
 
   function maybeAddTemplateSetterImport(state, programPath) {
     if (state.templateSetter) {
@@ -136,7 +140,7 @@ module.exports = function(babel, options) {
   function buildTemplate(path) {
     const templateSource = getTemplateString(path);
     const templateScopeTokens = getTemplateTokens(templateSource);
-    const compiled = precompile(templateSource);
+    const compiled = precompile(templateSource, precompileOptions);
     const ast = parse(`(${compiled})`);
 
     t.traverseFast(ast, node => {
