@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/service",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Services Functionality",
   "main": "dist/index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",

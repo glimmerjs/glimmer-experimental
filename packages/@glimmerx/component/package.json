@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/component",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Base component class",
   "main": "dist/index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",
