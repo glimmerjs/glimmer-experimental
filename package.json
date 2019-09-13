@@ -10,6 +10,7 @@
   "scripts": {
     "build": "scripts/build.js",
     "format": "prettier --write 'packages/**/*.{js,ts}'",
+    "prepublishOnly": "scripts/build.js",
     "start": "webpack-dev-server",
     "test": "testem ci",
     "test:watch": "testem"
