@@ -4,6 +4,9 @@ const { traverse, preprocess } = require('@glimmer/syntax');
 
 function tokensFromType(node, scopedTokens) {
   const tokensMap = {
+    StringLiteral: (node) => {
+      return node.value;
+    },
     PathExpression: (node) => {
       if (node.data === true || node.this === true) {
         return;
