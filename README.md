@@ -120,7 +120,7 @@ export default class extends Component {
 #### `helper`
 Wrapper function to tag functions as helpers
 
-`import { helper } from @glimmerx/core`
+`import { helper } from @glimmerx/helper`
 
 ```js
 import Component, { hbs } from '@glimmerx/component';
