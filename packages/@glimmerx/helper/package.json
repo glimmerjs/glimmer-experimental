@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/helper",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Helper Functionality",
   "main": "dist/index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",
