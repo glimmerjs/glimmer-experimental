@@ -71,14 +71,15 @@ function revalidate() {
   }
 }
 
+const resolver = new RuntimeResolver();
+const context = JitContext(new CompileTimeResolver(resolver));
+
 function getTemplateIterator(
   ComponentClass: Constructor<Component>,
   element: Element,
   services: Dict<unknown>
 ) {
   const env = Environment.create();
-  const resolver = new RuntimeResolver();
-  const context = JitContext(new CompileTimeResolver(resolver));
   const runtime = CustomJitRuntime(resolver, context, env);
   const builder = clientBuilder(runtime.env, {
     element,

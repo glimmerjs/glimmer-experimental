@@ -131,4 +131,19 @@ module('rendering', () => {
     });
     assert.strictEqual(elem.innerHTML, '<h1>The locale is en_US</h1>');
   });
+
+  test('a component can be rendered more than once', async assert => {
+    class MyComponent extends Component { }
+
+    setComponentTemplate(MyComponent, compileTemplate(`<h1>Bump</h1>`));
+
+    let elem = document.getElementById('qunit-fixture')!;
+    await renderComponent(MyComponent, elem);
+    assert.strictEqual(elem.innerHTML, '<h1>Bump</h1>', 'the component rendered');
+    assert.ok(true, 'rendered');
+
+    await renderComponent(MyComponent, elem);
+    assert.strictEqual(elem.innerHTML, '<h1>Bump</h1><h1>Bump</h1>', 'the component was rendered again');
+    assert.ok(true, 'rendered');
+  });
 });
