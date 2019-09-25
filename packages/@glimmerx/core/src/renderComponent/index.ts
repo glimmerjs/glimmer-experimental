@@ -21,10 +21,22 @@ import { RootReference } from '@glimmer/reference';
 export interface RenderComponentOptions {
   element: Element;
   services?: Dict<unknown>;
-  reRendered?: () => void;
 }
 
-const reRenderNotifiers: Array<() => void> = [];
+type ResolveFn = () => void;
+type RejectFn = (error: Error) => void;
+
+let renderNotifiers: Array<[ResolveFn, RejectFn]> = [];
+
+export function didRender() {
+  if (scheduled) {
+    return new Promise((resolve, reject) => {
+      renderNotifiers.push([resolve, reject]);
+    });
+  } else {
+    return Promise.resolve();
+  }
+}
 
 async function renderComponent(
   ComponentClass: Constructor<Component>,
@@ -44,10 +56,6 @@ async function renderComponent(
   const iterator = getTemplateIterator(ComponentClass, element, services);
   const result = iterator.sync();
   results.push(result);
-
-  if (options.reRendered) {
-    reRenderNotifiers.push(options.reRendered);
-  }
 }
 
 export default renderComponent;
@@ -65,9 +73,14 @@ function scheduleRevalidation() {
   scheduled = true;
   setTimeout(() => {
     scheduled = false;
-    revalidate();
+    try {
+      revalidate();
+      renderNotifiers.forEach(([resolve]) => resolve());
+    } catch (err) {
+      renderNotifiers.forEach(([,reject]) => reject(err));
+    }
 
-    reRenderNotifiers.forEach((notifier) => notifier());
+    renderNotifiers = [];
   }, 0);
 }
 
