@@ -138,7 +138,7 @@ export default class extends Component {
 }
 ```
 
-### `@glimmerx/services`
+### `@glimmerx/service`
 
 #### `service`
 `import { service } from '@glimmerx/service';`
@@ -155,6 +155,48 @@ Decorator to inject services into a component.
       @service locale;
       get currentLocale() {
         return this.locale.currentLocale;
+      }
+  }
+```
+
+### `@glimmerx/modifier`
+
+#### `on`
+`import { on } from '@glimmerx/modifier'`
+
+On modifier that allows components to add listeners for an dom event on an element
+
+```js
+  import Component, { hbs } from '@glimmerx/component';
+  import { on } from '@glimmerx/modifier';
+  export default class extends Component {
+      static template = hbs`
+        <button {{on "click" this.buttonClicked}}>Click Me!</button>
+      `
+
+      buttonClicked() {
+        console.log('The Button is clicked');
+      }
+  }
+```
+
+#### `action`
+`import { action } from '@glimmerx/modifier'`
+
+A decorator to bind a function to a component instance. This is required to set the `this` scope for a passed in function to any modifier.
+
+```js
+  import Component, { hbs, tracked } from '@glimmerx/component';
+  import { on, action } from '@glimmerx/modifier';
+  export default class extends Component {
+      static template = hbs`
+        <button {{on "click" this.incrementCounter}}>Counter: {{this.count}}</button>
+      `
+      @tracked count = 1;
+
+      @action
+      incrementCounter() {
+        this.count++;
       }
   }
 ```

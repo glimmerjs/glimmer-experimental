@@ -21,7 +21,10 @@ import { RootReference } from '@glimmer/reference';
 export interface RenderComponentOptions {
   element: Element;
   services?: Dict<unknown>;
+  reRendered?: () => void;
 }
+
+const reRenderNotifiers: Array<() => void> = [];
 
 async function renderComponent(
   ComponentClass: Constructor<Component>,
@@ -41,6 +44,10 @@ async function renderComponent(
   const iterator = getTemplateIterator(ComponentClass, element, services);
   const result = iterator.sync();
   results.push(result);
+
+  if (options.reRendered) {
+    reRenderNotifiers.push(options.reRendered);
+  }
 }
 
 export default renderComponent;
@@ -59,6 +66,8 @@ function scheduleRevalidation() {
   setTimeout(() => {
     scheduled = false;
     revalidate();
+
+    reRenderNotifiers.forEach((notifier) => notifier());
   }, 0);
 }
 
