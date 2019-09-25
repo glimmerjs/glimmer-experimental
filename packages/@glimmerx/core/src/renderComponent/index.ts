@@ -18,7 +18,7 @@ import { definitionForComponent } from './definitions';
 import { DYNAMIC_SCOPE_SERVICES_KEY } from '@glimmerx/service';
 import { RootReference } from '@glimmer/reference';
 
-interface RenderComponentOptions {
+export interface RenderComponentOptions {
   element: Element;
   services?: Dict<unknown>;
 }
@@ -77,7 +77,7 @@ const context = JitContext(new CompileTimeResolver(resolver));
 function getTemplateIterator(
   ComponentClass: Constructor<Component>,
   element: Element,
-  services: Dict<unknown>
+  services?: Dict<unknown>
 ) {
   const env = Environment.create();
   const runtime = CustomJitRuntime(resolver, context, env);
