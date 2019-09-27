@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     app: './packages/example-app/index.ts',
     tests: './packages/@glimmerx/core/tests/index.ts',
+    nodeTests: './packages/@glimmerx/ssr/tests/index.ts'
   },
   mode: 'development',
   externals: {

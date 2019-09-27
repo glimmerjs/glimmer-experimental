@@ -1,11 +1,20 @@
 {
   "framework": "qunit",
   "test_page": "tests.html",
+  "launchers": {
+    "Node": {
+      "command": "qunit dist/nodeTests.bundle.js"
+    }
+  },
   "on_start": {
     "command": "webpack --watch",
     "wait_for_text": "Built at:"
   },
   "watch_files": [
-    "dist/tests.bundle.js"
+    "dist/tests.bundle.js",
+    "dist/nodeTests.bundle.js"
+  ],
+  "launch_in_dev": [
+    "Node"
   ]
 }
