@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/modifier",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Modifier Functionality",
   "main": "dist/index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",

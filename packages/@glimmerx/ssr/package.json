@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/ssr",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "SSR functionality",
   "main": "dist/index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",
@@ -13,8 +13,8 @@
   "dependencies": {
     "@glimmer/application": "^0.14.0-alpha.11",
     "@glimmer/interfaces": "^0.41.0",
-    "@glimmer/opcode-compiler": "^0.41.0",
     "@glimmer/node": "^0.41.0",
+    "@glimmer/opcode-compiler": "^0.41.0",
     "@glimmer/reference": "^0.41.0",
     "@glimmer/runtime": "^0.41.0",
     "@glimmer/ssr": "^0.14.0-alpha.11",
