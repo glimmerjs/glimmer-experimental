@@ -1,11 +1,12 @@
 import Component, { tracked } from '@glimmerx/component';
 
+import { Constructor } from '..';
+import { setComponentTemplate } from '..';
+
 import { compileTemplate } from './utils';
-import { setComponentTemplate } from '../src/setComponentTemplate';
 import { helper } from '@glimmerx/helper';
 import { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
-import { Constructor } from '../src/interfaces';
 
 const { module, test } = QUnit;
 

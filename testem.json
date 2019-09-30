@@ -3,7 +3,8 @@
   "test_page": "tests.html",
   "launchers": {
     "Node": {
-      "command": "qunit dist/nodeTests.bundle.js"
+      "command": "node_modules/.bin/qunit dist/nodeTests.bundle.js",
+      "protocol": "tap"
     }
   },
   "on_start": {
