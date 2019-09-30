@@ -1,9 +1,10 @@
-import Component from '@glimmerx/component';
+import Component, { tracked } from '@glimmerx/component';
 
 import { compileTemplate } from './utils';
 import { setComponentTemplate } from '../src/setComponentTemplate';
 import { helper } from '@glimmerx/helper';
 import { service } from '@glimmerx/service';
+import { on, action } from '@glimmerx/modifier';
 import { Constructor } from '../src/interfaces';
 
 const { module, test } = QUnit;
@@ -137,6 +138,28 @@ export default function renderTests(moduleName: string, render: (component: Cons
       html = await render(MyComponent);
       assert.strictEqual(html, '<h1>Bump</h1>', 'the component was rendered again');
       assert.ok(true, 'rendered');
+    });
+
+    test('a component can use modifiers', async assert => {
+      class MyComponent extends Component {
+        @tracked count = 0;
+
+        @action
+        incrementCounter() {
+          this.count++;
+        }
+      }
+
+      setComponentTemplate(
+        MyComponent,
+        compileTemplate(
+          `<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`,
+          () => ({on})
+        )
+      );
+
+      let html = await render(MyComponent);
+      assert.strictEqual(html, `<button>Count: 0</button>`, 'the component was rendered');
     });
   });
 }

@@ -2,6 +2,7 @@ import Component, { tracked, hbs } from '@glimmerx/component';
 import { helper } from '@glimmerx/helper';
 import OtherComponent from './OtherComponent';
 import { service } from '@glimmerx/service';
+import { on, action } from '@glimmerx/modifier';
 import LocaleService from './services/LocaleService';
 
 const myHelper = helper(function([name], { greeting }) {
@@ -17,8 +18,7 @@ const isCJK = helper(function(args, hash, { services }) {
 
 class MyComponent extends Component {
   static template = hbs`
-    <h1>Hello {{this.message}}</h1>
-    <OtherComponent @count={{this.count}} />
+    <h1>Hello {{this.message}}</h1> <br/>
     {{myHelper "foo" greeting="Hello"}}
     <p>Current locale: {{this.currentLocale}}</p>
     {{#if (isCJK)}}
@@ -26,21 +26,22 @@ class MyComponent extends Component {
     {{else}}
       <p>Component is not in a CJK locale</p>
     {{/if}}
+
+    <OtherComponent @count={{this.count}} /> <br/>
+    <button {{on "click" this.increment}}>Increment</button>
   `;
 
   message = 'hello world';
   @tracked count = 55;
   @service locale: LocaleService;
 
-  constructor(owner: unknown, args: object) {
-    super(owner, args);
-    setInterval(() => {
-      this.count++;
-    }, 16);
-  }
-
   get currentLocale() {
     return this.locale.currentLocale;
+  }
+
+  @action
+  increment() {
+    this.count++;
   }
 }
 

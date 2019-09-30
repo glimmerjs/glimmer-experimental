@@ -4,7 +4,7 @@ import { ResolverDelegate, templateFactory } from '@glimmer/opcode-compiler';
 
 import RuntimeResolverDelegate from './RuntimeResolver';
 import { TemplateMeta, Constructor } from '../interfaces';
-import { definitionForComponent, definitionForHelper } from './definitions';
+import { definitionForComponent, definitionForHelper, Modifier, handleForModifier } from './definitions';
 
 export default class CompileTimeResolver implements ResolverDelegate {
   constructor(private runtimeResolver: RuntimeResolverDelegate) {}
@@ -20,8 +20,16 @@ export default class CompileTimeResolver implements ResolverDelegate {
     return handle;
   }
 
-  lookupModifier(_name: string, _referrer: unknown): Option<number> {
-    throw new Error('Method not implemented.');
+  lookupModifier(name: string, referrer: TemplateMeta): Option<number> {
+    const scope = referrer.scope();
+    const modifier = (scope[name] as any) as Modifier;
+    if (!modifier) {
+      throw new Error(`Cannot find modifier ${name} in scope`);
+    }
+
+    const handle = handleForModifier(modifier);
+    this.runtimeResolver.registry[handle] = modifier;
+    return handle;
   }
 
   lookupComponent(name: string, referrer: TemplateMeta): Option<CompileTimeComponent> {
