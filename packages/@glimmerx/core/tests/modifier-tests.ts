@@ -2,12 +2,11 @@ const { module, test } = QUnit;
 
 import { on, action } from '@glimmerx/modifier';
 import Component, { tracked } from '@glimmerx/component';
-import { renderComponent, setComponentTemplate } from '..';
+import { renderComponent, setComponentTemplate, didRender } from '..';
 import { compileTemplate } from './utils';
 
 module('Modifier Tests', () => {
-  test('Supports the on modifier', assert => {
-    const done = assert.async();
+  test('Supports the on modifier', async assert => {
     class MyComponent extends Component {
       @tracked count = 0;
 
@@ -26,19 +25,14 @@ module('Modifier Tests', () => {
     );
 
     const element = document.getElementById('qunit-fixture')!;
-    const onReRender = () => {
-      assert.strictEqual(element.innerHTML, `<button>Count: 1</button>`, 'the component was rerendered');
-      done();
-    };
 
-    renderComponent(MyComponent, {
-      element,
-      reRendered: onReRender
-    });
-
+    await renderComponent(MyComponent, element);
     assert.strictEqual(element.innerHTML, `<button>Count: 0</button>`, 'the component was rendered');
 
     const button = element.querySelector('button')!;
     button.click();
+
+    await didRender();
+    assert.strictEqual(element.innerHTML, `<button>Count: 1</button>`, 'the component was rerendered');
   });
 });
