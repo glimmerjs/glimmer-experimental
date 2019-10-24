@@ -30,6 +30,8 @@ const glob = promisify(require('glob'));
   await createDirs(packages.map(pkg => pkg.to));
   await move(packages);
 
+  await buildStorybook();
+
   console.log('\n\nDone');
 })();
 
@@ -43,6 +45,10 @@ async function buildTypescript(outDir, moduleKind = 'es2015') {
       throw err;
     }
   }
+}
+
+async function buildStorybook() {
+  await exec(`cd ./packages/@glimmerx/storybook/ && yarn prepare`);
 }
 
 function createDirs(paths) {
