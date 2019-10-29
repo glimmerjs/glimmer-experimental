@@ -1,4 +1,4 @@
-export { default as renderComponent, RenderComponentOptions, didRender } from './src/renderComponent';
+export { default as renderComponent, RenderComponentOptions, didRender, dictToReference } from './src/renderComponent';
 
 export { Constructor } from './src/interfaces';
 

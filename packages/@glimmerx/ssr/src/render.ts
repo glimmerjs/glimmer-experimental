@@ -1,5 +1,5 @@
 import Component from '@glimmerx/component';
-import { RuntimeResolver, CompileTimeResolver, definitionForComponent, Constructor } from '@glimmerx/core';
+import { RuntimeResolver, CompileTimeResolver, definitionForComponent, Constructor, dictToReference } from '@glimmerx/core';
 import { Dict } from '@glimmer/interfaces';
 import { JitContext } from '@glimmer/opcode-compiler';
 import Environment from './environment';
@@ -19,17 +19,6 @@ export interface RenderOptions {
 };
 
 const serializer = new HTMLSerializer(voidMap);
-
-function dictToReference(dict?: Dict<unknown>): Dict<PathReference> {
-  if (!dict) {
-    return {};
-  }
-
-  return Object.keys(dict).reduce((acc, key) => {
-    acc[key] = new RootReference(dict[key]);
-    return acc;
-  }, {} as Dict<PathReference>);
-}
 
 export function renderToString(ComponentClass: Constructor<Component>, options?: RenderOptions): Promise<string> {
   return new Promise<string>((resolve, reject) => {

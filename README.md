@@ -216,6 +216,24 @@ import MyComponent from './MyComponent';
 renderComponent(MyComponent, document.getElementById('app'));
 ```
 
+Renders a component with data passed as arguments to the component. First arugment is the Glimmer Component, the second argument is an object of render options, with the target DOM element and the data to pass to the component to render.
+
+```js
+import { renderComponent } from '@glimmerx/core';
+import Component, { hbs } from '@glimmerx/component';
+
+class OtherComponent extends Component {
+  static template = hbs`<h1>{{@say}}</h1>`;
+}
+
+renderComponent(MyComponent, {
+  element: document.getElementById('app'),
+  data: {
+    say: "Hello World"
+  }
+});
+```
+
 Service implementations for injection in components/helpers can be provided when calling renderComponent.
 
 ```js

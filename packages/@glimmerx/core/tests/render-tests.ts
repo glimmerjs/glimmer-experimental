@@ -77,6 +77,19 @@ export default function renderTests(moduleName: string, render: (component: Cons
       assert.strictEqual(html, '<h1>helper Hello foo</h1>', 'the template was rendered');
     });
 
+    test('a component can render with args', async assert => {
+      class MyComponent extends Component {}
+
+      setComponentTemplate(MyComponent, compileTemplate('<h1>{{@say}}</h1>'));
+
+      const html = await render(MyComponent, {
+        data: {
+          say: 'Hello Dolly!',
+        }
+      });
+      assert.strictEqual(html, '<h1>Hello Dolly!</h1>', 'the component is rendered with passed in data as args');
+    });
+
     test('a component can inject services', async assert => {
       class LocaleService {
         get currentLocale() {
