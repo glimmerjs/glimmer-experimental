@@ -16,10 +16,11 @@ import RuntimeResolver from './RuntimeResolver';
 import { Constructor } from '../interfaces';
 import { definitionForComponent } from './definitions';
 import { DYNAMIC_SCOPE_SERVICES_KEY } from '@glimmerx/service';
-import { RootReference } from '@glimmer/reference';
+import { RootReference, PathReference } from '@glimmer/reference';
 
 export interface RenderComponentOptions {
   element: Element;
+  data?: Dict<unknown>;
   services?: Dict<unknown>;
 }
 
@@ -52,8 +53,8 @@ async function renderComponent(
 ): Promise<void> {
   const options: RenderComponentOptions =
     optionsOrElement instanceof HTMLElement ? { element: optionsOrElement } : optionsOrElement;
-  const { element, services } = options;
-  const iterator = getTemplateIterator(ComponentClass, element, services);
+  const { element, services, data } = options;
+  const iterator = getTemplateIterator(ComponentClass, element, data, services);
   const result = iterator.sync();
   results.push(result);
 }
@@ -96,10 +97,22 @@ function revalidate() {
 const resolver = new RuntimeResolver();
 const context = JitContext(new CompileTimeResolver(resolver));
 
+export function dictToReference(dict?: Dict<unknown>): Dict<PathReference> {
+  if (!dict) {
+    return {};
+  }
+
+  return Object.keys(dict).reduce((acc, key) => {
+    acc[key] = new RootReference(dict[key]);
+    return acc;
+  }, {} as Dict<PathReference>);
+}
+
 function getTemplateIterator(
   ComponentClass: Constructor<Component>,
   element: Element,
-  services?: Dict<unknown>
+  componentArgs?: Dict<unknown>,
+  services?: Dict<unknown>,
 ) {
   const env = Environment.create();
   const runtime = CustomJitRuntime(resolver, context, env);
@@ -119,5 +132,5 @@ function getTemplateIterator(
     });
   }
 
-  return renderJitComponent(runtime, builder, context, 0, 'root', undefined, dynamicScope);
+  return renderJitComponent(runtime, builder, context, 0, 'root', dictToReference(componentArgs), dynamicScope);
 }
