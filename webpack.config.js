@@ -49,7 +49,9 @@ module.exports = {
     ],
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin()],
+    plugins: [new TsconfigPathsPlugin({
+      mainFields: ['module', 'main']
+    })],
     extensions: ['.ts', '.js'],
   },
   output: {
