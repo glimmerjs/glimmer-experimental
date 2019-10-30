@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/component",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Base component class",
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
