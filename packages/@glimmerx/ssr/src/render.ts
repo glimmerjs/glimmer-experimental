@@ -15,10 +15,11 @@ import { PassThrough } from 'stream';
 
 export interface RenderOptions {
   data?: Dict<unknown>;
+  serializer?: HTMLSerializer;
   services?: Dict<unknown>;
 };
 
-const serializer = new HTMLSerializer(voidMap);
+const defaultSerializer = new HTMLSerializer(voidMap);
 
 export function renderToString(ComponentClass: Constructor<Component>, options?: RenderOptions): Promise<string> {
   return new Promise<string>((resolve, reject) => {
@@ -37,6 +38,8 @@ export function renderToStream(stream: NodeJS.WritableStream, ComponentClass: Co
   const element = createHTMLDocument().body;
   const iterator = getTemplateIterator(ComponentClass, element, options.data, options.services);
   iterator.sync();
+
+  const serializer = options.serializer || defaultSerializer;
 
   stream.write(serializer.serializeChildren(element));
   stream.end();
