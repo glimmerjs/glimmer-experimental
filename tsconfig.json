@@ -3,6 +3,7 @@
     "target": "es2018",
     "declaration": true,
     "declarationMap": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "rootDir": ".",
     "outDir": "dist",
