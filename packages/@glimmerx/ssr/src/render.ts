@@ -5,7 +5,7 @@ import { JitContext } from '@glimmer/opcode-compiler';
 import Environment from './environment';
 import { CustomJitRuntime, DefaultDynamicScope, renderJitComponent } from '@glimmer/runtime';
 import { StringBuilder } from '@glimmer/ssr';
-import { RootReference, PathReference } from '@glimmer/reference';
+import { RootReference } from '@glimmer/reference';
 import createHTMLDocument from '@simple-dom/document';
 import { DYNAMIC_SCOPE_SERVICES_KEY } from '@glimmerx/service';
 import HTMLSerializer from '@simple-dom/serializer';
@@ -14,7 +14,7 @@ import { SimpleElement } from '@simple-dom/interface';
 import { PassThrough } from 'stream';
 
 export interface RenderOptions {
-  data?: Dict<unknown>;
+  args?: Dict<unknown>;
   serializer?: HTMLSerializer;
   services?: Dict<unknown>;
 };
@@ -36,7 +36,7 @@ export function renderToString(ComponentClass: Constructor<Component>, options?:
 
 export function renderToStream(stream: NodeJS.WritableStream, ComponentClass: Constructor<Component>, options: RenderOptions = {}) {
   const element = createHTMLDocument().body;
-  const iterator = getTemplateIterator(ComponentClass, element, options.data, options.services);
+  const iterator = getTemplateIterator(ComponentClass, element, options.args, options.services);
   iterator.sync();
 
   const serializer = options.serializer || defaultSerializer;

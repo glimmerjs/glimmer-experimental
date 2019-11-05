@@ -20,7 +20,7 @@ import { RootReference, PathReference } from '@glimmer/reference';
 
 export interface RenderComponentOptions {
   element: Element;
-  data?: Dict<unknown>;
+  args?: Dict<unknown>;
   services?: Dict<unknown>;
 }
 
@@ -53,8 +53,8 @@ async function renderComponent(
 ): Promise<void> {
   const options: RenderComponentOptions =
     optionsOrElement instanceof HTMLElement ? { element: optionsOrElement } : optionsOrElement;
-  const { element, services, data } = options;
-  const iterator = getTemplateIterator(ComponentClass, element, data, services);
+  const { element, services, args } = options;
+  const iterator = getTemplateIterator(ComponentClass, element, args, services);
   const result = iterator.sync();
   results.push(result);
 }
