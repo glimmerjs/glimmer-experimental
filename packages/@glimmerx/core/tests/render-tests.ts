@@ -82,12 +82,14 @@ export default function renderTests(moduleName: string, render: (component: Cons
 
       setComponentTemplate(MyComponent, compileTemplate('<h1>{{@say}}</h1>'));
 
-      const html = await render(MyComponent, {
-        data: {
+      const renderOptions = {
+        args: {
           say: 'Hello Dolly!',
         }
-      });
-      assert.strictEqual(html, '<h1>Hello Dolly!</h1>', 'the component is rendered with passed in data as args');
+      };
+
+      const html = await render(MyComponent, renderOptions);
+      assert.strictEqual(html, '<h1>Hello Dolly!</h1>', 'the component is rendered with passed in args');
     });
 
     test('a component can inject services', async assert => {
