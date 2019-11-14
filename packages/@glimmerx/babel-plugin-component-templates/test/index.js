@@ -2,6 +2,7 @@ import plugin from '..';
 import pluginTester from 'babel-plugin-tester';
 import path from 'path';
 import astTransformTestPluginOptions from './fixtures-options/precompile/ast-transform/options';
+import disabledPrecompilePluginOptions from './fixtures-options/precompile/disabled/options';
 
 pluginTester({
   plugin,
@@ -13,5 +14,11 @@ pluginTester({
       outputFixture: path.join(__dirname, 'fixtures-options/precompile/ast-transform/output.js'),
       pluginOptions: astTransformTestPluginOptions,
     },
+    {
+      title: 'options.precompile : disabled',
+      fixture: path.join(__dirname, 'fixtures-options/precompile/disabled/code.js'),
+      outputFixture: path.join(__dirname, 'fixtures-options/precompile/disabled/output.js'),
+      pluginOptions: disabledPrecompilePluginOptions,
+    }
   ],
 });
