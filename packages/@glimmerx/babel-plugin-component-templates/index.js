@@ -1,10 +1,10 @@
 const { precompile } = require('@glimmer/compiler');
-const { addNamed } = require('@babel/helper-module-imports');
+const { addNamed, addDefault } = require('@babel/helper-module-imports');
 const { traverse, preprocess } = require('@glimmer/syntax');
 
 function tokensFromType(node, scopedTokens) {
   const tokensMap = {
-    PathExpression: (node) => {
+    PathExpression: node => {
       if (node.data === true || node.this === true) {
         return;
       }
@@ -84,6 +84,8 @@ module.exports = function(babel, options) {
     precompile: precompileOptions,
   } = options || {};
 
+  const isPrecompileDisabled = precompileOptions && precompileOptions.disabled === true;
+
   function maybeAddTemplateSetterImport(state, programPath) {
     if (state.templateSetter) {
       return state.templateSetter;
@@ -92,6 +94,16 @@ module.exports = function(babel, options) {
     return (state.templateSetter = addNamed(programPath, importName, importPath, {
       importedType: 'es6',
     }));
+  }
+
+  function maybeAddGlimmerInlinePrecompileImport(state, programPath) {
+    if (!state.glimmerInlinePrecompile) {
+      state.glimmerInlinePrecompile = addDefault(programPath, 'glimmer-inline-precompile', {
+        nameHint: 'hbs',
+      });
+    }
+
+    return state.glimmerInlinePrecompile;
   }
 
   return {
@@ -108,7 +120,12 @@ module.exports = function(babel, options) {
             }
 
             let setter = maybeAddTemplateSetterImport(state, programPath);
-            insertTemplateWrapper(path, setter);
+
+            let hbsImportId = isPrecompileDisabled
+              ? maybeAddGlimmerInlinePrecompileImport(state, programPath)
+              : null;
+
+            insertTemplateWrapper(path, { setter, hbsImportId });
             path.remove();
           },
         });
@@ -124,9 +141,12 @@ module.exports = function(babel, options) {
     },
   };
 
-  function insertTemplateWrapper(path, setter) {
+  function insertTemplateWrapper(path, { setter, hbsImportId }) {
     const klass = path.findParent(path => path.isClassExpression() || path.isClassDeclaration());
-    const template = buildTemplate(path);
+
+    const template = isPrecompileDisabled
+      ? buildLooseTemplate(path, hbsImportId) // Loosely compile templates, do not transform to op codes.
+      : buildTemplate(path);
 
     if (klass.isClassExpression()) {
       klass.replaceWith(t.callExpression(setter, [klass.node, template]));
@@ -135,6 +155,51 @@ module.exports = function(babel, options) {
 
       klass.insertAfter(t.callExpression(setter, [klassId, template]));
     }
+  }
+
+  function buildLooseTemplate(path, hbsImportId) {
+    function getTaggedTemplateExpression(path) {
+      const stringNode = path.node.value;
+      if (t.isTaggedTemplateExpression(stringNode)) {
+        return stringNode;
+      }
+    }
+
+    const compiledTemplateIdentifier = t.identifier('compiledTemplate');
+
+    const taggedTemplateExpression = getTaggedTemplateExpression(path);
+
+    taggedTemplateExpression.tag = hbsImportId; // Update the tag to be the same as our importId
+
+    const compiledTemplateStatement = t.variableDeclaration('const', [
+      t.variableDeclarator(compiledTemplateIdentifier, taggedTemplateExpression),
+    ]);
+
+    const templateSource = getTemplateString(path);
+    const templateScopeTokens = getTemplateTokens(templateSource);
+
+    const left = t.memberExpression(
+      t.memberExpression(compiledTemplateIdentifier, t.identifier('meta')),
+      t.identifier('scope')
+    );
+
+    const scopeStatement = t.expressionStatement(
+      t.assignmentExpression('=', left, buildScopeFunction(path, templateScopeTokens).value)
+    );
+
+    const callExpression = t.callExpression(
+      t.arrowFunctionExpression(
+        [],
+        t.blockStatement([
+          compiledTemplateStatement,
+          scopeStatement,
+          t.returnStatement(compiledTemplateIdentifier),
+        ])
+      ),
+      []
+    );
+
+    return callExpression;
   }
 
   function buildTemplate(path) {
