@@ -6,7 +6,10 @@
     "storybook",
     "glimmerjs"
   ],
-  "author": "Jonathan Tsang <jonathantsangemail@gmail.com>",
+  "authors": [
+    "Abhishek Aroskar <abhi.aroskar.github@gmail.com> (https://github.com/aroskar)",
+    "Jonathan Tsang <jonathantsangemail@gmail.com> (https://github.com/jonathantsang)"
+  ],
   "license": "MIT",
   "files": [
     "bin/**/*",
