@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Configuration } from 'webpack';
-let path = require('path');
 
 export function webpack(config: Configuration) {
   return {
@@ -36,8 +35,8 @@ export function webpack(config: Configuration) {
       plugins: [],
       extensions: ['.ts', '.js'],
       alias: {
-        '@glimmerx/core$': path.join(__dirname, '../../node_modules/@glimmerx/core'),
-        '@glimmerx/component$': path.join(__dirname, '../../node_modules/@glimmerx/component'),
+        '@glimmerx/core$': require.resolve('@glimmerx/core'),
+        '@glimmerx/component$': require.resolve('@glimmerx/component'),
       },
     },
   };
