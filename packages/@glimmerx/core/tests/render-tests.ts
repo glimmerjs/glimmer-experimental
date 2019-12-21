@@ -10,7 +10,10 @@ import { on, action } from '@glimmerx/modifier';
 
 const { module, test } = QUnit;
 
-export default function renderTests(moduleName: string, render: (component: Constructor<Component>, options?: any) => Promise<string>) {
+export default function renderTests(
+  moduleName: string,
+  render: (component: Constructor<Component>, options?: any) => Promise<string>
+) {
   module(`${moduleName} rendering`, () => {
     test('it renders a component', async assert => {
       class MyComponent extends Component {}
@@ -85,11 +88,15 @@ export default function renderTests(moduleName: string, render: (component: Cons
       const renderOptions = {
         args: {
           say: 'Hello Dolly!',
-        }
+        },
       };
 
       const html = await render(MyComponent, renderOptions);
-      assert.strictEqual(html, '<h1>Hello Dolly!</h1>', 'the component is rendered with passed in args');
+      assert.strictEqual(
+        html,
+        '<h1>Hello Dolly!</h1>',
+        'the component is rendered with passed in args'
+      );
     });
 
     test('a component can inject services', async assert => {
@@ -143,7 +150,7 @@ export default function renderTests(moduleName: string, render: (component: Cons
     });
 
     test('a component can be rendered more than once', async assert => {
-      class MyComponent extends Component { }
+      class MyComponent extends Component {}
 
       setComponentTemplate(MyComponent, compileTemplate(`<h1>Bump</h1>`));
 
@@ -170,7 +177,7 @@ export default function renderTests(moduleName: string, render: (component: Cons
         MyComponent,
         compileTemplate(
           `<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`,
-          () => ({on})
+          () => ({ on })
         )
       );
 

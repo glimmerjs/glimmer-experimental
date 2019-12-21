@@ -3,17 +3,25 @@ import { CachedReference } from '@glimmer/component';
 import { Dict, VMArguments, CapturedArguments } from '@glimmer/interfaces';
 
 export type HelperOptions = {
-  services?: Dict<unknown>
+  services?: Dict<unknown>;
 };
 
-export type UserHelper = (args: ReadonlyArray<unknown>, named: Dict<unknown>, options: HelperOptions) => any;
+export type UserHelper = (
+  args: ReadonlyArray<unknown>,
+  named: Dict<unknown>,
+  options: HelperOptions
+) => any;
 
 export default class HelperReference extends CachedReference<unknown> {
   public tag: TagWrapper<RevisionTag | null>;
   private args: CapturedArguments;
   private servicesRef?: Reference<Dict<unknown>>;
 
-  constructor(private helper: UserHelper, args: VMArguments, servicesRef?: Reference<Dict<unknown>>) {
+  constructor(
+    private helper: UserHelper,
+    args: VMArguments,
+    servicesRef?: Reference<Dict<unknown>>
+  ) {
     super();
     if (servicesRef) {
       this.tag = combine([args.tag, servicesRef.tag]);

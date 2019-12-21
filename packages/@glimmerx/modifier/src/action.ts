@@ -3,7 +3,7 @@ const BINDINGS_MAP = new WeakMap();
 export function action(target: any, key: any): any;
 export function action(target: any, key: any, descriptor: PropertyDescriptor): PropertyDescriptor;
 export function action(...args: any[]): any {
-  let [,,desc] = args;
+  let [, , desc] = args;
 
   const actionFn = desc.value;
 
@@ -24,6 +24,6 @@ export function action(...args: any[]): any {
       }
 
       return fn;
-    }
+    },
   };
 }

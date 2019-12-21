@@ -8,7 +8,7 @@ import { SimpleDocument } from '@simple-dom/interface';
 import { parse } from 'url';
 
 interface EnvironmentOptions {
-  document: SimpleDocument
+  document: SimpleDocument;
 }
 
 /**

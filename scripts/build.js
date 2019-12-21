@@ -15,16 +15,16 @@ const glob = promisify(require('glob'));
 
   const packages = (await glob('dist/modules/packages/{@*/*,!(@*)}'))
     .map(pkg => pkg.replace('dist/modules/packages/', ''))
-    .flatMap(pkg => ([
+    .flatMap(pkg => [
       {
         from: path.join('dist', 'commonjs', 'packages', pkg),
-        to: path.join('packages', pkg, 'dist', 'commonjs')
+        to: path.join('packages', pkg, 'dist', 'commonjs'),
       },
       {
         from: path.join('dist', 'modules', 'packages', pkg),
-        to: path.join('packages', pkg, 'dist', 'modules')
-      }
-    ]));
+        to: path.join('packages', pkg, 'dist', 'modules'),
+      },
+    ]);
 
   await remove(packages.map(pkg => pkg.to));
   await createDirs(packages.map(pkg => pkg.to));
@@ -52,16 +52,16 @@ async function buildStorybook() {
 }
 
 function createDirs(paths) {
-  return each(paths, path => {
-    console.log(`Creating Dir ${path}`);
-    return fs.mkdirp(path);
+  return each(paths, pathOfDir => {
+    console.log(`Creating Dir ${pathOfDir}`);
+    return fs.mkdirp(pathOfDir);
   });
 }
 
 function remove(paths) {
-  return each(paths, path => {
-    console.log(`Removing ${path}`);
-    return fs.remove(path);
+  return each(paths, pathOfDir => {
+    console.log(`Removing ${pathOfDir}`);
+    return fs.remove(pathOfDir);
   });
 }
 

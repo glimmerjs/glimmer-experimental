@@ -171,7 +171,7 @@ module.exports = {
   overrides: [
     // node files
     {
-      files: ['.eslintrc.js', '.babelrc.js', 'standalone.js', 'bin/**/*.js', 'scripts/**/*.js'],
+      files: ['.eslintrc.js', '.babelrc.js', 'standalone.js', '**/bin/**/*.js', '**/scripts/**/*.js', 'webpack.config.js'],
       env: {
         es6: true,
         node: true,

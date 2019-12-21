@@ -8,14 +8,11 @@ import { renderToString, RenderOptions } from '..';
 
 QUnit.module('@glimmer/ssr rendering', () => {
   QUnit.test('options.serializer', async assert => {
-
-    class MyComponent extends Component { }
+    class MyComponent extends Component {}
 
     class CustomHTMLSerializer extends HTMLSerializer {
       text(text: SerializableNode) {
-        return super
-          .text(text)
-          .replace(/Hello/g, 'Goodbye') // Replaces repetitive whitespace with a single character.
+        return super.text(text).replace(/Hello/g, 'Goodbye'); // Replaces repetitive whitespace with a single character.
       }
     }
 
@@ -25,6 +22,6 @@ QUnit.module('@glimmer/ssr rendering', () => {
 
     const output = await renderToString(MyComponent, options);
 
-    assert.equal(output, "<h1>Goodbye World</h1>");
+    assert.equal(output, '<h1>Goodbye World</h1>');
   });
-})
+});

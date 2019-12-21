@@ -12,8 +12,9 @@
     "format": "prettier --write 'packages/**/*.{js,ts}'",
     "prepublishOnly": "scripts/build.js",
     "start": "webpack-dev-server",
-    "test": "testem ci && yarn test:node",
+    "test": "testem ci && yarn lint && yarn test:node",
     "test:watch": "testem",
+    "lint": "eslint . --cache --ext .js,.ts",
     "test:node": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules"
   },
   "workspaces": [
@@ -26,7 +27,12 @@
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-typescript": "^7.3.3",
     "@types/qunit": "^2.9.0",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
     "babel-loader": "^8.0.6",
+    "eslint": "^5.10.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "fs-extra": "^8.1.0",
     "lerna": "^3.15.0",
     "prettier": "^1.18.2",
@@ -40,6 +46,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "volta": {
-    "node": "12.10.0"
+    "node": "12.10.0",
+    "yarn": "1.21.1"
   }
 }

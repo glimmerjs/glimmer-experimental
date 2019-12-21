@@ -12,7 +12,6 @@ class OnModifierState {
 
   public shouldUpdate = true;
 
-
   constructor(element: Element, args: CapturedArguments) {
     this.element = element;
     this.args = args;
@@ -49,11 +48,7 @@ class OnModifierManager implements ModifierManager<OnModifierState | null, null>
     this.isInteractive = typeof document !== 'undefined';
   }
 
-  create(
-    element: SimpleElement,
-    state: null,
-    args: VMArguments
-  ): OnModifierState | null {
+  create(element: SimpleElement, state: null, args: VMArguments): OnModifierState | null {
     if (!this.isInteractive) {
       return null;
     }
@@ -65,9 +60,8 @@ class OnModifierManager implements ModifierManager<OnModifierState | null, null>
   getTag(state: OnModifierState | null): TagWrapper<RevisionTag | null> {
     if (state === null) {
       return CONSTANT_TAG;
-    } else {
-      return state.tag;
     }
+    return state.tag;
   }
 
   install(state: OnModifierState | null): void {
@@ -113,5 +107,5 @@ class OnModifierManager implements ModifierManager<OnModifierState | null, null>
 
 export const on = {
   state: null,
-  manager: new OnModifierManager()
+  manager: new OnModifierManager(),
 };
