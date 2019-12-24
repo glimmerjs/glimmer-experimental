@@ -15,7 +15,8 @@
     "test": "testem ci && yarn lint && yarn test:node",
     "test:watch": "testem",
     "lint": "eslint . --cache --ext .js,.ts",
-    "test:node": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules"
+    "test:node": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules",
+    "storybook": "yarn workspace example-app storybook"
   },
   "workspaces": [
     "packages/*",

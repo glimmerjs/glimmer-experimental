@@ -13,13 +13,12 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "glimmer-lite-core": "^0.1.0",
-    "@glimmerx/core": "^0.1.0",
-    "@glimmerx/component": "^0.1.0"
+    "glimmer-lite-core": "^0.1.0"
   },
   "devDependencies": {
     "@glimmer/bundle-compiler": "^0.40.1",
     "@glimmer/compiler": "^0.40.1",
-    "@glimmer/interfaces": "^0.40.1"
+    "@glimmer/interfaces": "^0.40.1",
+    "@glimmerx/storybook": "^0.0.1"
   }
 }

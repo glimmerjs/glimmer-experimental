@@ -31,19 +31,12 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
-    "@babel/plugin-proposal-decorators": "^7.7.0",
     "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/plugin-transform-classes": "^7.7.0",
-    "@babel/preset-env": "^7.7.6",
     "@babel/preset-es2015": "^7.0.0-beta.53",
-    "@babel/preset-typescript": "^7.7.4",
     "@glimmer/bundle-compiler": "^0.40.1",
     "@glimmer/compiler": "^0.40.1",
     "@glimmer/interfaces": "^0.40.1",
-    "@glimmerx/babel-plugin-component-templates": "0.1.3",
-    "@glimmerx/component": "0.1.1",
-    "@glimmerx/core": "0.1.2",
     "@glimmerx/service": "0.1.1",
     "@storybook/addons": "^5.3.0-alpha.41",
     "@storybook/core": "^5.3.0-alpha.41",
@@ -58,11 +51,18 @@
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.9.0",
     "typescript": "^3.4.0",
-    "babel-loader": "^7.0.0 || ^8.0.0",
     "core-js": "^3.0.1"
   },
   "dependencies": {
-    "global": "^4.3.2"
+    "global": "^4.3.2",
+    "@glimmerx/core": "^0.1.0",
+    "@glimmerx/component": "^0.1.0",
+    "@babel/preset-typescript": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "babel-loader": "^7.0.0 || ^8.0.0",
+    "@glimmerx/babel-plugin-component-templates": "0.1.3",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-decorators": "^7.7.0"
   },
   "engines": {
     "node": ">=8.0.0"

@@ -297,3 +297,8 @@ For TDD:
 Tests are run via testem (configured in [testem.json](testem.json)) and built
 with webpack (configured in [webpack.config.js](webpack.config.js)).
 
+## Storybook
+
+To test Storybook changes on example app components run:
+
+`yarn storybook` this will auto open Storybook app
