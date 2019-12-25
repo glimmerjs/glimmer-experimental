@@ -1,7 +1,7 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Configuration } from 'webpack';
 
 export function webpack(config: Configuration) {
+  const configRules = (config.module && config.module.rules) || [];
   return {
     ...config,
     externals: {
@@ -10,7 +10,7 @@ export function webpack(config: Configuration) {
     module: {
       ...config.module,
       rules: [
-        ...config.module.rules,
+        ...configRules,
         {
           test: /\.ts$/,
           use: {

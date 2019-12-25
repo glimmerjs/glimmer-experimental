@@ -1,3 +1,4 @@
+// this for compiling the server & client code for Storybook APIs
 module.exports = {
   presets: [
     ['@babel/preset-env', { shippedProposals: true, useBuiltIns: 'usage', corejs: '3' }],

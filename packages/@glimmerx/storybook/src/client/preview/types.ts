@@ -1,6 +1,6 @@
 import { StoryFn } from '@storybook/addons';
 import { Constructor } from '@glimmerx/core';
-import { Component as GlimmerComponent } from '@glimmer/component';
+import GlimmerComponent from '@glimmerx/component';
 
 export type StoryFnGlimmerReturnType = string | Constructor<GlimmerComponent>;
 

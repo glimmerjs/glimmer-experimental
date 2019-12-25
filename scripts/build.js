@@ -3,12 +3,13 @@
 const path = require('path');
 const fs = require('fs-extra');
 const { promisify } = require('util');
+const buildStorybook = require('./buildStorybook');
 
 const exec = promisify(require('child_process').exec);
 const glob = promisify(require('glob'));
 
 (async function() {
-  process.cwd(path.join(__dirname, '..'));
+  process.chdir(path.join(__dirname, '..'));
 
   await buildTypescript('dist/modules', 'es2015');
   await buildTypescript('dist/commonjs', 'commonjs');
@@ -45,10 +46,6 @@ async function buildTypescript(outDir, moduleKind = 'es2015') {
       throw err;
     }
   }
-}
-
-async function buildStorybook() {
-  await exec(`cd ./packages/@glimmerx/storybook/ && yarn prepare`);
 }
 
 function createDirs(paths) {
