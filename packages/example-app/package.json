@@ -19,6 +19,6 @@
     "@glimmer/bundle-compiler": "^0.40.1",
     "@glimmer/compiler": "^0.40.1",
     "@glimmer/interfaces": "^0.40.1",
-    "@glimmerx/storybook": "^0.0.1"
+    "@glimmerx/storybook": "^0.1.1"
   }
 }

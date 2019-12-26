@@ -50,9 +50,7 @@ To do that, create a file at .storybook/config.js with the following content:
 ```js
 import { configure } from '@glimmerx/storybook';
 
-const useSubdirectories = true
-
-configure(require.context('../src', useSubdirectories, /\.stories\.js$/), module);
+configure(require.context('../src', true, /\.stories\.js$/), module);
 ```
 That will load all the stories underneath your ../src directory that match the pattern *.stories.js. We recommend co-locating your stories with your source files, but you can place them wherever you choose.
 
@@ -62,12 +60,9 @@ Now create a ../stories/index.js file, and write your first story like this:
 ```js
 import { storiesOf } from '@glimmerx/storybook';
 import SampleComponent from '../src/SampleComponent';
+import { hbs } from '@glimmerx/component';
 
-class OtherComponent extends Component {
-  static template = hbs`<SampleComponent />`;
-}
-
-storiesOf('Sample', module).add('OtherComponent', () => OtherComponent );
+storiesOf('Sample', module).add('SampleComponent', () => hbs`<SampleComponent />`);
 ```
 Each story is a single state of your component. In the above case, there is a story using the SampleComponent.
 

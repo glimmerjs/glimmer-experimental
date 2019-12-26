@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/storybook",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "storybook for glimmerjs",
   "keywords": [
     "storybook",
@@ -24,17 +24,12 @@
     "storybook-server": "./bin/index.js"
   },
   "scripts": {
-    "prepare": "babel ./src --out-dir ./dist --config-file ./.babelrc.js --copy-files --extensions '.js,.jsx,.ts,.tsx'",
-    "test": "jest && yarn lint",
-    "lint": "eslint . --cache --ext .js,.ts",
-    "ts-compile": "node_modules/.bin/tsc -p ."
+    "build": "babel ./src --out-dir ./dist --config-file ./.babelrc.js --copy-files --extensions '.js,.jsx,.ts,.tsx'",
+    "ts-compile": "tsc -p ."
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
-    "@babel/plugin-proposal-export-default-from": "^7.5.2",
-    "@babel/plugin-transform-classes": "^7.7.0",
-    "@types/jest": "^24.0.11",
     "@types/node": "^12.1.0",
     "@types/webpack": "^4.39.0",
     "@types/webpack-env": "^1.13.9",
@@ -45,20 +40,21 @@
     "eslint": "^5.10.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "jest": "^24.9.0",
-    "typescript": "^3.4.0"
+    "typescript": "^3.4.0",
+    "@babel/preset-typescript": "^7.7.4",
+    "@babel/preset-env": "^7.7.6"
   },
   "dependencies": {
+    "global": "^4.3.2",
+    "@storybook/core": "^v5.3.8"
+  },
+  "peerDependencies": {
+    "babel-loader": "^8.0.6",
+    "@glimmerx/babel-plugin-component-templates": "^0.1.9",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-decorators": "^7.7.0",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/preset-typescript": "^7.7.4",
-    "@glimmerx/babel-plugin-component-templates": "0.1.3",
     "@glimmerx/component": "^0.1.0",
-    "@glimmerx/core": "^0.1.0",
-    "babel-loader": "^7.0.0 || ^8.0.0",
-    "global": "^4.3.2",
-    "@storybook/core": "^5.3.0-alpha.41"
+    "@glimmerx/core": "^0.1.0"
   },
   "engines": {
     "node": ">=8.0.0"

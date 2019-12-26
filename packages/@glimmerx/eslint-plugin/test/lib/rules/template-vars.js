@@ -1,3 +1,4 @@
+/* globals describe it */
 const babelParser = require.resolve('babel-eslint');
 const rule = require('../../../lib/rules/template-vars');
 // This very unfortunate require is because of the way RuleTester is set up.
@@ -9,8 +10,8 @@ const assert = require('assert');
 const ruleTester = new RuleTester({
   parser: babelParser,
   rules: {
-    'template-vars': 'error'
-  }
+    'template-vars': 'error',
+  },
 });
 
 /**
@@ -32,12 +33,15 @@ function testUnusedVars(code) {
     parser: 'babel-eslint',
     rules: {
       'no-unused-vars': 2,
-      'template-vars': 2
-    }
+      'template-vars': 2,
+    },
   });
 }
 
-describe('no-unused-vars', () => {
+describe('no-unused-vars', function() {
+  // eslint-disable-next-line no-invalid-this
+  this.timeout(5000);
+
   it('should not contain any errors when hbs is present and all references are imported', () => {
     const lintedOutput = testUnusedVars(`
       import { hbs } from '@glimmerx/component';
@@ -219,9 +223,9 @@ ruleTester.run('template-vars', rule, {
       options: [
         'all',
         {
-          nativeTokens: ['myImplicitRef']
-        }
-      ]
+          nativeTokens: ['myImplicitRef'],
+        },
+      ],
     },
     {
       code: `
@@ -241,9 +245,7 @@ ruleTester.run('template-vars', rule, {
           }
         }
       `,
-      options: [
-        'unused-only'
-      ]
+      options: ['unused-only'],
     },
   ],
   invalid: [
@@ -260,12 +262,10 @@ ruleTester.run('template-vars', rule, {
       `,
       errors: [
         {
-          messageId: "undefToken"
-        }
+          messageId: 'undefToken',
+        },
       ],
-      options: [
-        'all'
-      ]
+      options: ['all'],
     },
-  ]
+  ],
 });

@@ -10,8 +10,8 @@ const rootElement = document ? document.getElementById('root') : null;
  * @param {function} showMain - The function to initialize Storybook elements.
  */
 export default function renderMain({ storyFn, showMain }: RenderMainArgs) {
-  const element: any = storyFn();
+  const glimmerStoryComponent: any = storyFn();
   rootElement.innerHTML = '';
   showMain();
-  return renderComponent(element, { element: rootElement });
+  return renderComponent(glimmerStoryComponent, { element: rootElement });
 }

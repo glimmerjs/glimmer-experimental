@@ -257,7 +257,7 @@ renderComponent(MyComponent, {
 ### `@glimmerx/storybook`
 
 #### `storiesOf`
-`import { storiesOf } from '@glimmerx/core'`
+`import { storiesOf } from '@glimmerx/storybook'`
 
 Integrates Storybook into your host GlimmerJs application.
 
@@ -265,11 +265,7 @@ Integrates Storybook into your host GlimmerJs application.
 import { storiesOf } from '@glimmerx/storybook';
 import SampleComponent from '../src/SampleComponent';
 
-class WrapperComponent extends Component {
-  static template = hbs`<SampleComponent />`;
-}
-
-storiesOf('Sample', module).add('WrapperComponent', () => WrapperComponent );
+storiesOf('Sample', module).add('SampleComponent', () => hbs`<SampleComponent />`);
 ```
 For more details refer [README](./packages/@glimmerx/storybook/README.md).
 

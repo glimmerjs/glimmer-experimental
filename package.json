@@ -12,7 +12,7 @@
     "format": "prettier --write 'packages/**/*.{js,ts}'",
     "prepublishOnly": "scripts/build.js",
     "start": "webpack-dev-server",
-    "test": "testem ci && yarn lint && yarn test:node",
+    "test": "yarn lint && testem ci && yarn test:node",
     "test:watch": "testem",
     "lint": "eslint . --cache --ext .js,.ts",
     "test:node": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules",
@@ -47,7 +47,6 @@
     "webpack-dev-server": "^3.7.1"
   },
   "volta": {
-    "node": "12.10.0",
-    "yarn": "1.21.1"
+    "node": "12.10.0"
   }
 }
