@@ -53,6 +53,13 @@ Glimmer compiler:
 yarn add -D @glimmerx/babel-plugin-component-templates
 ```
 
+If using ESLint, you will also want to install / use the plugin provided, as the `no-unused-vars` core rule will fail without it
+
+```
+yarn add -D @glimmerx/eslint-plugin
+```
+For setup/configuration of the plugin, please view the [Plugin Readme](packages/@glimmerx/eslint-plugin)
+
 ## API
 
 ### `@glimmerx/component`

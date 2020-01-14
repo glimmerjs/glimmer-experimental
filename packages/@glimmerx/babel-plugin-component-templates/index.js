@@ -2,6 +2,14 @@ const { precompile } = require('@glimmer/compiler');
 const { addNamed, addDefault } = require('@babel/helper-module-imports');
 const { traverse, preprocess } = require('@glimmer/syntax');
 
+/* AST.Node reference: https://github.com/glimmerjs/glimmer-vm/blob/master/packages/%40glimmer/syntax/lib/types/nodes.ts#L268 */
+
+/**
+ * Gets the correct Token from the Node based on it's type
+ * @param {AST.Node} node - the node to extract tokens from
+ * @param {string[]} scopedTokens - An array of scoped tokens
+ * @returns {string} A tag to add to the list of tokens
+ */
 function tokensFromType(node, scopedTokens) {
   const tokensMap = {
     PathExpression: node => {
@@ -29,16 +37,32 @@ function tokensFromType(node, scopedTokens) {
   }
 }
 
-function addTokens(tokensSet, node, scopedTokens) {
+/**
+ * Adds tokens to the tokensSet based on their node.type
+ *
+ * @param {Set<string>} tokensSet The current Set of unique tokens
+ * @param {AST.Node} node - the node to extract tokens from
+ * @param {string | string[]} scopedTokens - a list, or single string of tokens
+ * @param {string[]} [nativeTokens] - An optional param of nativeTokens to exclude from the list (ex. ['if', 'each'])
+ */
+function addTokens(tokensSet, node, scopedTokens, nativeTokens = []) {
   const maybeTokens = tokensFromType(node, scopedTokens);
   (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach(maybeToken => {
-    if (maybeToken !== undefined) {
+    if (maybeToken !== undefined && !nativeTokens.includes(maybeToken)) {
       tokensSet.add(maybeToken);
     }
   });
 }
 
-function getTemplateTokens(html) {
+/**
+ * Parses and traverses a given handlebars html template to extract all tokens referenced
+ * that will come from the parent scope
+ *
+ * @param {string} html The handlebars html to process into an AST and traverse
+ * @param {string[]} [nativeTokens] - An optional param of nativeTokens to exclude from the list (ex. ['if', 'each'])
+ * @returns {string[]} The list of token names
+ */
+function getTemplateTokens(html, nativeTokens) {
   const ast = preprocess(html);
   const tokensSet = new Set();
   const scopedTokens = [];
@@ -70,7 +94,7 @@ function getTemplateTokens(html) {
       },
     },
     All(node) {
-      addTokens(tokensSet, node, scopedTokens);
+      addTokens(tokensSet, node, scopedTokens, nativeTokens);
     },
   });
   return Array.from(tokensSet);
@@ -251,3 +275,5 @@ module.exports = function(babel, options) {
     return path.node.value.quasis[0].value.raw;
   }
 };
+
+module.exports.getTemplateTokens = getTemplateTokens;
