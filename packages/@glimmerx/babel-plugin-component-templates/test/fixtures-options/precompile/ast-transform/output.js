@@ -1,5 +1,5 @@
-
 import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import Component, { hbs } from '@glimmerx/component';
 
 class MyComponent extends Component {}
 

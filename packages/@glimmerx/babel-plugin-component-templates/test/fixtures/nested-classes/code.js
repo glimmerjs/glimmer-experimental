@@ -1,4 +1,4 @@
-
+import Component, { hbs } from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 
 class MyComponent extends Component {

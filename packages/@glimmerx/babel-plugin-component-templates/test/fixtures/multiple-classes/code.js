@@ -1,3 +1,4 @@
+import Component, { hbs } from '@glimmerx/component';
 
 class Class1Declaration extends Component {
   static template = hbs`<h1>Hello world</h1>`;
