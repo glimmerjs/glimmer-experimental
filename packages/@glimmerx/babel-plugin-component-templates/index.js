@@ -120,6 +120,16 @@ module.exports = function(babel, options) {
     }));
   }
 
+  function maybeAddGlimmerInlinePrecompileImport(state, programPath) {
+    if (!state.glimmerInlinePrecompile) {
+      state.glimmerInlinePrecompile = addDefault(programPath, 'glimmer-inline-precompile', {
+        nameHint: 'hbs',
+      });
+    }
+
+    return state.glimmerInlinePrecompile;
+  }
+
   return {
     name: '@glimmerx/babel-plugin-glimmer-components',
     manipulateOptions({ parserOpts }) {
@@ -129,37 +139,37 @@ module.exports = function(babel, options) {
       Program(programPath, state) {
         programPath.traverse({
           ImportSpecifier(path) {
-            if (isPrecompileDisabled || state.hbsImportId || path.parent.source.value !== '@glimmerx/component') {
+            if (state.hbsImportId || path.parent.source.value !== '@glimmerx/component') {
               return;
             }
             const importedName = path.node.imported.name;
-            const {name} = path.node.local;
+            const localName = path.node.local.name;
             if (importedName === 'hbs') {
-              state.hbsImportId = {name};
-            }
-          },
-          ImportDefaultSpecifier(path) {
-            const sourceImportValue = path.parent.source.value;
-            const isInlinePrecompileImport = sourceImportValue === 'glimmer-inline-precompile' || sourceImportValue === '@glimmer/inline-precompile';
-            if (isPrecompileDisabled && !state.hbsImportId && isInlinePrecompileImport) {
-              const {name} = path.node.local;
-              state.hbsImportId = { type: 'Identifier', name };
-            } else if (!state.glimmerComponentImport && sourceImportValue === '@glimmerx/component') {
-              const {name} = path.node.local;
-              state.glimmerComponentImport = { name };
+              state.hbsImportId = localName;
+              // remove the hbs named import
+              if (path.parentPath.node.specifiers.length > 1) {
+                  path.remove();
+              } else {
+                path.parentPath.remove();
+              }
             }
 
+          },
+          ImportDefaultSpecifier(path) {
+            if (state.glimmerComponentImportId || path.parent.source.value !== '@glimmerx/component') {
+              return;
+            }
+            const localName = path.node.local.name;
+            state.glimmerComponentImportId = localName;
           },
           TaggedTemplateExpression(path) {
             const parentNode = path.parent;
-            const isACompiledTemplate = parentNode.id && parentNode.id.name === 'compiledTemplate';
-
-            if (isACompiledTemplate || path.node.tag.name !== state.hbsImportId.name) {
+            if (path.node.tag.name !== state.hbsImportId) {
               return;
             }
-            
+
             /**
-             * If its a hbs`....` only template then convert it into 
+             * If its a hbs`....` only template then convert it into
              * class extends Component { static template = hbs`....`;}
              * first and then compile
              */
@@ -168,19 +178,19 @@ module.exports = function(babel, options) {
               !parentNode.static ||
               parentNode.key.name !== 'template'
             ) {
-              if (!state.glimmerComponentImport) {
-                state.glimmerComponentImport = addDefault(programPath, '@glimmerx/component', {
+              if (!state.glimmerComponentImportId) {
+                state.glimmerComponentImportId = addDefault(programPath, '@glimmerx/component', {
                   nameHint: 'Component',
-                });
+                }).name;
               }
 
-              let taggedTemplateExpression = t.TaggedTemplateExpression(t.Identifier(state.hbsImportId.name), t.TemplateLiteral([...path.node.quasi.quasis], []));
+              let taggedTemplateExpression = t.TaggedTemplateExpression(t.Identifier(state.hbsImportId), t.TemplateLiteral([...path.node.quasi.quasis], []));
               const ClassTemplateProperty = t.ClassProperty(t.Identifier('template'), taggedTemplateExpression, null, null);
               ClassTemplateProperty.static = true;
               path.replaceWith(
                 t.ClassExpression(
                   null,
-                  t.Identifier(state.glimmerComponentImport.name),
+                  t.Identifier(state.glimmerComponentImportId),
                   t.ClassBody([ClassTemplateProperty])
                 )
               );
@@ -189,7 +199,7 @@ module.exports = function(babel, options) {
 
             let setter = maybeAddTemplateSetterImport(state, programPath);
             let hbsImportId = isPrecompileDisabled
-              ? state.hbsImportId
+              ? maybeAddGlimmerInlinePrecompileImport(state, programPath)
               : null;
             insertTemplateWrapper(path.parentPath, { setter, hbsImportId });
             path.parentPath.remove();

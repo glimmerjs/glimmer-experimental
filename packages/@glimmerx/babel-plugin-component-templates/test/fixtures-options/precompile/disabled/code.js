@@ -1,4 +1,4 @@
-import hbs from '@glimmer/inline-precompile';
+import Component, { hbs } from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 import YetAnotherComponent from './YetAnotherComponent';
 

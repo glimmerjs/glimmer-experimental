@@ -1,6 +1,5 @@
 import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
 import _Component from "@glimmerx/component";
-import { hbs } from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 import PhantomComponent from './PhantomComponent';
 import SecondPhantomComponent from './SecondPhantomComponent';

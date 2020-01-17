@@ -1,5 +1,5 @@
 import { dangerouslySetComponentTemplate as _dangerouslySetComponentTemplate } from "@glimmerx/other-package";
-import Component, { hbs } from '@glimmerx/component';
+import Component from '@glimmerx/component';
 
 class Class1Declaration extends Component {}
 
