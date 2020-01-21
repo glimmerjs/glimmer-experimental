@@ -159,6 +159,30 @@ ruleTester.run('template-vars', rule, {
     {
       code: `
         import { hbs } from '@glimmerx/component';
+        import myHelper from './my-helper';
+        import MyOtherComponent from './MyOtherComponent';
+        export default class Component {
+          static template = hbs\`
+            <MyOtherComponent>
+              <:namedBlock>
+                {{#unless (has-block "namedBlock")}}
+                  {{myHelper}}
+                {{/unless}}
+              </:namedBlock>
+              <:secondNamedBlock>
+                {{yield}}
+              </:secondNamedBlock>
+            </MyOtherComponent>
+          \`;
+          method() {
+            return false;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        import { hbs } from '@glimmerx/component';
         export default class Component {
           static template = hbs\`
             {{#if}}
