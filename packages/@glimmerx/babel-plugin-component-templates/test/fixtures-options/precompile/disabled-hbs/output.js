@@ -1,12 +1,10 @@
 import _hbs from "glimmer-inline-precompile";
 import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
-import Component from '@glimmerx/component';
+import _Component from "@glimmerx/component";
 import OtherComponent from './OtherComponent';
 import YetAnotherComponent from './YetAnotherComponent';
 
-class MyComponent extends Component {}
-
-_setComponentTemplate(MyComponent, (() => {
+const template1 = _setComponentTemplate(class extends _Component {}, (() => {
   const compiledTemplate = _hbs`<h1>Hello world</h1><OtherComponent/>`;
 
   compiledTemplate.meta.scope = () => ({
@@ -14,9 +12,9 @@ _setComponentTemplate(MyComponent, (() => {
   });
 
   return compiledTemplate;
-})())
+})());
 
-const MyComponentExpression = _setComponentTemplate(class extends Component {}, (() => {
+const template2 = _setComponentTemplate(class extends _Component {}, (() => {
   const compiledTemplate = _hbs`<YetAnotherComponent/>`;
 
   compiledTemplate.meta.scope = () => ({

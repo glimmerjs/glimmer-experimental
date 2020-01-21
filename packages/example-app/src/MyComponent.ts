@@ -16,6 +16,8 @@ const isCJK = helper(function(args, hash, { services }) {
          localeService.currentLocale === 'ja_JP';
 });
 
+const TemplateOnlyComponent = hbs`<h1>I am rendered by a template only component: {{@name}}</h1>`;
+
 class MyComponent extends Component {
   static template = hbs`
     <h1>Hello {{this.message}}</h1> <br/>
@@ -29,6 +31,7 @@ class MyComponent extends Component {
 
     <OtherComponent @count={{this.count}} /> <br/>
     <button {{on "click" this.increment}}>Increment</button>
+    <TemplateOnlyComponent @name="For Glimmerx"/>
   `;
 
   message = 'hello world';

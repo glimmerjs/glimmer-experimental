@@ -1,4 +1,5 @@
 import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import Component from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 const unknownValue = null;
 const MaybeComponent = null;

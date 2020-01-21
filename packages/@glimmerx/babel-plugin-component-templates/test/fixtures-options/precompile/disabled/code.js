@@ -1,3 +1,4 @@
+import Component, { hbs } from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 import YetAnotherComponent from './YetAnotherComponent';
 

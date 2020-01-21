@@ -138,19 +138,71 @@ module.exports = function(babel, options) {
     visitor: {
       Program(programPath, state) {
         programPath.traverse({
-          ClassProperty(path) {
-            if (!path.node.static || path.node.key.name !== 'template') {
+          ImportSpecifier(path) {
+            if (state.hbsImportId || path.parent.source.value !== '@glimmerx/component') {
+              return;
+            }
+            const importedName = path.node.imported.name;
+            const localName = path.node.local.name;
+            if (importedName === 'hbs') {
+              state.hbsImportId = localName;
+              // remove the hbs named import
+              if (path.parentPath.node.specifiers.length > 1) {
+                  path.remove();
+              } else {
+                path.parentPath.remove();
+              }
+            }
+
+          },
+          ImportDefaultSpecifier(path) {
+            if (state.glimmerComponentImportId || path.parent.source.value !== '@glimmerx/component') {
+              return;
+            }
+            const localName = path.node.local.name;
+            state.glimmerComponentImportId = localName;
+          },
+          TaggedTemplateExpression(path) {
+            const parentNode = path.parent;
+            if (path.node.tag.name !== state.hbsImportId) {
+              return;
+            }
+
+            /**
+             * If its a hbs`....` only template then convert it into
+             * class extends Component { static template = hbs`....`;}
+             * first and then compile
+             */
+            if (
+              parentNode.type !== 'ClassProperty' ||
+              !parentNode.static ||
+              parentNode.key.name !== 'template'
+            ) {
+              if (!state.glimmerComponentImportId) {
+                state.glimmerComponentImportId = addDefault(programPath, '@glimmerx/component', {
+                  nameHint: 'Component',
+                }).name;
+              }
+
+              let taggedTemplateExpression = t.TaggedTemplateExpression(t.Identifier(state.hbsImportId), t.TemplateLiteral([...path.node.quasi.quasis], []));
+              const ClassTemplateProperty = t.ClassProperty(t.Identifier('template'), taggedTemplateExpression, null, null);
+              ClassTemplateProperty.static = true;
+              path.replaceWith(
+                t.ClassExpression(
+                  null,
+                  t.Identifier(state.glimmerComponentImportId),
+                  t.ClassBody([ClassTemplateProperty])
+                )
+              );
               return;
             }
 
             let setter = maybeAddTemplateSetterImport(state, programPath);
-
             let hbsImportId = isPrecompileDisabled
               ? maybeAddGlimmerInlinePrecompileImport(state, programPath)
               : null;
-
-            insertTemplateWrapper(path, { setter, hbsImportId });
-            path.remove();
+            insertTemplateWrapper(path.parentPath, { setter, hbsImportId });
+            path.parentPath.remove();
           },
         });
         // Babel TypeScript transform strips any bindings that aren't
