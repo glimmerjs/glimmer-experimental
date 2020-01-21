@@ -23,7 +23,7 @@ function tokensFromType(node, scopedTokens) {
     },
     ElementNode: ({ tag }) => {
       const char = tag.charAt(0);
-      if (char !== char.toUpperCase()) {
+      if (char !== char.toUpperCase() || char === ':') {
         return;
       }
       if (scopedTokens.includes(tag)) {
