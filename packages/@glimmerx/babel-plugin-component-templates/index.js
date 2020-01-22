@@ -310,7 +310,7 @@ module.exports = function(babel, options) {
             .map(binding => {
               const { identifier } = binding;
               binding.reference(path);
-              return t.objectProperty(t.identifier(identifier.name), identifier, false, false);
+              return t.objectProperty(t.identifier(identifier.name), t.identifier(identifier.name), false, false);
             })
             .filter(prop => templateScopeTokens.includes(prop.key.name))
         )
