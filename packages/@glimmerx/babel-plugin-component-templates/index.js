@@ -111,27 +111,23 @@ module.exports = function(babel, options) {
   const isPrecompileDisabled = precompileOptions && precompileOptions.disabled === true;
 
   function maybeAddTemplateSetterImport(state, programPath) {
-    if (state.templateSetter) {
-      // babel transform commonjs maintains a set of nodes it has already transformed.
-      // This causes only the first instance of the node to get transformed. Using assign to clone node and generate a unique reference for each call
-      return Object.assign({}, state.templateSetter);
+    if (!state.templateSetterId) {
+      state.templateSetterId = addNamed(programPath, importName, importPath, {
+        importedType: 'es6',
+      }).name;
     }
 
-    return (state.templateSetter = addNamed(programPath, importName, importPath, {
-      importedType: 'es6',
-    }));
+    return state.templateSetterId;
   }
 
   function maybeAddGlimmerInlinePrecompileImport(state, programPath) {
-    if (state.glimmerInlinePrecompile) {
-      // babel transform commonjs maintains a set of nodes it has already transformed.
-      // This causes only the first instance of the node to get transformed. Using assign to clone node and generate a unique reference for each call
-      return Object.assign({}, state.glimmerInlinePrecompile);
+    if (!state.glimmerInlinePrecompileId) {
+      state.glimmerInlinePrecompileId = addDefault(programPath, 'glimmer-inline-precompile', {
+        nameHint: 'hbs',
+      }).name;
     }
 
-    return (state.glimmerInlinePrecompile = addDefault(programPath, 'glimmer-inline-precompile', {
-      nameHint: 'hbs',
-    }));
+    return state.glimmerInlinePrecompileId;
   }
 
   return {
@@ -201,11 +197,11 @@ module.exports = function(babel, options) {
               return;
             }
 
-            let setter = maybeAddTemplateSetterImport(state, programPath);
+            let setterId = maybeAddTemplateSetterImport(state, programPath);
             let hbsImportId = isPrecompileDisabled
               ? maybeAddGlimmerInlinePrecompileImport(state, programPath)
               : null;
-            insertTemplateWrapper(path.parentPath, { setter, hbsImportId });
+            insertTemplateWrapper(path.parentPath, { setterId, hbsImportId });
             path.parentPath.remove();
           },
         });
@@ -221,7 +217,7 @@ module.exports = function(babel, options) {
     },
   };
 
-  function insertTemplateWrapper(path, { setter, hbsImportId }) {
+  function insertTemplateWrapper(path, { setterId, hbsImportId }) {
     const klass = path.findParent(path => path.isClassExpression() || path.isClassDeclaration());
 
     const template = isPrecompileDisabled
@@ -229,11 +225,11 @@ module.exports = function(babel, options) {
       : buildTemplate(path);
 
     if (klass.isClassExpression()) {
-      klass.replaceWith(t.callExpression(setter, [klass.node, template]));
+      klass.replaceWith(t.callExpression(t.identifier(setterId), [klass.node, template]));
     } else {
       const klassId = klass.node.id;
 
-      klass.insertAfter(t.callExpression(setter, [klassId, template]));
+      klass.insertAfter(t.callExpression(t.identifier(setterId), [klassId, template]));
     }
   }
 
@@ -249,7 +245,7 @@ module.exports = function(babel, options) {
 
     const taggedTemplateExpression = getTaggedTemplateExpression(path);
 
-    taggedTemplateExpression.tag = hbsImportId; // Update the tag to be the same as our importId
+    taggedTemplateExpression.tag = t.identifier(hbsImportId); // Update the tag to be the same as our importId
 
     const compiledTemplateStatement = t.variableDeclaration('const', [
       t.variableDeclarator(compiledTemplateIdentifier, taggedTemplateExpression),
