@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/babel-plugin-component-templates",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Compiles Glimmer component templates",
   "repository": "https://github.com/tomdale/glimmer-lite",
   "author": "Tom Dale <tom@tomdale.net>",
