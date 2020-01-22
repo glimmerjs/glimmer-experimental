@@ -14,7 +14,7 @@
     "start": "webpack-dev-server",
     "test": "testem ci && yarn test:node",
     "test:watch": "testem",
-    "test:node": "mocha -r esm packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules"
+    "test:node": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules"
   },
   "workspaces": [
     "packages/*",

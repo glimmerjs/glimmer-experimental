@@ -112,7 +112,9 @@ module.exports = function(babel, options) {
 
   function maybeAddTemplateSetterImport(state, programPath) {
     if (state.templateSetter) {
-      return state.templateSetter;
+      // babel transform commonjs maintains a set of nodes it has already transformed.
+      // This causes only the first instance of the node to get transformed. Using assign to clone node and generate a unique reference for each call
+      return Object.assign({}, state.templateSetter);
     }
 
     return (state.templateSetter = addNamed(programPath, importName, importPath, {
@@ -121,13 +123,15 @@ module.exports = function(babel, options) {
   }
 
   function maybeAddGlimmerInlinePrecompileImport(state, programPath) {
-    if (!state.glimmerInlinePrecompile) {
-      state.glimmerInlinePrecompile = addDefault(programPath, 'glimmer-inline-precompile', {
-        nameHint: 'hbs',
-      });
+    if (state.glimmerInlinePrecompile) {
+      // babel transform commonjs maintains a set of nodes it has already transformed.
+      // This causes only the first instance of the node to get transformed. Using assign to clone node and generate a unique reference for each call
+      return Object.assign({}, state.glimmerInlinePrecompile);
     }
 
-    return state.glimmerInlinePrecompile;
+    return (state.glimmerInlinePrecompile = addDefault(programPath, 'glimmer-inline-precompile', {
+      nameHint: 'hbs',
+    }));
   }
 
   return {
