@@ -11,9 +11,11 @@ const myHelper = helper(function([name], { greeting }) {
 
 const isCJK = helper(function(args, hash, { services }) {
   const localeService = services!.locale as LocaleService;
-  return localeService.currentLocale === 'zh_CN' ||
-         localeService.currentLocale === 'ko_KO' ||
-         localeService.currentLocale === 'ja_JP';
+  return (
+    localeService.currentLocale === 'zh_CN' ||
+    localeService.currentLocale === 'ko_KO' ||
+    localeService.currentLocale === 'ja_JP'
+  );
 });
 
 const TemplateOnlyComponent = hbs`<h1>I am rendered by a template only component: {{@name}}</h1>`;

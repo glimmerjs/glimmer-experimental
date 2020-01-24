@@ -254,6 +254,21 @@ renderComponent(MyComponent, {
 });
 ```
 
+### `@glimmerx/storybook`
+
+#### `storiesOf`
+`import { storiesOf } from '@glimmerx/storybook'`
+
+Integrates Storybook into your host GlimmerJs application.
+
+```js
+import { storiesOf } from '@glimmerx/storybook';
+import SampleComponent from '../src/SampleComponent';
+
+storiesOf('Sample', module).add('SampleComponent', () => hbs`<SampleComponent />`);
+```
+For more details refer [README](./packages/@glimmerx/storybook/README.md).
+
 ## Development
 
 ### Setup
@@ -278,3 +293,8 @@ For TDD:
 Tests are run via testem (configured in [testem.json](testem.json)) and built
 with webpack (configured in [webpack.config.js](webpack.config.js)).
 
+## Storybook
+
+To test Storybook changes on example app components run:
+
+`yarn storybook` this will auto open Storybook app

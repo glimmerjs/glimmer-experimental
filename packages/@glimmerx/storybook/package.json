@@ -1,0 +1,62 @@
+{
+  "name": "@glimmerx/storybook",
+  "version": "0.1.1",
+  "description": "storybook for glimmerjs",
+  "keywords": [
+    "storybook",
+    "glimmerjs"
+  ],
+  "authors": [
+    "Abhishek Aroskar <abhi.aroskar.github@gmail.com> (https://github.com/aroskar)",
+    "Jonathan Tsang <jonathantsangemail@gmail.com> (https://github.com/jonathantsang)"
+  ],
+  "license": "MIT",
+  "files": [
+    "bin/**/*",
+    "dist/**/*",
+    "README.md",
+    "*.js"
+  ],
+  "main": "dist/client/index.js",
+  "bin": {
+    "build-storybook": "./bin/build.js",
+    "start-storybook": "./bin/index.js",
+    "storybook-server": "./bin/index.js"
+  },
+  "scripts": {
+    "build": "babel ./src --out-dir ./dist --config-file ./.babelrc.js --copy-files --extensions '.js,.jsx,.ts,.tsx'",
+    "ts-compile": "tsc -p ."
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@types/node": "^12.1.0",
+    "@types/webpack": "^4.39.0",
+    "@types/webpack-env": "^1.13.9",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
+    "babel-eslint": "^10.0.3",
+    "core-js": "^3.0.1",
+    "eslint": "^5.10.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "typescript": "^3.4.0",
+    "@babel/preset-typescript": "^7.7.4",
+    "@babel/preset-env": "^7.7.6"
+  },
+  "dependencies": {
+    "global": "^4.3.2",
+    "@storybook/core": "^v5.3.8"
+  },
+  "peerDependencies": {
+    "babel-loader": "^8.0.6",
+    "@glimmerx/babel-plugin-component-templates": "^0.1.9",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-decorators": "^7.7.0",
+    "@glimmerx/component": "^0.1.0",
+    "@glimmerx/core": "^0.1.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

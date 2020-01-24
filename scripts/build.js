@@ -3,32 +3,35 @@
 const path = require('path');
 const fs = require('fs-extra');
 const { promisify } = require('util');
+const buildStorybook = require('./buildStorybook');
 
 const exec = promisify(require('child_process').exec);
 const glob = promisify(require('glob'));
 
 (async function() {
-  process.cwd(path.join(__dirname, '..'));
+  process.chdir(path.join(__dirname, '..'));
 
   await buildTypescript('dist/modules', 'es2015');
   await buildTypescript('dist/commonjs', 'commonjs');
 
   const packages = (await glob('dist/modules/packages/{@*/*,!(@*)}'))
     .map(pkg => pkg.replace('dist/modules/packages/', ''))
-    .flatMap(pkg => ([
+    .flatMap(pkg => [
       {
         from: path.join('dist', 'commonjs', 'packages', pkg),
-        to: path.join('packages', pkg, 'dist', 'commonjs')
+        to: path.join('packages', pkg, 'dist', 'commonjs'),
       },
       {
         from: path.join('dist', 'modules', 'packages', pkg),
-        to: path.join('packages', pkg, 'dist', 'modules')
-      }
-    ]));
+        to: path.join('packages', pkg, 'dist', 'modules'),
+      },
+    ]);
 
   await remove(packages.map(pkg => pkg.to));
   await createDirs(packages.map(pkg => pkg.to));
   await move(packages);
+
+  await buildStorybook();
 
   console.log('\n\nDone');
 })();
@@ -46,16 +49,16 @@ async function buildTypescript(outDir, moduleKind = 'es2015') {
 }
 
 function createDirs(paths) {
-  return each(paths, path => {
-    console.log(`Creating Dir ${path}`);
-    return fs.mkdirp(path);
+  return each(paths, pathOfDir => {
+    console.log(`Creating Dir ${pathOfDir}`);
+    return fs.mkdirp(pathOfDir);
   });
 }
 
 function remove(paths) {
-  return each(paths, path => {
-    console.log(`Removing ${path}`);
-    return fs.remove(path);
+  return each(paths, pathOfDir => {
+    console.log(`Removing ${pathOfDir}`);
+    return fs.remove(pathOfDir);
   });
 }
 

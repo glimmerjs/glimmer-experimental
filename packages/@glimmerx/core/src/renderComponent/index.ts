@@ -34,9 +34,8 @@ export function didRender() {
     return new Promise((resolve, reject) => {
       renderNotifiers.push([resolve, reject]);
     });
-  } else {
-    return Promise.resolve();
   }
+  return Promise.resolve();
 }
 
 async function renderComponent(
@@ -78,7 +77,7 @@ function scheduleRevalidation() {
       revalidate();
       renderNotifiers.forEach(([resolve]) => resolve());
     } catch (err) {
-      renderNotifiers.forEach(([,reject]) => reject(err));
+      renderNotifiers.forEach(([, reject]) => reject(err));
     }
 
     renderNotifiers = [];
@@ -102,17 +101,20 @@ export function dictToReference(dict?: Dict<unknown>): Dict<PathReference> {
     return {};
   }
 
-  return Object.keys(dict).reduce((acc, key) => {
-    acc[key] = new RootReference(dict[key]);
-    return acc;
-  }, {} as Dict<PathReference>);
+  return Object.keys(dict).reduce(
+    (acc, key) => {
+      acc[key] = new RootReference(dict[key]);
+      return acc;
+    },
+    {} as Dict<PathReference>
+  );
 }
 
 function getTemplateIterator(
   ComponentClass: Constructor<Component>,
   element: Element,
   componentArgs?: Dict<unknown>,
-  services?: Dict<unknown>,
+  services?: Dict<unknown>
 ) {
   const env = Environment.create();
   const runtime = CustomJitRuntime(resolver, context, env);
@@ -132,5 +134,13 @@ function getTemplateIterator(
     });
   }
 
-  return renderJitComponent(runtime, builder, context, 0, 'root', dictToReference(componentArgs), dynamicScope);
+  return renderJitComponent(
+    runtime,
+    builder,
+    context,
+    0,
+    'root',
+    dictToReference(componentArgs),
+    dynamicScope
+  );
 }

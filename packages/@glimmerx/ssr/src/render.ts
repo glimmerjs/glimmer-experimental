@@ -1,5 +1,11 @@
 import Component from '@glimmerx/component';
-import { RuntimeResolver, CompileTimeResolver, definitionForComponent, Constructor, dictToReference } from '@glimmerx/core';
+import {
+  RuntimeResolver,
+  CompileTimeResolver,
+  definitionForComponent,
+  Constructor,
+  dictToReference,
+} from '@glimmerx/core';
 import { Dict } from '@glimmer/interfaces';
 import { JitContext } from '@glimmer/opcode-compiler';
 import Environment from './environment';
@@ -17,11 +23,14 @@ export interface RenderOptions {
   args?: Dict<unknown>;
   serializer?: HTMLSerializer;
   services?: Dict<unknown>;
-};
+}
 
 const defaultSerializer = new HTMLSerializer(voidMap);
 
-export function renderToString(ComponentClass: Constructor<Component>, options?: RenderOptions): Promise<string> {
+export function renderToString(
+  ComponentClass: Constructor<Component>,
+  options?: RenderOptions
+): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     const stream = new PassThrough();
     let html = '';
@@ -34,7 +43,11 @@ export function renderToString(ComponentClass: Constructor<Component>, options?:
   });
 }
 
-export function renderToStream(stream: NodeJS.WritableStream, ComponentClass: Constructor<Component>, options: RenderOptions = {}) {
+export function renderToStream(
+  stream: NodeJS.WritableStream,
+  ComponentClass: Constructor<Component>,
+  options: RenderOptions = {}
+) {
   const element = createHTMLDocument().body;
   const iterator = getTemplateIterator(ComponentClass, element, options.args, options.services);
   iterator.sync();
@@ -45,11 +58,15 @@ export function renderToStream(stream: NodeJS.WritableStream, ComponentClass: Co
   stream.end();
 }
 
-
 const resolver = new RuntimeResolver();
 const context = JitContext(new CompileTimeResolver(resolver));
 
-function getTemplateIterator(ComponentClass: Constructor<Component>, element: SimpleElement, componentArgs?: Dict<unknown>, services?: Dict<unknown>) {
+function getTemplateIterator(
+  ComponentClass: Constructor<Component>,
+  element: SimpleElement,
+  componentArgs?: Dict<unknown>,
+  services?: Dict<unknown>
+) {
   const env = Environment.create();
   const runtime = CustomJitRuntime(resolver, context, env);
   const builder = new StringBuilder({ element }).getBuilder(env);
@@ -65,5 +82,13 @@ function getTemplateIterator(ComponentClass: Constructor<Component>, element: Si
     });
   }
 
-  return renderJitComponent(runtime, builder, context, 0, 'root', dictToReference(componentArgs), dynamicScope);
+  return renderJitComponent(
+    runtime,
+    builder,
+    context,
+    0,
+    'root',
+    dictToReference(componentArgs),
+    dynamicScope
+  );
 }
