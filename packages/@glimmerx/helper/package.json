@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/helper",
-  "version": "0.1.1",
+  "version": "0.1.10",
   "description": "Helper Functionality",
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
