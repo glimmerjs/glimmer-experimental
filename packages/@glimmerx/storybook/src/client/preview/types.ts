@@ -1,8 +1,18 @@
-import { StoryFn } from '@storybook/addons';
 import { Constructor } from '@glimmerx/core';
 import GlimmerComponent from '@glimmerx/component';
 
-export type StoryFnGlimmerReturnType = string | Constructor<GlimmerComponent>;
+export type GlimmerStoryFnReturnType =
+  | GlimmerStoryComponentClass
+  | GlimmerStoryComponentClassWithData;
+
+export type GlimmerStoryComponentClass = Constructor<GlimmerComponent>;
+
+export interface GlimmerStoryComponentClassWithData {
+  componentClass: GlimmerStoryComponentClass;
+  componentArgs: {
+    [key: string]: any;
+  };
+}
 
 export interface IStorybookStory {
   name: string;
@@ -20,7 +30,7 @@ export interface ShowErrorArgs {
 }
 
 export interface RenderMainArgs {
-  storyFn: () => StoryFn<StoryFnGlimmerReturnType>;
+  storyFn: () => GlimmerStoryFnReturnType;
   selectedKind: string;
   selectedStory: string;
   showMain: () => void;

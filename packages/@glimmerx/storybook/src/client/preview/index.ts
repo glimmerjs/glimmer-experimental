@@ -4,11 +4,11 @@ import { ClientStoryApi, Loadable } from '@storybook/addons';
 
 import './globals';
 import render from './render';
-import { StoryFnGlimmerReturnType, IStorybookSection } from './types';
+import { GlimmerStoryFnReturnType, IStorybookSection } from './types';
 
 const framework = 'glimmer';
 
-interface ClientApi extends ClientStoryApi<StoryFnGlimmerReturnType> {
+interface ClientApi extends ClientStoryApi<GlimmerStoryFnReturnType> {
   setAddon(addon: any): void;
   configure(loader: Loadable, module: NodeModule): void;
   getStorybook(): IStorybookSection[];
