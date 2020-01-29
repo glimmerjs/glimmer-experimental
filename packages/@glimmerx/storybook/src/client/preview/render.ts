@@ -1,6 +1,6 @@
 import { document } from 'global';
-import { RenderMainArgs } from './types';
-import { renderComponent } from '@glimmerx/core';
+import { RenderMainArgs, GlimmerStoryFnReturnType, GlimmerStoryComponentClass } from './types';
+import { renderComponent, RenderComponentOptions } from '@glimmerx/core';
 
 const rootElement = document ? document.getElementById('root') : null;
 
@@ -10,8 +10,19 @@ const rootElement = document ? document.getElementById('root') : null;
  * @param {function} showMain - The function to initialize Storybook elements.
  */
 export default function renderMain({ storyFn, showMain }: RenderMainArgs) {
-  const glimmerStoryComponent: any = storyFn();
+  const storyFnResult: GlimmerStoryFnReturnType = storyFn();
+  let glimmerStoryComponent: GlimmerStoryComponentClass;
+  let glimmerRenderComponentOptions: RenderComponentOptions = {
+    element: rootElement,
+  };
+
+  if (typeof storyFnResult === 'function') {
+    glimmerStoryComponent = storyFnResult;
+  } else {
+    glimmerStoryComponent = storyFnResult.componentClass;
+    glimmerRenderComponentOptions.args = storyFnResult.componentArgs;
+  }
   rootElement.innerHTML = '';
   showMain();
-  return renderComponent(glimmerStoryComponent, { element: rootElement });
+  return renderComponent(glimmerStoryComponent, glimmerRenderComponentOptions);
 }

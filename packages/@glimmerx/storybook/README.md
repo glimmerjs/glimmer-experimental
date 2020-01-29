@@ -59,10 +59,17 @@ Now create a ../stories/index.js file, and write your first story like this:
 
 ```js
 import { storiesOf } from '@glimmerx/storybook';
-import SampleComponent from '../src/SampleComponent';
+import OtherComponent from './OtherComponent';
 import { hbs } from '@glimmerx/component';
 
-storiesOf('Sample', module).add('SampleComponent', () => hbs`<SampleComponent />`);
+storiesOf('Example Stories', module)
+.add('OtherComponent', () => hbs`<OtherComponent @count=101/>`)
+.add('OtherComponent with context data', () => ({
+  componentClass: OtherComponent,
+  componentArgs: {
+    count: 1007
+  }
+}));
 ```
 Each story is a single state of your component. In the above case, there is a story using the SampleComponent.
 
