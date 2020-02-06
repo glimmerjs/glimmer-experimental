@@ -64,10 +64,12 @@ import { hbs } from '@glimmerx/component';
 
 storiesOf('Example Stories', module)
 .add('OtherComponent', () => hbs`<OtherComponent @count=101/>`)
-.add('OtherComponent with context data', () => ({
+.add('OtherComponent with render options', () => ({
   componentClass: OtherComponent,
-  componentArgs: {
-    count: 1007
+  renderOptions: {
+    args: {
+      count: 1007
+    }
   }
 }));
 ```

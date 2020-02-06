@@ -2,11 +2,13 @@ import { storiesOf } from '@glimmerx/storybook';
 import OtherComponent from './OtherComponent';
 import { hbs } from '@glimmerx/component';
 
-storiesOf('Example Stories', module)
-.add('OtherComponent', () => hbs`<OtherComponent @count=101/>`)
-.add('OtherComponent with context data', () => ({
+storiesOf('OtherComponent Stories', module)
+.add('Basic with hbs', () => hbs`<OtherComponent @count=101/>`)
+.add('With render options', () => ({
   componentClass: OtherComponent,
-  componentArgs: {
-    count: 1007
+  renderOptions: {
+    args: {
+      count: 1007
+    }
   }
 }));

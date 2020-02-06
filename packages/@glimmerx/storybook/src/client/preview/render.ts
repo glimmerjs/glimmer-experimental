@@ -20,7 +20,10 @@ export default function renderMain({ storyFn, showMain }: RenderMainArgs) {
     glimmerStoryComponent = storyFnResult;
   } else {
     glimmerStoryComponent = storyFnResult.componentClass;
-    glimmerRenderComponentOptions.args = storyFnResult.componentArgs;
+    glimmerRenderComponentOptions = {
+      ...glimmerRenderComponentOptions,
+      ...storyFnResult.renderOptions,
+    };
   }
   rootElement.innerHTML = '';
   showMain();
