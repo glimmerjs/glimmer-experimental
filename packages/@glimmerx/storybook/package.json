@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/storybook",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "storybook for glimmerjs",
   "keywords": [
     "storybook",
