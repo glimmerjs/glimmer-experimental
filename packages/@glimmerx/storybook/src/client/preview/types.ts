@@ -1,17 +1,15 @@
-import { Constructor } from '@glimmerx/core';
+import { Constructor, RenderComponentOptions } from '@glimmerx/core';
 import GlimmerComponent from '@glimmerx/component';
 
 export type GlimmerStoryFnReturnType =
   | GlimmerStoryComponentClass
-  | GlimmerStoryComponentClassWithData;
+  | GlimmerStoryWithComponentRenderOptions;
 
 export type GlimmerStoryComponentClass = Constructor<GlimmerComponent>;
 
-export interface GlimmerStoryComponentClassWithData {
+export interface GlimmerStoryWithComponentRenderOptions {
   componentClass: GlimmerStoryComponentClass;
-  componentArgs: {
-    [key: string]: any;
-  };
+  renderOptions: RenderComponentOptions;
 }
 
 export interface IStorybookStory {
