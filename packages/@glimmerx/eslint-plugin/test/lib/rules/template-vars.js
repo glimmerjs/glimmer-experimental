@@ -207,6 +207,34 @@ ruleTester.run('template-vars', rule, {
         import { hbs } from '@glimmerx/component';
         export default class Component {
           static template = hbs\`
+            {{!This is for instances where an argument is a curried component}}
+            <@blockParamDoesNotCauseAFailure/>
+          \`;
+          method() {
+            return false;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        import { hbs } from '@glimmerx/component';
+        export default class Component {
+          static template = hbs\`
+            {{!This is for instances where an argument is a curried component}}
+            {{component 'SomeComponent'}}
+          \`;
+          method() {
+            return false;
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        import { hbs } from '@glimmerx/component';
+        export default class Component {
+          static template = hbs\`
             {{#if}}
               If check should not cause a failure
             {{/if}}

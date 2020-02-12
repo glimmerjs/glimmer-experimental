@@ -36,7 +36,7 @@ module.exports = {
     ],
   },
   create(context) {
-    const defaultNativeTokens = ['if', 'each', 'unless', 'has-block', 'yield'];
+    const defaultNativeTokens = ['if', 'each', 'unless', 'has-block', 'yield', 'component'];
     let isGlimmerSfc = false;
     let hbsImportId;
 
