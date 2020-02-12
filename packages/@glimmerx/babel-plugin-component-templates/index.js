@@ -48,7 +48,7 @@ function tokensFromType(node, scopedTokens) {
 function addTokens(tokensSet, node, scopedTokens, nativeTokens = []) {
   const maybeTokens = tokensFromType(node, scopedTokens);
   (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach(maybeToken => {
-    if (maybeToken !== undefined && !nativeTokens.includes(maybeToken)) {
+    if (maybeToken !== undefined && !nativeTokens.includes(maybeToken) && !maybeToken.startsWith('@')) {
       tokensSet.add(maybeToken);
     }
   });
