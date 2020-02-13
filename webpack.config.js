@@ -5,18 +5,17 @@ module.exports = {
   entry: {
     app: './packages/example-app/index.ts',
     tests: './packages/@glimmerx/core/tests/index.ts',
+    nodeTests: './packages/@glimmerx/ssr/tests/index.ts',
   },
   mode: 'development',
   externals: {
-    fs: 'fs'
+    fs: 'fs',
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        include: [
-          path.resolve(__dirname, 'packages/@glimmerx')
-        ],
+        include: [path.resolve(__dirname, 'packages/@glimmerx')],
         use: {
           loader: 'babel-loader',
           options: {
@@ -30,9 +29,7 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        include: [
-          path.resolve(__dirname, 'packages/example-app')
-        ],
+        include: [path.resolve(__dirname, 'packages/example-app')],
         use: {
           loader: 'babel-loader',
           options: {
@@ -48,7 +45,11 @@ module.exports = {
     ],
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin()],
+    plugins: [
+      new TsconfigPathsPlugin({
+        mainFields: ['module', 'main'],
+      }),
+    ],
     extensions: ['.ts', '.js'],
   },
   output: {

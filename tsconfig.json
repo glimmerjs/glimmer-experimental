@@ -3,6 +3,7 @@
     "target": "es2018",
     "declaration": true,
     "declarationMap": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "rootDir": ".",
     "outDir": "dist",
@@ -20,5 +21,8 @@
     "noFallthroughCasesInSwitch": true,       /* Report errors for fallthrough cases in switch statement. */
 
     "experimentalDecorators": true            /* Enables experimental support for ES7 decorators. */
-  }
+  },
+  "exclude": [
+    "./packages/@glimmerx/storybook"
+  ]
 }

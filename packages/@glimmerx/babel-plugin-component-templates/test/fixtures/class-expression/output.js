@@ -1,4 +1,5 @@
 import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import Component from '@glimmerx/component';
 
 const MyComponent = _setComponentTemplate(class extends Component {}, {
   id: "pX6MO7j4",

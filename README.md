@@ -53,6 +53,13 @@ Glimmer compiler:
 yarn add -D @glimmerx/babel-plugin-component-templates
 ```
 
+If using ESLint, you will also want to install / use the plugin provided, as the `no-unused-vars` core rule will fail without it
+
+```
+yarn add -D @glimmerx/eslint-plugin
+```
+For setup/configuration of the plugin, please view the [Plugin Readme](packages/@glimmerx/eslint-plugin)
+
 ## API
 
 ### `@glimmerx/component`
@@ -120,7 +127,7 @@ export default class extends Component {
 #### `helper`
 Wrapper function to tag functions as helpers
 
-`import { helper } from @glimmerx/core`
+`import { helper } from @glimmerx/helper`
 
 ```js
 import Component, { hbs } from '@glimmerx/component';
@@ -138,7 +145,7 @@ export default class extends Component {
 }
 ```
 
-### `@glimmerx/services`
+### `@glimmerx/service`
 
 #### `service`
 `import { service } from '@glimmerx/service';`
@@ -159,6 +166,48 @@ Decorator to inject services into a component.
   }
 ```
 
+### `@glimmerx/modifier`
+
+#### `on`
+`import { on } from '@glimmerx/modifier'`
+
+On modifier that allows components to add listeners for an dom event on an element
+
+```js
+  import Component, { hbs } from '@glimmerx/component';
+  import { on } from '@glimmerx/modifier';
+  export default class extends Component {
+      static template = hbs`
+        <button {{on "click" this.buttonClicked}}>Click Me!</button>
+      `
+
+      buttonClicked() {
+        console.log('The Button is clicked');
+      }
+  }
+```
+
+#### `action`
+`import { action } from '@glimmerx/modifier'`
+
+A decorator to bind a function to a component instance. This is required to set the `this` scope for a passed in function to any modifier.
+
+```js
+  import Component, { hbs, tracked } from '@glimmerx/component';
+  import { on, action } from '@glimmerx/modifier';
+  export default class extends Component {
+      static template = hbs`
+        <button {{on "click" this.incrementCounter}}>Counter: {{this.count}}</button>
+      `
+      @tracked count = 1;
+
+      @action
+      incrementCounter() {
+        this.count++;
+      }
+  }
+```
+
 ### `@glimmerx/core`
 
 #### `renderComponent`
@@ -174,6 +223,24 @@ import MyComponent from './MyComponent';
 renderComponent(MyComponent, document.getElementById('app'));
 ```
 
+Renders a component with data passed as arguments to the component. First arugment is the Glimmer Component, the second argument is an object of render options, with the target DOM element and the data to pass to the component to render.
+
+```js
+import { renderComponent } from '@glimmerx/core';
+import Component, { hbs } from '@glimmerx/component';
+
+class OtherComponent extends Component {
+  static template = hbs`<h1>{{@say}}</h1>`;
+}
+
+renderComponent(MyComponent, {
+  element: document.getElementById('app'),
+  data: {
+    say: "Hello World"
+  }
+});
+```
+
 Service implementations for injection in components/helpers can be provided when calling renderComponent.
 
 ```js
@@ -186,6 +253,21 @@ renderComponent(MyComponent, {
   }
 });
 ```
+
+### `@glimmerx/storybook`
+
+#### `storiesOf`
+`import { storiesOf } from '@glimmerx/storybook'`
+
+Integrates Storybook into your host GlimmerJs application.
+
+```js
+import { storiesOf } from '@glimmerx/storybook';
+import SampleComponent from '../src/SampleComponent';
+
+storiesOf('Sample', module).add('SampleComponent', () => hbs`<SampleComponent />`);
+```
+For more details refer [README](./packages/@glimmerx/storybook/README.md).
 
 ## Development
 
@@ -211,3 +293,8 @@ For TDD:
 Tests are run via testem (configured in [testem.json](testem.json)) and built
 with webpack (configured in [webpack.config.js](webpack.config.js)).
 
+## Storybook
+
+To test Storybook changes on example app components run:
+
+`yarn storybook` this will auto open Storybook app

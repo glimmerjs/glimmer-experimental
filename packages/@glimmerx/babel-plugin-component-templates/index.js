@@ -1,13 +1,21 @@
 const { precompile } = require('@glimmer/compiler');
-const { addNamed } = require('@babel/helper-module-imports');
+const { addNamed, addDefault } = require('@babel/helper-module-imports');
 const { traverse, preprocess } = require('@glimmer/syntax');
 
+/* AST.Node reference: https://github.com/glimmerjs/glimmer-vm/blob/master/packages/%40glimmer/syntax/lib/types/nodes.ts#L268 */
+
+/**
+ * Gets the correct Token from the Node based on it's type
+ * @param {AST.Node} node - the node to extract tokens from
+ * @param {string[]} scopedTokens - An array of scoped tokens
+ * @returns {string} A tag to add to the list of tokens
+ */
 function tokensFromType(node, scopedTokens) {
   const tokensMap = {
-    StringLiteral: (node) => {
+    StringLiteral: node => {
       return node.value;
     },
-    PathExpression: (node) => {
+    PathExpression: node => {
       if (node.data === true || node.this === true) {
         return;
       }
@@ -18,7 +26,7 @@ function tokensFromType(node, scopedTokens) {
     },
     ElementNode: ({ tag }) => {
       const char = tag.charAt(0);
-      if (char !== char.toUpperCase()) {
+      if (char !== char.toUpperCase() || char === ':') {
         return;
       }
       if (scopedTokens.includes(tag)) {
@@ -32,16 +40,32 @@ function tokensFromType(node, scopedTokens) {
   }
 }
 
-function addTokens(tokensSet, node, scopedTokens) {
+/**
+ * Adds tokens to the tokensSet based on their node.type
+ *
+ * @param {Set<string>} tokensSet The current Set of unique tokens
+ * @param {AST.Node} node - the node to extract tokens from
+ * @param {string | string[]} scopedTokens - a list, or single string of tokens
+ * @param {string[]} [nativeTokens] - An optional param of nativeTokens to exclude from the list (ex. ['if', 'each'])
+ */
+function addTokens(tokensSet, node, scopedTokens, nativeTokens = []) {
   const maybeTokens = tokensFromType(node, scopedTokens);
   (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach(maybeToken => {
-    if (maybeToken !== undefined) {
+    if (maybeToken !== undefined && !nativeTokens.includes(maybeToken) && !maybeToken.startsWith('@')) {
       tokensSet.add(maybeToken);
     }
   });
 }
 
-function getTemplateTokens(html) {
+/**
+ * Parses and traverses a given handlebars html template to extract all tokens referenced
+ * that will come from the parent scope
+ *
+ * @param {string} html The handlebars html to process into an AST and traverse
+ * @param {string[]} [nativeTokens] - An optional param of nativeTokens to exclude from the list (ex. ['if', 'each'])
+ * @returns {string[]} The list of token names
+ */
+function getTemplateTokens(html, nativeTokens) {
   const ast = preprocess(html);
   const tokensSet = new Set();
   const scopedTokens = [];
@@ -73,7 +97,7 @@ function getTemplateTokens(html) {
       },
     },
     All(node) {
-      addTokens(tokensSet, node, scopedTokens);
+      addTokens(tokensSet, node, scopedTokens, nativeTokens);
     },
   });
   return Array.from(tokensSet);
@@ -87,14 +111,26 @@ module.exports = function(babel, options) {
     precompile: precompileOptions,
   } = options || {};
 
+  const isPrecompileDisabled = precompileOptions && precompileOptions.disabled === true;
+
   function maybeAddTemplateSetterImport(state, programPath) {
-    if (state.templateSetter) {
-      return state.templateSetter;
+    if (!state.templateSetterId) {
+      state.templateSetterId = addNamed(programPath, importName, importPath, {
+        importedType: 'es6',
+      }).name;
     }
 
-    return (state.templateSetter = addNamed(programPath, importName, importPath, {
-      importedType: 'es6',
-    }));
+    return state.templateSetterId;
+  }
+
+  function maybeAddGlimmerInlinePrecompileImport(state, programPath) {
+    if (!state.glimmerInlinePrecompileId) {
+      state.glimmerInlinePrecompileId = addDefault(programPath, 'glimmer-inline-precompile', {
+        nameHint: 'hbs',
+      }).name;
+    }
+
+    return state.glimmerInlinePrecompileId;
   }
 
   return {
@@ -105,14 +141,71 @@ module.exports = function(babel, options) {
     visitor: {
       Program(programPath, state) {
         programPath.traverse({
-          ClassProperty(path) {
-            if (!path.node.static || path.node.key.name !== 'template') {
+          ImportSpecifier(path) {
+            if (state.hbsImportId || path.parent.source.value !== '@glimmerx/component') {
+              return;
+            }
+            const importedName = path.node.imported.name;
+            const localName = path.node.local.name;
+            if (importedName === 'hbs') {
+              state.hbsImportId = localName;
+              // remove the hbs named import
+              if (path.parentPath.node.specifiers.length > 1) {
+                  path.remove();
+              } else {
+                path.parentPath.remove();
+              }
+            }
+
+          },
+          ImportDefaultSpecifier(path) {
+            if (state.glimmerComponentImportId || path.parent.source.value !== '@glimmerx/component') {
+              return;
+            }
+            const localName = path.node.local.name;
+            state.glimmerComponentImportId = localName;
+          },
+          TaggedTemplateExpression(path) {
+            const parentNode = path.parent;
+            if (path.node.tag.name !== state.hbsImportId) {
               return;
             }
 
-            let setter = maybeAddTemplateSetterImport(state, programPath);
-            insertTemplateWrapper(path, setter);
-            path.remove();
+            /**
+             * If its a hbs`....` only template then convert it into
+             * class extends Component { static template = hbs`....`;}
+             * first and then compile
+             */
+            if (
+              parentNode.type !== 'ClassProperty' ||
+              !parentNode.static ||
+              parentNode.key.name !== 'template'
+            ) {
+              if (!state.glimmerComponentImportId) {
+                state.glimmerComponentImportId = addDefault(programPath, '@glimmerx/component', {
+                  nameHint: 'Component',
+                }).name;
+              }
+
+              let taggedTemplateExpression = t.TaggedTemplateExpression(t.Identifier(state.hbsImportId), t.TemplateLiteral([...path.node.quasi.quasis], []));
+              const ClassTemplateProperty = t.ClassProperty(t.Identifier('template'), taggedTemplateExpression, null, null);
+              ClassTemplateProperty.static = true;
+              path.replaceWith(
+                t.ClassExpression(
+                  null,
+                  t.Identifier(state.glimmerComponentImportId),
+                  t.ClassBody([ClassTemplateProperty])
+                )
+              );
+              return;
+            }
+
+            let setterId = maybeAddTemplateSetterImport(state, programPath);
+            let hbsImportId = isPrecompileDisabled
+              ? maybeAddGlimmerInlinePrecompileImport(state, programPath)
+              : null;
+            insertTemplateWrapper(path.parentPath, { setterId, hbsImportId });
+            path.parentPath.remove();
           },
         });
         // Babel TypeScript transform strips any bindings that aren't
@@ -127,17 +220,65 @@ module.exports = function(babel, options) {
     },
   };
 
-  function insertTemplateWrapper(path, setter) {
+  function insertTemplateWrapper(path, { setterId, hbsImportId }) {
     const klass = path.findParent(path => path.isClassExpression() || path.isClassDeclaration());
-    const template = buildTemplate(path);
+
+    const template = isPrecompileDisabled
+      ? buildLooseTemplate(path, hbsImportId) // Loosely compile templates, do not transform to op codes.
+      : buildTemplate(path);
 
     if (klass.isClassExpression()) {
-      klass.replaceWith(t.callExpression(setter, [klass.node, template]));
+      klass.replaceWith(t.callExpression(t.identifier(setterId), [klass.node, template]));
     } else {
       const klassId = klass.node.id;
 
-      klass.insertAfter(t.callExpression(setter, [klassId, template]));
+      klass.insertAfter(t.callExpression(t.identifier(setterId), [klassId, template]));
     }
+  }
+
+  function buildLooseTemplate(path, hbsImportId) {
+    function getTaggedTemplateExpression(path) {
+      const stringNode = path.node.value;
+      if (t.isTaggedTemplateExpression(stringNode)) {
+        return stringNode;
+      }
+    }
+
+    const compiledTemplateIdentifier = t.identifier('compiledTemplate');
+
+    const taggedTemplateExpression = getTaggedTemplateExpression(path);
+
+    taggedTemplateExpression.tag = t.identifier(hbsImportId); // Update the tag to be the same as our importId
+
+    const compiledTemplateStatement = t.variableDeclaration('const', [
+      t.variableDeclarator(compiledTemplateIdentifier, taggedTemplateExpression),
+    ]);
+
+    const templateSource = getTemplateString(path);
+    const templateScopeTokens = getTemplateTokens(templateSource);
+
+    const left = t.memberExpression(
+      t.memberExpression(compiledTemplateIdentifier, t.identifier('meta')),
+      t.identifier('scope')
+    );
+
+    const scopeStatement = t.expressionStatement(
+      t.assignmentExpression('=', left, buildScopeFunction(path, templateScopeTokens).value)
+    );
+
+    const callExpression = t.callExpression(
+      t.arrowFunctionExpression(
+        [],
+        t.blockStatement([
+          compiledTemplateStatement,
+          scopeStatement,
+          t.returnStatement(compiledTemplateIdentifier),
+        ])
+      ),
+      []
+    );
+
+    return callExpression;
   }
 
   function buildTemplate(path) {
@@ -172,7 +313,7 @@ module.exports = function(babel, options) {
             .map(binding => {
               const { identifier } = binding;
               binding.reference(path);
-              return t.objectProperty(t.identifier(identifier.name), identifier, false, false);
+              return t.objectProperty(t.identifier(identifier.name), t.identifier(identifier.name), false, false);
             })
             .filter(prop => templateScopeTokens.includes(prop.key.name))
         )
@@ -189,3 +330,5 @@ module.exports = function(babel, options) {
     return path.node.value.quasis[0].value.raw;
   }
 };
+
+module.exports.getTemplateTokens = getTemplateTokens;

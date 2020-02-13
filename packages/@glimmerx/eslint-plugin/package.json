@@ -1,0 +1,25 @@
+{
+  "name": "@glimmerx/eslint-plugin",
+  "version": "0.1.10",
+  "description": "ESLint Plugin to enable and streamline glimmerx development",
+  "main": "index.js",
+  "repository": "https://github.com/tomdale/glimmer-lite",
+  "author": "Kyle Blomquist <mygraphitepark@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "mocha -r esm --recursive"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "mocha": "^7.0.0"
+  },
+  "dependencies": {
+    "@glimmerx/babel-plugin-component-templates": "^0.1.9"
+  },
+  "peerDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0"
+  }
+}

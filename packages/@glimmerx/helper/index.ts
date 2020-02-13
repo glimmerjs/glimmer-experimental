@@ -1,1 +1,1 @@
-export { default } from './src/helper';
+export { helper } from './src/helper';

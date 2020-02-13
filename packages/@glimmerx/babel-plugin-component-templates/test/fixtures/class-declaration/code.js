@@ -1,4 +1,4 @@
-
+import Component, { hbs } from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 const unknownValue = null;
 const MaybeComponent = null;
