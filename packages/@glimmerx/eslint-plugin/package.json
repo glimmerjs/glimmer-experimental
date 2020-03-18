@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/eslint-plugin",
-  "version": "0.1.10",
+  "version": "0.1.14",
   "description": "ESLint Plugin to enable and streamline glimmerx development",
   "main": "index.js",
   "repository": "https://github.com/tomdale/glimmer-lite",
@@ -16,7 +16,7 @@
     "mocha": "^7.0.0"
   },
   "dependencies": {
-    "@glimmerx/babel-plugin-component-templates": "^0.1.9"
+    "@glimmerx/babel-plugin-component-templates": "^0.1.14"
   },
   "peerDependencies": {
     "babel-eslint": "^10.0.3",
