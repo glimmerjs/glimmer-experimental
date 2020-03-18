@@ -2,6 +2,8 @@ import plugin from '..';
 import pluginTester from 'babel-plugin-tester';
 import path from 'path';
 import astTransformTestPluginOptions from './fixtures-options/precompile/ast-transform/options';
+const { addNamed } = require('@babel/helper-module-imports');
+
 
 // For correct .babelrc detection inside the fixture directory we need to force babel's cwd and root to be the package root.
 // This will ensure that the tests will run correctly from the mono repo root or package root.
@@ -29,3 +31,51 @@ pluginTester({
     },
   ],
 });
+
+pluginTester({
+  plugin: () => { return { name: 'ordering-of-plugins', visitor: {} }},
+  babelOptions: {
+    cwd: packageRootPath,
+    root: packageRootPath,
+    plugins: [
+      [addImport],
+      [plugin],
+      ['@babel/plugin-proposal-class-properties', { loose: true }]
+    ]
+  },
+  fixtures: path.join(__dirname, 'fixtures-compat')
+})
+
+pluginTester({
+  plugin: () => { return { name: 'ordering-of-plugins-precompile-options', visitor: {} }},
+  babelOptions: {
+    cwd: packageRootPath,
+    root: packageRootPath,
+    plugins: [
+      [addImport],
+      [plugin, {
+        "precompile": {
+          "disabled": true
+        }
+      }],
+      ['@babel/plugin-proposal-class-properties', { loose: true }]
+    ]
+  },
+  fixtures: path.join(__dirname, 'fixtures-compat-options')
+})
+
+
+function addImport() {
+  return {
+    name: 'introduce-import',
+    visitor: {
+      Program(path) {
+        addNamed(path, 't', 't-helper');
+        path.get('body').forEach(declaration => {
+          declaration.isImportDeclaration() &&
+            path.scope.registerDeclaration(declaration);
+        });
+      }
+    }
+  }
+}
