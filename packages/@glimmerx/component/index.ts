@@ -1,4 +1,4 @@
-export { default } from './src/Component';
+export { default } from '@glimmer/component';
+export { tracked } from '@glimmer/tracking';
 export { hbs } from './src/hbs';
 
-export { tracked } from '@glimmer/tracking';

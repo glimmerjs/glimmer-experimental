@@ -11,12 +11,26 @@
     "build": "scripts/build.js",
     "format": "prettier --write 'packages/**/*.{js,ts}'",
     "prepublishOnly": "scripts/build.js",
+    "problems": "tsc -p tsconfig.json --noEmit",
     "start": "webpack-dev-server",
     "test": "yarn lint && testem ci && yarn test:node",
     "test:watch": "testem",
     "lint": "eslint . --cache --ext .js,.ts",
     "test:node": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules",
     "storybook": "yarn build && yarn workspace example-app storybook"
+  },
+  "browserslist": {
+    "production": [
+      "last 2 Edge versions",
+      "last 2 Chrome versions",
+      "last 2 Firefox versions",
+      "last 2 Safari versions"
+    ],
+    "development": [
+      "last 1 Chrome version",
+      "last 1 Firefox version",
+      "last 1 Safari version"
+    ]
   },
   "workspaces": [
     "packages/*",
@@ -27,6 +41,8 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-typescript": "^7.3.3",
+    "@glimmer/babel-plugin-glimmer-env": "^2.0.0-beta.3",
+    "@glimmer/babel-plugin-strict-template-precompile": "^2.0.0-beta.3",
     "@types/qunit": "^2.9.0",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
@@ -41,7 +57,7 @@
     "testem": "^2.16.0",
     "ts-loader": "^6.0.2",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "~3.2.4",
+    "typescript": "~3.8.2",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1"

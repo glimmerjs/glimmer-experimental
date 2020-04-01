@@ -1,14 +1,8 @@
-import _hbs from "glimmer-inline-precompile";
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import { createTemplate as _createTemplate } from "@glimmer/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import { t as _t } from "t-helper";
 import Component from '@glimmerx/component';
 
-const MyComponent = _setComponentTemplate(class extends Component {}, (() => {
-  const compiledTemplate = _hbs`<h1>{{_t "foo"}}</h1>`;
-
-  compiledTemplate.meta.scope = () => ({
-    _t: _t
-  });
-
-  return compiledTemplate;
-})());
+const MyComponent = _setComponentTemplate(class extends Component {}, _createTemplate({
+  _t: _t
+}, `<h1>{{_t "foo"}}</h1>`));

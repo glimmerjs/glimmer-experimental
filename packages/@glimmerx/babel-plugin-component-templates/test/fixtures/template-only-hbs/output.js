@@ -1,9 +1,9 @@
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
-import _Component from "@glimmerx/component";
-import { renderComponent } from '@glimmerx/core';
-renderComponent(_setComponentTemplate(class extends _Component {}, {
-  id: "/eBDGAqT",
-  block: "{\"symbols\":[\"@name\"],\"statements\":[[7,\"h1\",true],[9],[0,\"Hello \"],[1,[24,1,[]],false],[10]],\"hasEval\":false}",
+import { templateOnlyComponent as _templateOnlyComponent } from "@glimmer/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
+import { renderComponent } from '@glimmer/core';
+renderComponent(_setComponentTemplate(_templateOnlyComponent(), {
+  id: "wr1/fM82",
+  block: "{\"symbols\":[\"@name\"],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello \"],[1,0,0,0,[27,[24,1],[]]],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }

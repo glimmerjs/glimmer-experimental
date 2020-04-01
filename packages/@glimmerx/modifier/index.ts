@@ -1,2 +1,1 @@
-export { on } from './src/on';
-export { action } from './src/action';
+export { on, action } from '@glimmer/modifier';

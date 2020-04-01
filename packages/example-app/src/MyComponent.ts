@@ -5,11 +5,11 @@ import { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
 import LocaleService from './services/LocaleService';
 
-const myHelper = helper(function([name], { greeting }) {
+const myHelper = helper(function([name]: [string], { greeting }: { greeting: string }) {
   return `Helper: ${greeting} ${name}`;
 });
 
-const isCJK = helper(function(args, hash, { services }) {
+const isCJK = helper(function(_args, _hash, { services }) {
   const localeService = services!.locale as LocaleService;
   return (
     localeService.currentLocale === 'zh_CN' ||

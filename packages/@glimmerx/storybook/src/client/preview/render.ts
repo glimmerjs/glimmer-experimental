@@ -16,15 +16,16 @@ export default function renderMain({ storyFn, showMain }: RenderMainArgs) {
     element: rootElement,
   };
 
-  if (typeof storyFnResult === 'function') {
-    glimmerStoryComponent = storyFnResult;
-  } else {
+  if ('componentClass' in storyFnResult && 'renderOptions' in storyFnResult) {
     glimmerStoryComponent = storyFnResult.componentClass;
     glimmerRenderComponentOptions = {
       ...glimmerRenderComponentOptions,
       ...storyFnResult.renderOptions,
     };
+  } else {
+    glimmerStoryComponent = storyFnResult;
   }
+
   rootElement.innerHTML = '';
   showMain();
   return renderComponent(glimmerStoryComponent, glimmerRenderComponentOptions);

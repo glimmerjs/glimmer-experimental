@@ -1,4 +1,4 @@
-import { renderComponent } from '@glimmerx/core';
+import { renderComponent } from '@glimmer/core';
 import IamGlimmerComponent, { hbs } from '@glimmerx/component';
 
 renderComponent(hbs`<h1>Hello {{@name}}</h1>`, {

@@ -1,4 +1,4 @@
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import Component from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 const unknownValue = null;
@@ -8,8 +8,8 @@ const maybeModifier = null;
 class MyComponent extends Component {}
 
 _setComponentTemplate(MyComponent, {
-  id: "O7ZGAk2s",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h1\",false],[3,\"maybeModifier\",null,null],[9],[0,\"Hello world \"],[1,[23,\"unknownValue\"],false],[5,\"MySubComponent\",[],[[],[]],[[\"default\"],[{\"statements\":[[5,\"MaybeComponent\",[],[[],[]],null]],\"parameters\":[]}]]],[10]],\"hasEval\":false}",
+  id: "hNaOsjkR",
+  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",false],[3,0,0,[27,[26,0,\"ModifierHead\"],[]],null,null],[10],[1,1,0,0,\"Hello world \"],[1,0,0,0,[27,[26,1,\"AppendSingleId\"],[]]],[7,\"MySubComponent\",[],[[],[]],[[\"default\"],[{\"statements\":[[7,\"MaybeComponent\",[],[[],[]],null]],\"parameters\":[]}]]],[11]],\"hasEval\":false,\"upvars\":[\"maybeModifier\",\"unknownValue\"]}",
   meta: {
     scope: () => ({
       unknownValue: unknownValue,

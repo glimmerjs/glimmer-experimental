@@ -12,9 +12,9 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/component": "^0.14.0-alpha.11",
-    "@glimmer/interfaces": "^0.41.0",
-    "@glimmer/reference": "^0.41.0"
+    "@glimmerx/core": "0.1.10",
+    "@glimmer/helper": "^2.0.0-beta.3",
+    "@glimmer/interfaces": "^0.50.0"
   },
   "volta": {
     "node": "12.10.0",

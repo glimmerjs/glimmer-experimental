@@ -12,15 +12,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/application": "^0.14.0-alpha.11",
-    "@glimmer/component": "^0.14.0-alpha.11",
-    "@glimmer/opcode-compiler": "^0.41.0",
-    "@glimmer/runtime": "^0.41.0",
-    "@simple-dom/interface": "^1.4.0"
-  },
-  "devDependencies": {
-    "@glimmer/bundle-compiler": "^0.41.0",
-    "@glimmer/compiler": "^0.41.0"
+    "@glimmer/component": "^2.0.0-beta.3",
+    "@glimmer/tracking": "^2.0.0-beta.3"
   },
   "volta": {
     "node": "12.10.0",

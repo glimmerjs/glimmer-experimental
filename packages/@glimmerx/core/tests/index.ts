@@ -1,8 +1,6 @@
-import './component-manager-tests';
 import './modifier-tests';
-import renderTests from './render-tests';
+import renderTests, { Constructor } from './render-tests';
 import { renderComponent, RenderComponentOptions } from '..';
-import { Constructor } from '../src/interfaces';
 import Component from '@glimmerx/component';
 
 renderTests(
