@@ -20,10 +20,11 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             plugins: [
+              ['@glimmer/babel-plugin-glimmer-env', { DEBUG: true }],
               ['@babel/plugin-proposal-decorators', { legacy: true }],
               ['@babel/plugin-proposal-class-properties', { loose: true }],
             ],
-            presets: ['@babel/preset-typescript'],
+            presets: ['@babel/preset-typescript', '@babel/preset-env'],
           },
         },
       },
@@ -35,10 +36,11 @@ module.exports = {
           options: {
             plugins: [
               '@glimmerx/babel-plugin-component-templates',
+              ['@glimmer/babel-plugin-glimmer-env', { DEBUG: true }],
               ['@babel/plugin-proposal-decorators', { legacy: true }],
               ['@babel/plugin-proposal-class-properties', { loose: true }],
             ],
-            presets: ['@babel/preset-typescript'],
+            presets: ['@babel/preset-typescript', '@babel/preset-env'],
           },
         },
       },

@@ -27,6 +27,7 @@ export function webpack(config: Configuration) {
               ],
               plugins: [
                 '@glimmerx/babel-plugin-component-templates',
+                '@glimmer/babel-plugin-strict-template-precompile',
                 ['@babel/plugin-proposal-decorators', { legacy: true }],
                 ['@babel/plugin-proposal-class-properties', { loose: true }],
               ],
@@ -48,6 +49,7 @@ export function webpack(config: Configuration) {
               ],
               plugins: [
                 '@glimmerx/babel-plugin-component-templates',
+                '@glimmer/babel-plugin-strict-template-precompile',
                 ['@babel/plugin-proposal-decorators', { legacy: true }],
                 ['@babel/plugin-proposal-class-properties', { loose: true }],
               ],

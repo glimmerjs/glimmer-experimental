@@ -1,19 +1,19 @@
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import Component from '@glimmerx/component';
 
 class Class1Declaration extends Component {}
 
 _setComponentTemplate(Class1Declaration, {
-  id: "pX6MO7j4",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h1\",true],[9],[0,\"Hello world\"],[10]],\"hasEval\":false}",
+  id: "hzw7dJc0",
+  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
 })
 
 const Class1Expression = _setComponentTemplate(class extends Component {}, {
-  id: "pX6MO7j4",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h1\",true],[9],[0,\"Hello world\"],[10]],\"hasEval\":false}",
+  id: "hzw7dJc0",
+  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
@@ -22,16 +22,16 @@ const Class1Expression = _setComponentTemplate(class extends Component {}, {
 class Class2Declaration extends Component {}
 
 _setComponentTemplate(Class2Declaration, {
-  id: "K+OefGFw",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h2\",true],[9],[0,\"\\n    Goodbye world\\n  \"],[10]],\"hasEval\":false}",
+  id: "85zTPBgs",
+  block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"\\n    Goodbye world\\n  \"],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
 })
 
 const Class2Expression = _setComponentTemplate(class extends Component {}, {
-  id: "y8Jq1bmF",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h2\",true],[9],[0,\"\\n    Goodbye world\"],[5,\"Class1Expression\",[],[[],[]],null],[0,\"\\n  \"],[10]],\"hasEval\":false}",
+  id: "d1fbtzoG",
+  block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"\\n    Goodbye world\"],[7,\"Class1Expression\",[],[[],[]],null],[1,1,0,0,\"\\n  \"],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       Class1Expression: Class1Expression

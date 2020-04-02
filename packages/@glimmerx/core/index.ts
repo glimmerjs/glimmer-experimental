@@ -1,16 +1,29 @@
+export { default as Owner, FactoryIdentifier } from './src/owner';
+export { default as renderComponent, RenderComponentOptions } from './src/renderComponent';
+
 export {
-  default as renderComponent,
-  RenderComponentOptions,
+  setComponentTemplate,
+
+  componentCapabilities,
+  ComponentCapabilities,
+  ComponentDefinition,
+  ComponentManager,
+  setComponentManager,
+
+  helperCapabilities,
+  HelperCapabilities,
+  HelperDefinition,
+  HelperManager,
+  setHelperManager,
+
+  modifierCapabilities,
+  ModifierCapabilities,
+  ModifierDefinition,
+  ModifierManager,
+  setModifierManager,
+
+  setOwner,
+  getOwner,
+  TemplateArgs,
   didRender,
-  dictToReference,
-} from './src/renderComponent';
-
-export { Constructor } from './src/interfaces';
-
-export { default as RuntimeResolver } from './src/renderComponent/RuntimeResolver';
-export { default as CompileTimeResolver } from './src/renderComponent/CompileTimeResolver';
-
-export { definitionForComponent } from './src/renderComponent/definitions';
-
-export { getComponentManager, setComponentManager } from './src/setComponentManager';
-export { getComponentTemplate, setComponentTemplate } from './src/setComponentTemplate';
+} from '@glimmer/core';

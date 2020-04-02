@@ -1,11 +1,10 @@
-import { Constructor, RenderComponentOptions } from '@glimmerx/core';
-import GlimmerComponent from '@glimmerx/component';
+import { ComponentDefinition, RenderComponentOptions } from '@glimmerx/core';
 
 export type GlimmerStoryFnReturnType =
   | GlimmerStoryComponentClass
   | GlimmerStoryWithComponentRenderOptions;
 
-export type GlimmerStoryComponentClass = Constructor<GlimmerComponent>;
+export type GlimmerStoryComponentClass = ComponentDefinition;
 
 export interface GlimmerStoryWithComponentRenderOptions {
   componentClass: GlimmerStoryComponentClass;

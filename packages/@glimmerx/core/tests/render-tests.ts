@@ -1,6 +1,5 @@
 import Component, { tracked } from '@glimmerx/component';
 
-import { Constructor } from '..';
 import { setComponentTemplate } from '..';
 
 import { compileTemplate } from './utils';
@@ -9,6 +8,10 @@ import { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
 
 const { module, test } = QUnit;
+
+export interface Constructor<T> {
+  new (owner: unknown, args: object): T;
+}
 
 export default function renderTests(
   moduleName: string,
@@ -66,7 +69,7 @@ export default function renderTests(
     });
 
     test('a component can render with helpers', async assert => {
-      const myHelper = helper(([name]: [string], { greeting }: { greeting: string }) => {
+      const myHelper = helper(([name]: string, { greeting }: { greeting: string }) => {
         return `helper ${greeting} ${name}`;
       });
 
@@ -130,7 +133,7 @@ export default function renderTests(
         }
       }
 
-      const myHelper = helper((args, hash, { services }) => {
+      const myHelper = helper((_args: unknown, _hash: unknown, { services }) => {
         const localeService = services!.locale as LocaleService;
         return `The locale is ${localeService.currentLocale}`;
       });

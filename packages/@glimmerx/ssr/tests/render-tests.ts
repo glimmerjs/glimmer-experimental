@@ -1,5 +1,4 @@
-import renderTests from '@glimmerx/core/tests/render-tests';
-import { Constructor } from '@glimmerx/core';
+import renderTests, { Constructor } from '@glimmerx/core/tests/render-tests';
 import Component from '@glimmerx/component';
 import { renderToString, RenderOptions } from '..';
 

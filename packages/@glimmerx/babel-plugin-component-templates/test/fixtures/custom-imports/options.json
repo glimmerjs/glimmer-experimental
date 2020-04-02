@@ -1,4 +1,8 @@
 {
-  "importPath": "@glimmerx/other-package",
-  "importName": "dangerouslySetComponentTemplate"
+  "setTemplatePath": "@glimmerx/other-package",
+  "setTemplateName": "dangerouslySetComponentTemplate",
+  "createTemplatePath": "@glimmerx/some-other-package",
+  "createTemplateName": "createStrictTemplate",
+  "templateOnlyComponentPath": "@glimmerx/some-component-path",
+  "templateOnlyComponentName": "TOComponent"
 }

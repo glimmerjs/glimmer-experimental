@@ -12,20 +12,9 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/application": "^0.14.0-alpha.11",
-    "@glimmer/interfaces": "^0.41.0",
-    "@glimmer/node": "^0.41.0",
-    "@glimmer/opcode-compiler": "^0.41.0",
-    "@glimmer/reference": "^0.41.0",
-    "@glimmer/runtime": "^0.41.0",
-    "@glimmer/ssr": "^0.14.0-alpha.11",
-    "@glimmerx/component": "^0.1.1",
-    "@glimmerx/core": "^0.1.10",
-    "@glimmerx/service": "^0.1.10",
-    "@simple-dom/document": "^1.4.0",
-    "@simple-dom/interface": "^1.4.0",
-    "@simple-dom/serializer": "^1.4.0",
-    "@simple-dom/void-map": "^1.4.0"
+    "@glimmer/interfaces": "^0.50.0",
+    "@glimmer/ssr": "^2.0.0-beta.3",
+    "@glimmerx/core": "^0.1.10"
   },
   "volta": {
     "node": "12.10.0",

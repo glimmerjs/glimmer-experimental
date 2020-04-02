@@ -19,3 +19,5 @@ const Class2Expression = class extends Component {
     Goodbye world<Class2Declaration />
   </h2>`;
 }
+
+const TOComponent = hbs`<h3>Hello again world<Class2Expression/></h3>`
