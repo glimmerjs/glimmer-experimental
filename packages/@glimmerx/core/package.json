@@ -22,5 +22,9 @@
   "devDependencies": {
     "@glimmer/bundle-compiler": "^0.41.0",
     "@glimmer/compiler": "^0.41.0"
+  },
+  "volta": {
+    "node": "12.10.0",
+    "yarn": "1.22.4"
   }
 }
