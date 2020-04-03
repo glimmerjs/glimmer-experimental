@@ -1,4 +1,3 @@
-/* globals describe it */
 const babelParser = require.resolve('babel-eslint');
 const rule = require('../../../lib/rules/template-vars');
 // This very unfortunate require is because of the way RuleTester is set up.

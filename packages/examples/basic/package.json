@@ -1,5 +1,5 @@
 {
-  "name": "example-app",
+  "name": "basic-example-app",
   "version": "0.1.13",
   "description": "Example application using @glimmerx packages",
   "main": "dist/commonjs/index.js",

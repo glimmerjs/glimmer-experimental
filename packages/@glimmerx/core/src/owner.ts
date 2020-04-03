@@ -22,7 +22,9 @@ export default class Owner {
     }
 
     if (DEBUG && this[SERVICES][name] === undefined) {
-      throw new Error(`Attempted to lookup service '${name}', but it did not exist. Did you pass it into renderComponent()?`)
+      throw new Error(
+        `Attempted to lookup service '${name}', but it did not exist. Did you pass it into renderComponent()?`
+      );
     }
 
     return this[SERVICES][name];

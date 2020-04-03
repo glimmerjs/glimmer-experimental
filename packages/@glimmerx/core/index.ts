@@ -3,25 +3,21 @@ export { default as renderComponent, RenderComponentOptions } from './src/render
 
 export {
   setComponentTemplate,
-
   componentCapabilities,
   ComponentCapabilities,
   ComponentDefinition,
   ComponentManager,
   setComponentManager,
-
   helperCapabilities,
   HelperCapabilities,
   HelperDefinition,
   HelperManager,
   setHelperManager,
-
   modifierCapabilities,
   ModifierCapabilities,
   ModifierDefinition,
   ModifierManager,
   setModifierManager,
-
   setOwner,
   getOwner,
   TemplateArgs,

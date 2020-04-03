@@ -15,6 +15,7 @@ export interface Constructor<T> {
 
 export default function renderTests(
   moduleName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render: (component: Constructor<Component>, options?: any) => Promise<string>
 ) {
   module(`${moduleName} rendering`, () => {
@@ -184,7 +185,7 @@ export default function renderTests(
         )
       );
 
-      let html = await render(MyComponent);
+      const html = await render(MyComponent);
       assert.strictEqual(html, `<button>Count: 0</button>`, 'the component was rendered');
     });
   });
