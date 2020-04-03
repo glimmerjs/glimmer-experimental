@@ -1,5 +1,5 @@
 const { precompileTemplate } = require('@glimmer/babel-plugin-strict-template-precompile');
-const { addNamed, addDefault } = require('@babel/helper-module-imports');
+const { addNamed } = require('@babel/helper-module-imports');
 const { traverse, preprocess } = require('@glimmer/syntax');
 
 /* AST.Node reference: https://github.com/glimmerjs/glimmer-vm/blob/master/packages/%40glimmer/syntax/lib/types/nodes.ts#L268 */
@@ -159,19 +159,39 @@ module.exports = function(babel, options) {
       parserOpts.plugins.push(['classProperties']);
     },
     visitor: {
+      // This visitor exists to add an extra reference to all template bindings
+      // so they don't get removed eagerly. This is because we may end up using
+      // them later on and adding a reference ourselves.
       Program: {
         enter(path, state) {
           const parentScope = path.scope.getProgramParent();
-          const bindings = Object.values(parentScope.bindings);
 
-          bindings.forEach(b => b.reference(path));
+          // Get the bindings and filter out any that are typescript types
+          const bindings = Object.values(parentScope.bindings).filter(
+            b => !b.referencePaths.some(p => p.parent.type === 'TSTypeReference')
+          );
 
+          if (bindings.length === 0) return;
+
+          // create a new empty node to add a reference to in the binding
+          let firstNode = path.get('body.0');
+          firstNode.insertBefore(t.noop());
+          firstNode = path.get('body.0');
+
+          bindings.forEach(b => b.reference(firstNode));
+
+          // save the node and original bindings off to remove on exit
           state.originalBindings = bindings;
+          state.emptyPath = firstNode;
         },
 
         exit(path, state) {
-          state.originalBindings.forEach(b => b.dereference(path));
-        }
+          if (state.originalBindings) {
+            // dereference all the original bindings, and remove the empty path
+            state.originalBindings.forEach(b => b.dereference(state.emptyPath));
+            state.emptyPath.remove();
+          }
+        },
       },
 
       ImportDefaultSpecifier(path, state) {
@@ -272,7 +292,7 @@ module.exports = function(babel, options) {
     }
   }
 
-  function getFilteredTemplateTokens(path, templateSource, state) {
+  function getFilteredTemplateTokens(path, templateSource) {
     const templateScopeTokens = getTemplateTokens(templateSource);
 
     const filtered = [];
