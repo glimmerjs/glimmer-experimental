@@ -33,9 +33,9 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
   }
 
   createHelper(fn: Helper, args: TemplateArgs) {
-    let { owner } = this;
+    const { owner } = this;
 
-    let ownerProxy = new Proxy(
+    const ownerProxy = new Proxy(
       {},
       {
         get(_target, key) {

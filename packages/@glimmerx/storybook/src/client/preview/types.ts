@@ -11,14 +11,14 @@ export interface GlimmerStoryWithComponentRenderOptions {
   renderOptions: RenderComponentOptions;
 }
 
-export interface IStorybookStory {
+export interface StorybookStory {
   name: string;
-  render: () => any;
+  render: () => unknown;
 }
 
-export interface IStorybookSection {
+export interface StorybookSection {
   kind: string;
-  stories: IStorybookStory[];
+  stories: StorybookStory[];
 }
 
 export interface ShowErrorArgs {

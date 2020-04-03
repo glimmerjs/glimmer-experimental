@@ -1,6 +1,6 @@
 {
   "framework": "qunit",
-  "test_page": "tests.html",
+  "test_page": "tests/index.html",
   "launchers": {
     "Node": {
       "command": "node_modules/.bin/qunit dist/nodeTests.bundle.js",
@@ -24,6 +24,7 @@
   },
   "launch_in_ci": [
     "Node",
+    "Chrome",
     "Firefox"
   ],
   "launch_in_dev": [

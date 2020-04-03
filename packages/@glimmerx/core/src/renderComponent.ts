@@ -1,4 +1,8 @@
-import { renderComponent as glimmerJsRenderComponent, ComponentDefinition, RenderComponentOptions as GlimmerJsRenderComponentOptions } from '@glimmer/core';
+import {
+  renderComponent as glimmerJsRenderComponent,
+  ComponentDefinition,
+  RenderComponentOptions as GlimmerJsRenderComponentOptions,
+} from '@glimmer/core';
 import { Dict } from '@glimmer/interfaces';
 import Owner from './owner';
 
@@ -22,9 +26,9 @@ export default function renderComponent(
     return glimmerJsRenderComponent(ComponentClass, optionsOrElement);
   }
 
-  let { element, args, services } = optionsOrElement;
+  const { element, args, services } = optionsOrElement;
 
-  let owner = new Owner(services ?? {});
+  const owner = new Owner(services ?? {});
 
   return glimmerJsRenderComponent(ComponentClass, { element, args, owner });
 }
