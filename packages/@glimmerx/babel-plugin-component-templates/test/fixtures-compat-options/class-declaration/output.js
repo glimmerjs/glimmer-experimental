@@ -5,6 +5,6 @@ import Component from '@glimmerx/component';
 
 class MyComponent extends Component {}
 
-_setComponentTemplate(MyComponent, _createTemplate({
+_setComponentTemplate(_createTemplate({
   _t: _t
-}, `<h1>{{_t "foo"}}</h1>`))
+}, `<h1>{{_t "foo"}}</h1>`), MyComponent)

@@ -4,10 +4,10 @@ import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import OtherComponent from './OtherComponent';
 import YetAnotherComponent from './YetAnotherComponent';
 
-const template1 = _setComponentTemplate(_templateOnlyComponent(), _createTemplate({
+const template1 = _setComponentTemplate(_createTemplate({
   OtherComponent: OtherComponent
-}, `<h1>Hello world</h1><OtherComponent/>`));
+}, `<h1>Hello world</h1><OtherComponent/>`), _templateOnlyComponent());
 
-const template2 = _setComponentTemplate(_templateOnlyComponent(), _createTemplate({
+const template2 = _setComponentTemplate(_createTemplate({
   YetAnotherComponent: YetAnotherComponent
-}, `<YetAnotherComponent/>`));
+}, `<YetAnotherComponent/>`), _templateOnlyComponent());

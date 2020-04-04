@@ -12,9 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class MyComponent extends _component.default {}
 
-(0, _core.setComponentTemplate)(MyComponent, (0, _core.createTemplate)({
+(0, _core.setComponentTemplate)((0, _core.createTemplate)({
   OtherComponent: _OtherComponent.default
-}, `<h1>Hello world</h1><OtherComponent/>`))
-const MyComponentExpression = (0, _core.setComponentTemplate)(class extends _component.default {}, (0, _core.createTemplate)({
+}, `<h1>Hello world</h1><OtherComponent/>`), MyComponent)
+const MyComponentExpression = (0, _core.setComponentTemplate)((0, _core.createTemplate)({
   YetAnotherComponent: _YetAnotherComponent.default
-}, `<YetAnotherComponent/>`));
+}, `<YetAnotherComponent/>`), class extends _component.default {});

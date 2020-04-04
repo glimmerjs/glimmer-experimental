@@ -8,7 +8,7 @@ export function foo() {
 }
 export class MyComponent extends Component {}
 
-_setComponentTemplate(MyComponent, {
+_setComponentTemplate({
   id: "hNaOsjkR",
   block: "{\"symbols\":[],\"statements\":[[9,\"h1\",false],[3,0,0,[27,[26,0,\"ModifierHead\"],[]],null,null],[10],[1,1,0,0,\"Hello world \"],[1,0,0,0,[27,[26,1,\"AppendSingleId\"],[]]],[7,\"MySubComponent\",[],[[],[]],[[\"default\"],[{\"statements\":[[7,\"MaybeComponent\",[],[[],[]],null]],\"parameters\":[]}]]],[11]],\"hasEval\":false,\"upvars\":[\"maybeModifier\",\"unknownValue\"]}",
   meta: {
@@ -18,4 +18,4 @@ _setComponentTemplate(MyComponent, {
       maybeModifier: maybeModifier
     })
   }
-});
+}, MyComponent);

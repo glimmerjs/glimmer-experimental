@@ -255,8 +255,8 @@ module.exports = function(babel, options) {
 
         path.replaceWith(
           t.callExpression(t.identifier(setTemplateId), [
-            t.callExpression(t.identifier(templateOnlyId), []),
             templateNode,
+            t.callExpression(t.identifier(templateOnlyId), []),
           ])
         );
       },
@@ -278,17 +278,17 @@ module.exports = function(babel, options) {
     const setTemplateId = maybeAddSetTemplateImport(state, programPath);
 
     const template = shouldPrecompile
-      ? buildTemplate(templatePath, state)
+      ? buildTemplate(templatePath)
       : buildCreateTemplate(templatePath, programPath, state);
 
     if (classPath.isClassExpression()) {
       classPath.replaceWith(
-        t.callExpression(t.identifier(setTemplateId), [classPath.node, template])
+        t.callExpression(t.identifier(setTemplateId), [template, classPath.node])
       );
     } else {
       const classId = classPath.node.id;
 
-      classPath.insertAfter(t.callExpression(t.identifier(setTemplateId), [classId, template]));
+      classPath.insertAfter(t.callExpression(t.identifier(setTemplateId), [template, classId]));
     }
   }
 
@@ -309,9 +309,9 @@ module.exports = function(babel, options) {
     return filtered;
   }
 
-  function buildTemplate(path, programPath, state) {
+  function buildTemplate(path) {
     const templateSource = getTemplateString(path);
-    const templateScopeTokens = getFilteredTemplateTokens(path, templateSource, state);
+    const templateScopeTokens = getFilteredTemplateTokens(path, templateSource);
 
     const compiledTemplate = precompileTemplate(
       templateSource,
@@ -327,7 +327,7 @@ module.exports = function(babel, options) {
   function buildCreateTemplate(path, programPath, state) {
     const createTemplateId = maybeAddCreateTemplateImport(state, programPath);
     const templateSource = getTemplateString(path);
-    const tokens = getFilteredTemplateTokens(path, templateSource, state);
+    const tokens = getFilteredTemplateTokens(path, templateSource);
 
     const scopeObject = t.objectExpression(
       tokens.map(token => t.objectProperty(t.identifier(token), t.identifier(token), false, false))
