@@ -11,7 +11,8 @@ module.exports = {
     }
   },
   plugins: [
-    'ember'
+    'ember',
+    '@glimmerx'
   ],
   extends: [
     'eslint:recommended',
@@ -21,7 +22,8 @@ module.exports = {
     browser: true
   },
   rules: {
-    'ember/no-jquery': 'error'
+    'ember/no-jquery': 'error',
+    '@glimmerx/template-vars': 'error'
   },
   overrides: [
     // node files
@@ -30,7 +32,7 @@ module.exports = {
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
-        'index.js',
+        'ember-addon-main.js',
         'testem.js',
         'blueprints/*/index.js',
         'config/**/*.js',

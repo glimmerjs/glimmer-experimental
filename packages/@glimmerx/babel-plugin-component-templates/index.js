@@ -1,4 +1,5 @@
-const { precompileTemplate } = require('@glimmer/babel-plugin-strict-template-precompile');
+const glimmerPrecompileTemplate = require('@glimmer/babel-plugin-strict-template-precompile')
+  .precompileTemplate;
 const { addNamed } = require('@babel/helper-module-imports');
 const { traverse, preprocess } = require('@glimmer/syntax');
 
@@ -107,54 +108,67 @@ function getTemplateTokens(html, nativeTokens) {
 module.exports = function (babel, options) {
   const { types: t, parse } = babel;
   const {
+    // Whether or not we'ret targeting Ember. If so, we use the Ember global
+    // instead of adding imports, and we use different default import paths.
+    ember = false,
+
     setTemplatePath = '@glimmer/core',
-    setTemplateName = 'setComponentTemplate',
+    setTemplateName = ember ? '_setComponentTemplate' : 'setComponentTemplate',
+
     createTemplatePath = '@glimmer/core',
     createTemplateName = 'createTemplate',
+
     templateOnlyComponentPath = '@glimmer/core',
-    templateOnlyComponentName = 'templateOnlyComponent',
-    precompile: precompileOptions,
+    templateOnlyComponentName = ember ? '_templateOnlyComponent' : 'templateOnlyComponent',
+
+    precompile: precompileOptions = {},
+
+    // Users can pass a custom precompile function. This is used by Ember.
+    precompileTemplate = glimmerPrecompileTemplate,
   } = options || {};
 
-  const shouldPrecompile = !(precompileOptions && precompileOptions.disabled);
+  const shouldPrecompile = precompileOptions.disabled !== true;
 
-  function maybeAddSetTemplateImport(state, programPath) {
-    if (!state.setTemplateId) {
-      state.setTemplateId = addNamed(programPath, setTemplateName, setTemplatePath, {
-        importedType: 'es6',
-      }).name;
+  function maybeAddImport(state, programPath, name, importPath) {
+    let stateKey = `__import__${name}`;
+
+    if (!state[stateKey]) {
+      if (ember) {
+        // In Ember, we destructure the value from the Ember global
+        const globalImport = t.variableDeclaration('var', [
+          t.variableDeclarator(
+            t.identifier(name),
+            t.memberExpression(t.identifier('Ember'), t.identifier(name))
+          ),
+        ]);
+
+        programPath.get('body.0').insertBefore(globalImport);
+
+        state[stateKey] = name;
+      } else {
+        state[stateKey] = addNamed(programPath, name, importPath, {
+          importedType: 'es6',
+        }).name;
+      }
     }
 
-    return state.setTemplateId;
+    return state[stateKey];
+  }
+
+  function maybeAddSetTemplateImport(state, programPath) {
+    return maybeAddImport(state, programPath, setTemplateName, setTemplatePath);
   }
 
   function maybeAddCreateTemplateImport(state, programPath) {
-    if (!state.createTemplateId) {
-      state.createTemplateId = addNamed(programPath, createTemplateName, createTemplatePath, {
-        importedType: 'es6',
-      }).name;
-    }
-
-    return state.createTemplateId;
+    return maybeAddImport(state, programPath, createTemplateName, createTemplatePath);
   }
 
   function maybeAddTemplateOnlyComponentImport(state, programPath) {
-    if (!state.templateOnlyComponentImportId) {
-      state.templateOnlyComponentImportId = addNamed(
-        programPath,
-        templateOnlyComponentName,
-        templateOnlyComponentPath,
-        {
-          importedType: 'es6',
-        }
-      ).name;
-    }
-
-    return state.templateOnlyComponentImportId;
+    return maybeAddImport(state, programPath, templateOnlyComponentName, templateOnlyComponentPath);
   }
 
   return {
-    name: '@glimmerx/babel-plugin-glimmer-components',
+    name: '@glimmerx/babel-plugin-component-templates',
     manipulateOptions({ parserOpts }) {
       parserOpts.plugins.push(['classProperties']);
     },

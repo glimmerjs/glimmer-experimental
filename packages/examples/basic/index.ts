@@ -1,6 +1,7 @@
 import { renderComponent } from '@glimmerx/core';
 import MyComponent from './src/MyComponent';
 import LocaleService from './src/services/LocaleService';
+import { ButtonListService } from 'basic-addon';
 
 document.addEventListener(
   'DOMContentLoaded',
@@ -10,6 +11,7 @@ document.addEventListener(
       element: element!,
       services: {
         locale: new LocaleService('en_US'),
+        buttonList: new ButtonListService(),
       },
     });
   },

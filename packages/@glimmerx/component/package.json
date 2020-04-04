@@ -2,6 +2,9 @@
   "name": "@glimmerx/component",
   "version": "0.1.1",
   "description": "Base component class",
+  "keywords": [
+    "ember-addon"
+  ],
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
@@ -13,10 +16,16 @@
   },
   "dependencies": {
     "@glimmer/component": "^2.0.0-beta.5",
-    "@glimmer/tracking": "^2.0.0-beta.5"
+    "@glimmer/tracking": "^2.0.0-beta.5",
+    "@glimmerx/babel-plugin-component-templates": "^0.1.14",
+    "ember-cli-babel": "^7.17.2",
+    "ember-cli-babel-plugin-helpers": "^1.1.0"
   },
   "volta": {
     "node": "12.10.0",
     "yarn": "1.22.4"
+  },
+  "ember-addon": {
+    "main": "ember-addon-main.js"
   }
 }

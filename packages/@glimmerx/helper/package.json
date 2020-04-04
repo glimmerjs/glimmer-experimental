@@ -2,6 +2,9 @@
   "name": "@glimmerx/helper",
   "version": "0.1.10",
   "description": "Helper Functionality",
+  "keywords": [
+    "ember-addon"
+  ],
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
@@ -14,10 +17,14 @@
   "dependencies": {
     "@glimmerx/core": "0.1.10",
     "@glimmer/helper": "^2.0.0-beta.5",
-    "@glimmer/interfaces": "^0.50.1"
+    "@glimmer/interfaces": "^0.50.1",
+    "ember-cli-babel": "^7.18.0"
   },
   "volta": {
     "node": "12.10.0",
     "yarn": "1.22.4"
+  },
+  "ember-addon": {
+    "main": "ember-addon-main.js"
   }
 }
