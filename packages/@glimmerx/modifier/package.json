@@ -12,8 +12,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/core": "^2.0.0-beta.3",
-    "@glimmer/modifier": "^2.0.0-beta.3"
+    "@glimmer/core": "^2.0.0-beta.5",
+    "@glimmer/modifier": "^2.0.0-beta.5"
   },
   "volta": {
     "node": "12.10.0",

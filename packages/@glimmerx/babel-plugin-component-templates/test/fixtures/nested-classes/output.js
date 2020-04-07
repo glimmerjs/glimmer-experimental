@@ -4,7 +4,7 @@ import OtherComponent from './OtherComponent';
 
 class MyComponent extends Component {
   get ChildComponent() {
-    return _setComponentTemplate(class extends Component {}, {
+    return _setComponentTemplate({
       id: "z5SJXwaW",
       block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"Goodbye world\"],[7,\"MyComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
       meta: {
@@ -12,12 +12,12 @@ class MyComponent extends Component {
           MyComponent: MyComponent
         })
       }
-    });
+    }, class extends Component {});
   }
 
 }
 
-_setComponentTemplate(MyComponent, {
+_setComponentTemplate({
   id: "O/CNYunf",
   block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[7,\"OtherComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
@@ -25,4 +25,4 @@ _setComponentTemplate(MyComponent, {
       OtherComponent: OtherComponent
     })
   }
-})
+}, MyComponent)

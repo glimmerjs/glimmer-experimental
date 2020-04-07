@@ -51,7 +51,7 @@
   "peerDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/plugin-proposal-decorators": "^7.7.0",
-    "@glimmer/babel-plugin-strict-template-precompile": "^2.0.0-beta.3",
+    "@glimmer/babel-plugin-strict-template-precompile": "^2.0.0-beta.5",
     "@glimmerx/babel-plugin-component-templates": "^0.1.9",
     "@glimmerx/component": "^0.1.0",
     "@glimmerx/core": "^0.1.0",

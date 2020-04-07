@@ -10,7 +10,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class MyComponent extends _component.default {}
 
-(0, _core.setComponentTemplate)(MyComponent, {
+(0, _core.setComponentTemplate)({
   id: "wvnbwYrJ",
   block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello \"],[7,\"ExternalComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
@@ -18,11 +18,11 @@ class MyComponent extends _component.default {}
       ExternalComponent: _somewhere.OtherComponent
     })
   }
-})
+}, MyComponent)
 
 class OtherComponent extends _component.default {}
 
-(0, _core.setComponentTemplate)(OtherComponent, {
+(0, _core.setComponentTemplate)({
   id: "wvnbwYrJ",
   block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello \"],[7,\"ExternalComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
@@ -30,4 +30,4 @@ class OtherComponent extends _component.default {}
       ExternalComponent: _somewhere.OtherComponent
     })
   }
-})
+}, OtherComponent)
