@@ -17,11 +17,11 @@ module('Modifier Tests', () => {
     }
 
     setComponentTemplate(
-      MyComponent,
       compileTemplate(
         `<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`,
         () => ({ on })
-      )
+      ),
+      MyComponent
     );
 
     const element = document.getElementById('qunit-fixture')!;

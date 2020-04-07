@@ -33,7 +33,7 @@
     ]
   },
   "workspaces": [
-    "packages/*",
+    "packages/examples/*",
     "packages/@glimmerx/*"
   ],
   "devDependencies": {

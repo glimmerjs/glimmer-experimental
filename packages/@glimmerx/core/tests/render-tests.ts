@@ -22,7 +22,7 @@ export default function renderTests(
     test('it renders a component', async assert => {
       class MyComponent extends Component {}
 
-      setComponentTemplate(MyComponent, compileTemplate(`<h1>Hello world</h1>`));
+      setComponentTemplate(compileTemplate(`<h1>Hello world</h1>`), MyComponent);
 
       const html = await render(MyComponent);
       assert.strictEqual(html, '<h1>Hello world</h1>', 'the template was rendered');
@@ -32,12 +32,12 @@ export default function renderTests(
     test('a component can render a nested component', async assert => {
       class OtherComponent extends Component {}
 
-      setComponentTemplate(OtherComponent, compileTemplate(`Hello world`));
+      setComponentTemplate(compileTemplate(`Hello world`), OtherComponent);
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent }))
+        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent })),
+        MyComponent
       );
 
       const html = await render(MyComponent);
@@ -47,21 +47,21 @@ export default function renderTests(
 
     test('a component can render multiple nested components', async assert => {
       class Foo extends Component {}
-      setComponentTemplate(Foo, compileTemplate(`Foo`));
+      setComponentTemplate(compileTemplate(`Foo`), Foo);
 
       class Bar extends Component {}
-      setComponentTemplate(Bar, compileTemplate(`Bar`));
+      setComponentTemplate(compileTemplate(`Bar`), Bar);
 
       class OtherComponent extends Component {}
       setComponentTemplate(
-        OtherComponent,
-        compileTemplate(`Hello world <Foo /><Bar />`, () => ({ Foo, Bar }))
+        compileTemplate(`Hello world <Foo /><Bar />`, () => ({ Foo, Bar })),
+        OtherComponent
       );
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent }))
+        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent })),
+        MyComponent
       );
 
       const html = await render(MyComponent);
@@ -76,8 +76,8 @@ export default function renderTests(
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate('<h1>{{myHelper "foo" greeting="Hello"}}</h1>', () => ({ myHelper }))
+        compileTemplate('<h1>{{myHelper "foo" greeting="Hello"}}</h1>', () => ({ myHelper })),
+        MyComponent
       );
 
       const html = await render(MyComponent);
@@ -87,7 +87,7 @@ export default function renderTests(
     test('a component can render with args', async assert => {
       class MyComponent extends Component {}
 
-      setComponentTemplate(MyComponent, compileTemplate('<h1>{{@say}}</h1>'));
+      setComponentTemplate(compileTemplate('<h1>{{@say}}</h1>'), MyComponent);
 
       const renderOptions = {
         args: {
@@ -117,7 +117,7 @@ export default function renderTests(
         }
       }
 
-      setComponentTemplate(MyComponent, compileTemplate('<h1>{{this.myLocale}}</h1>'));
+      setComponentTemplate(compileTemplate('<h1>{{this.myLocale}}</h1>'), MyComponent);
 
       const html = await render(MyComponent, {
         services: {
@@ -141,8 +141,8 @@ export default function renderTests(
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate('<h1>{{myHelper}}</h1>', () => ({ myHelper }))
+        compileTemplate('<h1>{{myHelper}}</h1>', () => ({ myHelper })),
+        MyComponent
       );
 
       const html = await render(MyComponent, {
@@ -156,7 +156,7 @@ export default function renderTests(
     test('a component can be rendered more than once', async assert => {
       class MyComponent extends Component {}
 
-      setComponentTemplate(MyComponent, compileTemplate(`<h1>Bump</h1>`));
+      setComponentTemplate(compileTemplate(`<h1>Bump</h1>`), MyComponent);
 
       let html = await render(MyComponent);
       assert.strictEqual(html, '<h1>Bump</h1>', 'the component rendered');
@@ -178,11 +178,11 @@ export default function renderTests(
       }
 
       setComponentTemplate(
-        MyComponent,
         compileTemplate(
           `<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`,
           () => ({ on })
-        )
+        ),
+        MyComponent
       );
 
       const html = await render(MyComponent);
