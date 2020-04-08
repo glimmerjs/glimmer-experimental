@@ -6,7 +6,7 @@ import { renderComponent, setComponentTemplate, didRender } from '..';
 import { compileTemplate } from './utils';
 
 module('Modifier Tests', () => {
-  test('Supports the on modifier', async assert => {
+  test('Supports the on modifier', async (assert) => {
     class MyComponent extends Component {
       @tracked count = 0;
 

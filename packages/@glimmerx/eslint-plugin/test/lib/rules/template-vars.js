@@ -37,7 +37,7 @@ function testUnusedVars(code) {
   });
 }
 
-describe('no-unused-vars', function() {
+describe('no-unused-vars', function () {
   // eslint-disable-next-line no-invalid-this
   this.timeout(5000);
 

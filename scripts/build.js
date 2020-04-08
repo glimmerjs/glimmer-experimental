@@ -8,15 +8,15 @@ const buildStorybook = require('./buildStorybook');
 const exec = promisify(require('child_process').exec);
 const glob = promisify(require('glob'));
 
-(async function() {
+(async function () {
   process.chdir(path.join(__dirname, '..'));
 
   await buildTypescript('dist/modules', 'es2015');
   await buildTypescript('dist/commonjs', 'commonjs');
 
   const packages = (await glob('dist/modules/packages/{@*/*,!(@*)}'))
-    .map(pkg => pkg.replace('dist/modules/packages/', ''))
-    .flatMap(pkg => [
+    .map((pkg) => pkg.replace('dist/modules/packages/', ''))
+    .flatMap((pkg) => [
       {
         from: path.join('dist', 'commonjs', 'packages', pkg),
         to: path.join('packages', pkg, 'dist', 'commonjs'),
@@ -27,8 +27,8 @@ const glob = promisify(require('glob'));
       },
     ]);
 
-  await remove(packages.map(pkg => pkg.to));
-  await createDirs(packages.map(pkg => pkg.to));
+  await remove(packages.map((pkg) => pkg.to));
+  await createDirs(packages.map((pkg) => pkg.to));
   await move(packages);
 
   await buildStorybook();
@@ -49,14 +49,14 @@ async function buildTypescript(outDir, moduleKind = 'es2015') {
 }
 
 function createDirs(paths) {
-  return each(paths, pathOfDir => {
+  return each(paths, (pathOfDir) => {
     console.log(`Creating Dir ${pathOfDir}`);
     return fs.mkdirp(pathOfDir);
   });
 }
 
 function remove(paths) {
-  return each(paths, pathOfDir => {
+  return each(paths, (pathOfDir) => {
     console.log(`Removing ${pathOfDir}`);
     return fs.remove(pathOfDir);
   });
