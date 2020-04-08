@@ -16,7 +16,7 @@
     "@glimmerx/core": "^0.1.10"
   },
   "devDependencies": {
-    "@glimmer/interfaces": "^0.50.0",
+    "@glimmer/interfaces": "^0.50.1",
     "@glimmerx/storybook": "^0.1.13"
   },
   "volta": {
