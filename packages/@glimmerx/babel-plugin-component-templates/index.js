@@ -12,7 +12,7 @@ const { traverse, preprocess } = require('@glimmer/syntax');
  */
 function tokensFromType(node, scopedTokens) {
   const tokensMap = {
-    PathExpression: node => {
+    PathExpression: (node) => {
       if (node.data === true || node.this === true) {
         return;
       }
@@ -47,7 +47,7 @@ function tokensFromType(node, scopedTokens) {
  */
 function addTokens(tokensSet, node, scopedTokens, nativeTokens = []) {
   const maybeTokens = tokensFromType(node, scopedTokens);
-  (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach(maybeToken => {
+  (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach((maybeToken) => {
     if (
       maybeToken !== undefined &&
       !nativeTokens.includes(maybeToken) &&
@@ -74,7 +74,7 @@ function getTemplateTokens(html, nativeTokens) {
   traverse(ast, {
     Block: {
       enter({ blockParams }) {
-        blockParams.forEach(param => {
+        blockParams.forEach((param) => {
           scopedTokens.push(param);
         });
       },
@@ -86,7 +86,7 @@ function getTemplateTokens(html, nativeTokens) {
     },
     ElementNode: {
       enter(node) {
-        node.blockParams.forEach(param => {
+        node.blockParams.forEach((param) => {
           scopedTokens.push(param);
         });
         addTokens(tokensSet, node, scopedTokens);
@@ -104,7 +104,7 @@ function getTemplateTokens(html, nativeTokens) {
   return Array.from(tokensSet);
 }
 
-module.exports = function(babel, options) {
+module.exports = function (babel, options) {
   const { types: t, parse } = babel;
   const {
     setTemplatePath = '@glimmer/core',
@@ -168,7 +168,7 @@ module.exports = function(babel, options) {
 
           // Get the bindings and filter out any that are typescript types
           const bindings = Object.values(parentScope.bindings).filter(
-            b => !b.referencePaths.some(p => p.parent.type === 'TSTypeReference')
+            (b) => !b.referencePaths.some((p) => p.parent.type === 'TSTypeReference')
           );
 
           if (bindings.length === 0) return;
@@ -178,7 +178,7 @@ module.exports = function(babel, options) {
           firstNode.insertBefore(t.noop());
           firstNode = path.get('body.0');
 
-          bindings.forEach(b => b.reference(firstNode));
+          bindings.forEach((b) => b.reference(firstNode));
 
           // save the node and original bindings off to remove on exit
           state.originalBindings = bindings;
@@ -188,7 +188,7 @@ module.exports = function(babel, options) {
         exit(path, state) {
           if (state.originalBindings) {
             // dereference all the original bindings, and remove the empty path
-            state.originalBindings.forEach(b => b.dereference(state.emptyPath));
+            state.originalBindings.forEach((b) => b.dereference(state.emptyPath));
             state.emptyPath.remove();
           }
         },
@@ -264,7 +264,7 @@ module.exports = function(babel, options) {
   };
 
   function findTemplateProperty(classBody, hbsImportId) {
-    return classBody.find(propPath => {
+    return classBody.find((propPath) => {
       return (
         propPath.node.static &&
         propPath.node.key.name === 'template' &&
@@ -298,7 +298,7 @@ module.exports = function(babel, options) {
     const filtered = [];
     const parentScope = path.scope.getProgramParent();
 
-    Object.values(parentScope.bindings).forEach(binding => {
+    Object.values(parentScope.bindings).forEach((binding) => {
       binding.reference(path);
 
       if (templateScopeTokens.includes(binding.identifier.name)) {
@@ -330,7 +330,9 @@ module.exports = function(babel, options) {
     const tokens = getFilteredTemplateTokens(path, templateSource);
 
     const scopeObject = t.objectExpression(
-      tokens.map(token => t.objectProperty(t.identifier(token), t.identifier(token), false, false))
+      tokens.map((token) =>
+        t.objectProperty(t.identifier(token), t.identifier(token), false, false)
+      )
     );
 
     return t.callExpression(t.identifier(createTemplateId), [

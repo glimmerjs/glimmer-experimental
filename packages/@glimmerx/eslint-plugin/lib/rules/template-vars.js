@@ -67,7 +67,7 @@ module.exports = {
         const templateString = templateElementNode.value.raw;
 
         const templateScopeTokens = getTemplateTokens(templateString, nativeTokens);
-        templateScopeTokens.forEach(token => {
+        templateScopeTokens.forEach((token) => {
           const isTokenPresent = context.markVariableAsUsed(token);
           if (!isTokenPresent && mode === 'all') {
             context.report({
