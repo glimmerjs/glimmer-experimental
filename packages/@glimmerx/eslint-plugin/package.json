@@ -3,7 +3,7 @@
   "version": "0.1.14",
   "description": "ESLint Plugin to enable and streamline glimmerx development",
   "main": "index.js",
-  "repository": "https://github.com/tomdale/glimmer-lite",
+  "repository": "https://github.com/glimmerjs/glimmer-experimental",
   "author": "Kyle Blomquist <mygraphitepark@gmail.com>",
   "license": "MIT",
   "private": false,

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Lightweight runtime for Glimmer components",
   "main": "dist/index.js",
-  "repository": "https://github.com/tomdale/glimmer-lite",
+  "repository": "https://github.com/glimmerjs/glimmer-experimental",
   "author": "Tom Dale <tom@tomdale.net>",
   "license": "MIT",
   "private": true,
