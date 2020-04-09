@@ -1,0 +1,27 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: volta-cli/action@v1
+      - uses: actions/checkout@v2
+
+      - name: Install and Build 🔧
+        run: |
+          yarn install --frozen-lockfile --non-interactive
+          yarn build
+          yarn workspace glimmerx-playground build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: packages/examples/playground/dist

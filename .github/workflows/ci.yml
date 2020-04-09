@@ -17,6 +17,18 @@ jobs:
       - run: yarn install --frozen-lockfile --non-interactive
       - run: yarn test
 
+  playground-test:
+    name: "Playground Tests"
+    runs-on: ubuntu-latest
+    env:
+      MOZ_HEADLESS: 1
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+      - run: yarn install --frozen-lockfile --non-interactive
+      - run: yarn build
+      - run: yarn test:playground
+
   ember-smoke-tests:
       name: "Ember Tests: ${{ matrix.ember-version }}"
       runs-on: ubuntu-latest
