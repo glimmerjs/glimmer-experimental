@@ -1,17 +1,16 @@
 {
   "framework": "qunit",
-  "test_page": "dist/tests/index.html",
+  "test_page": "tests/index.html",
   "routes": {
-    "/tests.bundle.js": "dist/tests.bundle.js",
-    "/public": "dist/public",
-    "/images": "dist/images"
+    "/": "dist"
   },
   "on_start": {
     "command": "webpack",
-    "wait_for_text": "Built at:"
+    "wait_for_text": "Built at:",
+    "wait_for_text_timeout": 300000
   },
   "watch_files": [
-    "dist/tests.bundle.js"
+    "tests.bundle.js"
   ],
   "browser_args": {
     "mode": "ci",

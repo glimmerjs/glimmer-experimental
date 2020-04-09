@@ -30,7 +30,7 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         filename: 'tests/index.html',
         template: './tests/index.html',
-        inject: 'head',
+        inject: false,
         chunks: ['tests'],
       })
     );

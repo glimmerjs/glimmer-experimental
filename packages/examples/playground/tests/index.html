@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width">
     <title>glimmerx-playground Tests</title>
     <link rel="icon" href="../public/favicon.png" />
+    <%= htmlWebpackPlugin.tags.headTags %>
   </head>
   <body>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
     <script src="/testem.js"></script>
