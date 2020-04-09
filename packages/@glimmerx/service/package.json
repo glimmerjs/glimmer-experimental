@@ -2,6 +2,9 @@
   "name": "@glimmerx/service",
   "version": "0.1.10",
   "description": "Services Functionality",
+  "keywords": [
+    "ember-addon"
+  ],
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
@@ -13,10 +16,14 @@
   },
   "dependencies": {
     "@glimmerx/core": "0.1.10",
-    "@glimmer/env": "0.1.7"
+    "@glimmer/env": "^0.1.7",
+    "ember-cli-babel": "^7.18.0"
   },
   "volta": {
     "node": "12.10.0",
     "yarn": "1.22.4"
+  },
+  "ember-addon": {
+    "main": "ember-addon-main.js"
   }
 }

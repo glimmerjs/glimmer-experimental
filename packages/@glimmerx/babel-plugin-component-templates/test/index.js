@@ -2,6 +2,7 @@ import plugin from '..';
 import pluginTester from 'babel-plugin-tester';
 import path from 'path';
 import astTransformTestPluginOptions from './fixtures-options/precompile/ast-transform/options';
+import customPrecompileTestPluginOptions from './fixtures-options/precompile/custom/options';
 const { addNamed } = require('@babel/helper-module-imports');
 
 
@@ -28,6 +29,12 @@ pluginTester({
       fixture: path.join(__dirname, 'fixtures-options/precompile/ast-transform-hbs/code.js'),
       outputFixture: path.join(__dirname, 'fixtures-options/precompile/ast-transform-hbs/output.js'),
       pluginOptions: astTransformTestPluginOptions,
+    },
+    {
+      title: 'options.precompile : custom precompile',
+      fixture: path.join(__dirname, 'fixtures-options/precompile/custom/code.js'),
+      outputFixture: path.join(__dirname, 'fixtures-options/precompile/custom/output.js'),
+      pluginOptions: customPrecompileTestPluginOptions,
     },
   ],
 });

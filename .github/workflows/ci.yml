@@ -16,3 +16,17 @@ jobs:
       - uses: volta-cli/action@v1
       - run: yarn install --frozen-lockfile --non-interactive
       - run: yarn test
+
+  ember-smoke-tests:
+      name: "Ember Tests: ${{ matrix.ember-version }}"
+      runs-on: ubuntu-latest
+
+      strategy:
+        matrix:
+          ember-version: [default, release, beta, canary, lts-3.16]
+
+      steps:
+        - uses: actions/checkout@v2
+        - uses: volta-cli/action@v1
+        - run: yarn install --frozen-lockfile --non-interactive
+        - run: yarn test:ember ember-${{ matrix.ember-version }} --skip-cleanup

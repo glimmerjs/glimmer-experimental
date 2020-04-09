@@ -4,6 +4,7 @@ import OtherComponent from './OtherComponent';
 import { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
 import LocaleService from './services/LocaleService';
+import { ButtonList } from 'basic-addon';
 
 const myHelper = helper(function ([name]: [string], { greeting }: { greeting: string }) {
   return `Helper: ${greeting} ${name}`;
@@ -34,6 +35,9 @@ class MyComponent extends Component {
     <OtherComponent @count={{this.count}} /> <br/>
     <button {{on "click" this.increment}}>Increment</button>
     <TemplateOnlyComponent @name="For Glimmerx"/>
+
+    <ButtonList/>
+    <ButtonList/>
   `;
 
   message = 'hello world';
