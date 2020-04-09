@@ -3,12 +3,13 @@ const glob = require('glob');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = () => {
   const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
   const entry = {
-    app: './src/index.js',
+    app: './src/index.ts',
   };
 
   const plugins = [
@@ -18,6 +19,7 @@ module.exports = () => {
       excludeChunks: ['tests'],
     }),
     new CopyPlugin([{ from: 'public', to: 'public' }]),
+    new MonacoWebpackPlugin(),
   ];
 
   // Include tests in development builds
@@ -49,7 +51,7 @@ module.exports = () => {
           use: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
+          test: /\.(woff(2)?|ttf|eot|png|svg|jpg|gif)$/,
           loader: 'file-loader',
           options: {
             outputPath: 'images',

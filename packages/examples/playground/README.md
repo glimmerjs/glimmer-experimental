@@ -1,7 +1,7 @@
 # glimmerx-playground
 
-This README outlines the details of collaborating on this GlimmerX application.
-A short introduction of this app could easily go here.
+This is the GlimmerX playground! It allows users to create and share components
+in directly in the browser, no install necessary.
 
 ## Prerequisites
 
@@ -13,18 +13,18 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd glimmerx-playground`
-* `yarn`
+* `git clone https://github.com/glimmerjs/glimmer-experimental` this repository
+* `cd glimmer-experimental`
+* `yarn workspace glimmerx-playground start`
 
 ## Running / Development
 
-* `yarn start`
+* `yarn workspace glimmerx-playground start`
 * Visit your app at [http://localhost:8080](http://localhost:8080).
 
 ### Building
 
-* `yarn build`
+* `yarn workspace glimmerx-playground build`
 
 ## Further Reading / Useful Links
 
