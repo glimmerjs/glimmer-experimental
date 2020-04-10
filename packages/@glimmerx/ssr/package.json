@@ -8,6 +8,9 @@
   "author": "Tom Dale <tom@tomdale.net>",
   "license": "MIT",
   "private": false,
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "build": "webpack"
   },

@@ -6,6 +6,9 @@
   "author": "Tom Dale <tom@tomdale.net>",
   "license": "MIT",
   "private": false,
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "test": "mocha -r esm"
   },
