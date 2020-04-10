@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/ssr",
-  "version": "0.1.10",
+  "version": "0.2.0",
   "description": "SSR functionality",
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
@@ -17,7 +17,7 @@
   "dependencies": {
     "@glimmer/interfaces": "^0.50.1",
     "@glimmer/ssr": "2.0.0-beta.5",
-    "@glimmerx/core": "^0.1.10"
+    "@glimmerx/core": "^0.2.0"
   },
   "volta": {
     "node": "12.10.0",
