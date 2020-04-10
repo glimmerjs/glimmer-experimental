@@ -2,6 +2,14 @@
 
 **🚨This is unstable, experimental code and should not be used in production.🚨**
 
+## Quickstart
+
+Generate a new project using the GlimmerX blueprint:
+
+```sh
+npx ember-cli new hello-glimmerx --blueprint @glimmerx/blueprint
+```
+
 ## Introduction
 
 This project exists as a playground to explore lightweight APIs for authoring
@@ -268,6 +276,24 @@ import SampleComponent from '../src/SampleComponent';
 storiesOf('Sample', module).add('SampleComponent', () => hbs`<SampleComponent />`);
 ```
 For more details refer [README](./packages/@glimmerx/storybook/README.md).
+
+## Experimental Features
+
+### Ember/Glimmer Interop
+
+The `@glimmerx` packages are compatible with both Ember and Glimmer
+applications, with some notable caveats:
+
+- Custom helpers are not supported using `helper` from `@glimmerx/helper`
+- Plain functions do not work as helpers or modifiers in Ember applications
+- Ember applications do not support template imports. As such, even if you
+  import a component to use in your app, you must _also_ export that component
+  in the resolvable location for Ember apps.
+
+This feature is highly experimental, and it is not recommended to build
+production applications or addons using it currently. You can see an example of
+this feature in use in the `examples/basic-addon` Ember addon, which can be used
+in both Ember and Glimmer applications.
 
 ## Development
 
