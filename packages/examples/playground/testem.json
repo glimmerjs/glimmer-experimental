@@ -5,7 +5,7 @@
     "/": "dist"
   },
   "on_start": {
-    "command": "webpack",
+    "command": "TESTEM=true webpack",
     "wait_for_text": "Built at:",
     "wait_for_text_timeout": 300000
   },
