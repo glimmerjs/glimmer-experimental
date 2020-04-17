@@ -1,3 +1,12 @@
+## v0.2.1 (2020-04-17)
+
+#### :bug: Bug Fix
+* `@glimmerx/babel-plugin-component-templates`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/ssr`, `@glimmerx/storybook`, `examples`
+  * [#69](https://github.com/glimmerjs/glimmer-experimental/pull/69) [BUGFIX] Fixes interop with Commonjs ([@pzuraq](https://github.com/pzuraq))
+
+#### Committers: 1
+- Chris Garrett ([@pzuraq](https://github.com/pzuraq))
+
 ## v0.2.0 (2020-04-10)
 
 Updates to Glimmer.js 2.0!
