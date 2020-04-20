@@ -1,3 +1,13 @@
+## v0.2.2 (2020-04-20)
+
+#### :house: Internal
+* `@glimmerx/babel-plugin-component-templates`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/ssr`, `@glimmerx/storybook`, `examples`
+  * [#70](https://github.com/glimmerjs/glimmer-experimental/pull/70) [CHORE] Bump to glimmerjs 2.0.0-beta.7 which contains glimmer-vm 0.51.0 ([@chiragpat](https://github.com/chiragpat))
+
+#### Committers: 1
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+
+
 ## v0.2.1 (2020-04-17)
 
 #### :bug: Bug Fix
