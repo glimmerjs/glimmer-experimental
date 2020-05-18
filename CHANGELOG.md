@@ -1,3 +1,13 @@
+## v0.2.3 (2020-05-18)
+
+#### :house: Internal
+* `examples`
+  * [#71](https://github.com/glimmerjs/glimmer-experimental/pull/71) [CHORE] add private: true field to basic-addon ([@chiragpat](https://github.com/chiragpat))
+
+#### Committers: 1
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+
+
 ## v0.2.2 (2020-04-20)
 
 #### :house: Internal
