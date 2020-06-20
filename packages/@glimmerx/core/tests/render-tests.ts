@@ -1,6 +1,5 @@
 import Component, { tracked } from '@glimmerx/component';
 
-import { Constructor } from '..';
 import { setComponentTemplate } from '..';
 
 import { compileTemplate } from './utils';
@@ -10,30 +9,35 @@ import { on, action } from '@glimmerx/modifier';
 
 const { module, test } = QUnit;
 
+export interface Constructor<T> {
+  new (owner: unknown, args: object): T;
+}
+
 export default function renderTests(
   moduleName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render: (component: Constructor<Component>, options?: any) => Promise<string>
 ) {
   module(`${moduleName} rendering`, () => {
-    test('it renders a component', async assert => {
+    test('it renders a component', async (assert) => {
       class MyComponent extends Component {}
 
-      setComponentTemplate(MyComponent, compileTemplate(`<h1>Hello world</h1>`));
+      setComponentTemplate(compileTemplate(`<h1>Hello world</h1>`), MyComponent);
 
       const html = await render(MyComponent);
       assert.strictEqual(html, '<h1>Hello world</h1>', 'the template was rendered');
       assert.ok(true, 'rendered');
     });
 
-    test('a component can render a nested component', async assert => {
+    test('a component can render a nested component', async (assert) => {
       class OtherComponent extends Component {}
 
-      setComponentTemplate(OtherComponent, compileTemplate(`Hello world`));
+      setComponentTemplate(compileTemplate(`Hello world`), OtherComponent);
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent }))
+        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent })),
+        MyComponent
       );
 
       const html = await render(MyComponent);
@@ -41,23 +45,23 @@ export default function renderTests(
       assert.ok(true, 'rendered');
     });
 
-    test('a component can render multiple nested components', async assert => {
+    test('a component can render multiple nested components', async (assert) => {
       class Foo extends Component {}
-      setComponentTemplate(Foo, compileTemplate(`Foo`));
+      setComponentTemplate(compileTemplate(`Foo`), Foo);
 
       class Bar extends Component {}
-      setComponentTemplate(Bar, compileTemplate(`Bar`));
+      setComponentTemplate(compileTemplate(`Bar`), Bar);
 
       class OtherComponent extends Component {}
       setComponentTemplate(
-        OtherComponent,
-        compileTemplate(`Hello world <Foo /><Bar />`, () => ({ Foo, Bar }))
+        compileTemplate(`Hello world <Foo /><Bar />`, () => ({ Foo, Bar })),
+        OtherComponent
       );
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent }))
+        compileTemplate(`<h1><OtherComponent /></h1>`, () => ({ OtherComponent })),
+        MyComponent
       );
 
       const html = await render(MyComponent);
@@ -65,25 +69,25 @@ export default function renderTests(
       assert.strictEqual(html, '<h1>Hello world FooBar</h1>', 'the template was rendered');
     });
 
-    test('a component can render with helpers', async assert => {
-      const myHelper = helper(([name]: [string], { greeting }: { greeting: string }) => {
+    test('a component can render with helpers', async (assert) => {
+      const myHelper = helper(([name]: string, { greeting }: { greeting: string }) => {
         return `helper ${greeting} ${name}`;
       });
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate('<h1>{{myHelper "foo" greeting="Hello"}}</h1>', () => ({ myHelper }))
+        compileTemplate('<h1>{{myHelper "foo" greeting="Hello"}}</h1>', () => ({ myHelper })),
+        MyComponent
       );
 
       const html = await render(MyComponent);
       assert.strictEqual(html, '<h1>helper Hello foo</h1>', 'the template was rendered');
     });
 
-    test('a component can render with args', async assert => {
+    test('a component can render with args', async (assert) => {
       class MyComponent extends Component {}
 
-      setComponentTemplate(MyComponent, compileTemplate('<h1>{{@say}}</h1>'));
+      setComponentTemplate(compileTemplate('<h1>{{@say}}</h1>'), MyComponent);
 
       const renderOptions = {
         args: {
@@ -99,7 +103,7 @@ export default function renderTests(
       );
     });
 
-    test('a component can inject services', async assert => {
+    test('a component can inject services', async (assert) => {
       class LocaleService {
         get currentLocale() {
           return 'en_US';
@@ -113,7 +117,7 @@ export default function renderTests(
         }
       }
 
-      setComponentTemplate(MyComponent, compileTemplate('<h1>{{this.myLocale}}</h1>'));
+      setComponentTemplate(compileTemplate('<h1>{{this.myLocale}}</h1>'), MyComponent);
 
       const html = await render(MyComponent, {
         services: {
@@ -123,22 +127,22 @@ export default function renderTests(
       assert.strictEqual(html, '<h1>en_US</h1>');
     });
 
-    test('a helper can inject services', async assert => {
+    test('a helper can inject services', async (assert) => {
       class LocaleService {
         get currentLocale() {
           return 'en_US';
         }
       }
 
-      const myHelper = helper((args, hash, { services }) => {
+      const myHelper = helper((_args: unknown, _hash: unknown, { services }) => {
         const localeService = services!.locale as LocaleService;
         return `The locale is ${localeService.currentLocale}`;
       });
 
       class MyComponent extends Component {}
       setComponentTemplate(
-        MyComponent,
-        compileTemplate('<h1>{{myHelper}}</h1>', () => ({ myHelper }))
+        compileTemplate('<h1>{{myHelper}}</h1>', () => ({ myHelper })),
+        MyComponent
       );
 
       const html = await render(MyComponent, {
@@ -149,10 +153,10 @@ export default function renderTests(
       assert.strictEqual(html, '<h1>The locale is en_US</h1>');
     });
 
-    test('a component can be rendered more than once', async assert => {
+    test('a component can be rendered more than once', async (assert) => {
       class MyComponent extends Component {}
 
-      setComponentTemplate(MyComponent, compileTemplate(`<h1>Bump</h1>`));
+      setComponentTemplate(compileTemplate(`<h1>Bump</h1>`), MyComponent);
 
       let html = await render(MyComponent);
       assert.strictEqual(html, '<h1>Bump</h1>', 'the component rendered');
@@ -163,7 +167,7 @@ export default function renderTests(
       assert.ok(true, 'rendered');
     });
 
-    test('a component can use modifiers', async assert => {
+    test('a component can use modifiers', async (assert) => {
       class MyComponent extends Component {
         @tracked count = 0;
 
@@ -174,14 +178,14 @@ export default function renderTests(
       }
 
       setComponentTemplate(
-        MyComponent,
         compileTemplate(
           `<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`,
           () => ({ on })
-        )
+        ),
+        MyComponent
       );
 
-      let html = await render(MyComponent);
+      const html = await render(MyComponent);
       assert.strictEqual(html, `<button>Count: 0</button>`, 'the component was rendered');
     });
   });

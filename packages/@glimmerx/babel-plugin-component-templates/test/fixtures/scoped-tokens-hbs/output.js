@@ -1,15 +1,15 @@
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
-import _Component from "@glimmerx/component";
+import { templateOnlyComponent as _templateOnlyComponent } from "@glimmer/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import OtherComponent from './OtherComponent';
 import PhantomComponent from './PhantomComponent';
 import SecondPhantomComponent from './SecondPhantomComponent';
 
-const hbsOnlyTemplate = _setComponentTemplate(class extends _Component {}, {
-  id: "tX2UUCNd",
-  block: "{\"symbols\":[\"PhantomComponent\",\"SecondPhantomComponent\"],\"statements\":[[0,\"\\n\"],[7,\"h1\",true],[9],[0,\"Hello world\\n\"],[4,\"OtherComponent\",null,null,[[\"default\"],[{\"statements\":[[0,\"        \"],[6,[24,2,[]],[],[[],[]],null],[0,\"\\n        \"],[1,[24,2,[]],false],[0,\"\\n\"]],\"parameters\":[2]}]]],[0,\"    \"],[5,\"OtherComponent\",[],[[],[]],[[\"default\"],[{\"statements\":[[0,\"\\n        \"],[6,[24,1,[]],[],[[],[]],null],[0,\"\\n        \"],[1,[24,1,[]],false],[0,\"\\n    \"]],\"parameters\":[1]}]]],[0,\"\\n\"],[10]],\"hasEval\":false}",
+const hbsOnlyTemplate = _setComponentTemplate({
+  id: "ZciCU0lx",
+  block: "{\"symbols\":[\"PhantomComponent\",\"SecondPhantomComponent\"],\"statements\":[[1,1,0,0,\"\\n\"],[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\\n\"],[5,[27,[26,0,\"BlockHead\"],[]],null,null,[[\"default\"],[{\"statements\":[[1,1,0,0,\"        \"],[7,[27,[24,2],[]],[],[[],[]],null],[1,1,0,0,\"\\n        \"],[1,0,0,0,[27,[24,2],[]]],[1,1,0,0,\"\\n\"]],\"parameters\":[2]}]]],[1,1,0,0,\"    \"],[7,\"OtherComponent\",[],[[],[]],[[\"default\"],[{\"statements\":[[1,1,0,0,\"\\n        \"],[7,[27,[24,1],[]],[],[[],[]],null],[1,1,0,0,\"\\n        \"],[1,0,0,0,[27,[24,1],[]]],[1,1,0,0,\"\\n    \"]],\"parameters\":[1]}]]],[1,1,0,0,\"\\n\"],[11]],\"hasEval\":false,\"upvars\":[\"OtherComponent\"]}",
   meta: {
     scope: () => ({
       OtherComponent: OtherComponent
     })
   }
-});
+}, _templateOnlyComponent());

@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #FDF0ED;
+  color: #1E293B;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.editor {
+  background: #1E293B;
+}
+
+.sandbox {
+  padding: 0.6em 1em;
+}
+
+.editor .buffer {
+  flex-grow: 1;
+  font-family: monospace;
+}
+
+.editor nav {
+  height: 3.2em;
+  padding: 0.6em 1em;
+  display: flex;
+  /* vertical-align: middle; */
+}
+
+.editor nav .divider {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.editor nav a,
+.editor nav button {
+  color: #FDF0ED99;
+  font-weight: bold;
+  line-height: 2em;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1em;
+  padding: 0 0.6em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.editor nav a {
+  /* can't seem to get them aligned */
+  margin-top: 1px;
+}
+
+.editor nav a:hover,
+.editor nav button:hover {
+  color: #FDF0ED;
+}
+
+.editor nav .share {
+  position: relative;
+}
+
+.editor nav .share.clicked::before {
+  content: '';
+  position: absolute;
+  z-index: 9998;
+  font-size: 0.8em;
+  top: 2.5em;
+  transform: translateX(-50%);
+  left: 50%;
+  width: 0;
+  height: 0;
+
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+  border-bottom: 0.5em solid #e27b57;
+}
+
+.editor nav .share.clicked::after {
+  content: 'Link Copied!';
+  position: absolute;
+  z-index: 9999;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 3em;
+  width: 8em;
+  height: 3em;
+
+  color: #fff;
+  font-size: 0.8em;
+  line-height: 36px;
+  text-align: center;
+
+  background: #e27b57;
+  border-radius: 3px;
+}
+
+.editor nav .logo {
+  height: 2em;
+  width: 2em;
+  display: inline-block;
+}
+
+.buffer {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  #app {
+    display: flex;
+  }
+
+  .sandbox {
+    width: 50vw;
+    height: 100vh;
+    overflow: scroll;
+  }
+
+  .editor {
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+  }
+}

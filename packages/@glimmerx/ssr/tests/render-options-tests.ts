@@ -7,7 +7,7 @@ import { SerializableNode } from '@simple-dom/interface';
 import { renderToString, RenderOptions } from '..';
 
 QUnit.module('@glimmer/ssr rendering', () => {
-  QUnit.test('options.serializer', async assert => {
+  QUnit.test('options.serializer', async (assert) => {
     class MyComponent extends Component {}
 
     class CustomHTMLSerializer extends HTMLSerializer {
@@ -18,7 +18,7 @@ QUnit.module('@glimmer/ssr rendering', () => {
 
     const options: RenderOptions = { serializer: new CustomHTMLSerializer(voidMap) };
 
-    setComponentTemplate(MyComponent, compileTemplate(`<h1>Hello World</h1>`));
+    setComponentTemplate(compileTemplate(`<h1>Hello World</h1>`), MyComponent);
 
     const output = await renderToString(MyComponent, options);
 

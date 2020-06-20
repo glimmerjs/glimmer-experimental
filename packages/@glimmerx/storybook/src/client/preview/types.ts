@@ -1,25 +1,24 @@
-import { Constructor, RenderComponentOptions } from '@glimmerx/core';
-import GlimmerComponent from '@glimmerx/component';
+import { ComponentDefinition, RenderComponentOptions } from '@glimmerx/core';
 
 export type GlimmerStoryFnReturnType =
   | GlimmerStoryComponentClass
   | GlimmerStoryWithComponentRenderOptions;
 
-export type GlimmerStoryComponentClass = Constructor<GlimmerComponent>;
+export type GlimmerStoryComponentClass = ComponentDefinition;
 
 export interface GlimmerStoryWithComponentRenderOptions {
   componentClass: GlimmerStoryComponentClass;
   renderOptions: RenderComponentOptions;
 }
 
-export interface IStorybookStory {
+export interface StorybookStory {
   name: string;
-  render: () => any;
+  render: () => unknown;
 }
 
-export interface IStorybookSection {
+export interface StorybookSection {
   kind: string;
-  stories: IStorybookStory[];
+  stories: StorybookStory[];
 }
 
 export interface ShowErrorArgs {

@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/storybook",
-  "version": "0.1.13",
+  "version": "0.2.3",
   "description": "storybook for glimmerjs",
   "keywords": [
     "storybook",
@@ -28,35 +28,40 @@
     "ts-compile": "tsc -p ."
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/preset-typescript": "^7.7.4",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-typescript": "^7.9.0",
     "@types/node": "^12.1.0",
-    "@types/webpack": "^4.39.0",
-    "@types/webpack-env": "^1.13.9",
-    "@typescript-eslint/eslint-plugin": "^2.2.0",
-    "@typescript-eslint/parser": "^2.2.0",
-    "babel-eslint": "^10.0.3",
-    "core-js": "^3.0.1",
-    "eslint": "^5.10.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "typescript": "^3.4.0"
+    "@types/webpack": "^4.41.10",
+    "@types/webpack-env": "^1.15.1",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "babel-eslint": "^10.1.0",
+    "core-js": "^3.6.4",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@storybook/core": "^v5.3.8",
-    "global": "^4.3.2"
+    "@storybook/core": "^v5.3.18",
+    "global": "^4.4.0"
   },
   "peerDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.7.0",
-    "@babel/plugin-proposal-decorators": "^7.7.0",
-    "@glimmerx/babel-plugin-component-templates": "^0.1.9",
-    "@glimmerx/component": "^0.1.0",
-    "@glimmerx/core": "^0.1.0",
-    "babel-loader": "^8.0.6"
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@glimmer/babel-plugin-strict-template-precompile": "2.0.0-beta.7",
+    "@glimmerx/babel-plugin-component-templates": "^0.2.3",
+    "@glimmerx/component": "^0.2.3",
+    "@glimmerx/core": "^0.2.3",
+    "babel-loader": "^8.1.0"
   },
   "engines": {
     "node": ">=8.0.0"
+  },
+  "volta": {
+    "node": "12.10.0",
+    "yarn": "1.22.4"
   }
 }

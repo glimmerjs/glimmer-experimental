@@ -1,0 +1,57 @@
+import Component, { tracked, hbs } from '@glimmerx/component';
+import { helper } from '@glimmerx/helper';
+import OtherComponent from './OtherComponent';
+import { service } from '@glimmerx/service';
+import { on, action } from '@glimmerx/modifier';
+import LocaleService from './services/LocaleService';
+import { ButtonList } from 'basic-addon';
+
+const myHelper = helper(function ([name]: [string], { greeting }: { greeting: string }) {
+  return `Helper: ${greeting} ${name}`;
+});
+
+const isCJK = helper(function (_args, _hash, { services }) {
+  const localeService = services!.locale as LocaleService;
+  return (
+    localeService.currentLocale === 'zh_CN' ||
+    localeService.currentLocale === 'ko_KO' ||
+    localeService.currentLocale === 'ja_JP'
+  );
+});
+
+const TemplateOnlyComponent = hbs`<h1>I am rendered by a template only component: {{@name}}</h1>`;
+
+class MyComponent extends Component {
+  static template = hbs`
+    <h1>Hello {{this.message}}</h1> <br/>
+    {{myHelper "foo" greeting="Hello"}}
+    <p>Current locale: {{this.currentLocale}}</p>
+    {{#if (isCJK)}}
+      <p>Component is in a CJK locale</p>
+    {{else}}
+      <p>Component is not in a CJK locale</p>
+    {{/if}}
+
+    <OtherComponent @count={{this.count}} /> <br/>
+    <button {{on "click" this.increment}}>Increment</button>
+    <TemplateOnlyComponent @name="For Glimmerx"/>
+
+    <ButtonList/>
+    <ButtonList/>
+  `;
+
+  message = 'hello world';
+  @tracked count = 55;
+  @service locale: LocaleService;
+
+  get currentLocale() {
+    return this.locale.currentLocale;
+  }
+
+  @action
+  increment() {
+    this.count++;
+  }
+}
+
+export default MyComponent;

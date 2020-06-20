@@ -6,7 +6,7 @@ import { renderComponent, setComponentTemplate, didRender } from '..';
 import { compileTemplate } from './utils';
 
 module('Modifier Tests', () => {
-  test('Supports the on modifier', async assert => {
+  test('Supports the on modifier', async (assert) => {
     class MyComponent extends Component {
       @tracked count = 0;
 
@@ -17,11 +17,11 @@ module('Modifier Tests', () => {
     }
 
     setComponentTemplate(
-      MyComponent,
       compileTemplate(
         `<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`,
         () => ({ on })
-      )
+      ),
+      MyComponent
     );
 
     const element = document.getElementById('qunit-fixture')!;

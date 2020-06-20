@@ -1,0 +1,29 @@
+{
+  "framework": "qunit",
+  "test_page": "tests/index.html",
+  "routes": {
+    "/": "dist"
+  },
+  "on_start": {
+    "command": "TESTEM=true webpack",
+    "wait_for_text": "Built at:",
+    "wait_for_text_timeout": 300000
+  },
+  "watch_files": [
+    "tests.bundle.js"
+  ],
+  "browser_args": {
+    "mode": "ci",
+    "Chrome": [
+      "--headless",
+      "--remote-debugging-port=9222"
+    ]
+  },
+  "launch_in_ci": [
+    "Chrome",
+    "Firefox"
+  ],
+  "launch_in_dev": [
+    "Chrome"
+  ]
+}

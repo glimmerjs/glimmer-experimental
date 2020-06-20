@@ -1,5 +1,6 @@
-const { precompile } = require('@glimmer/compiler');
-const { addNamed, addDefault } = require('@babel/helper-module-imports');
+const glimmerPrecompileTemplate = require('@glimmer/babel-plugin-strict-template-precompile')
+  .precompileTemplate;
+const { addNamed } = require('@babel/helper-module-imports');
 const { traverse, preprocess } = require('@glimmer/syntax');
 
 /* AST.Node reference: https://github.com/glimmerjs/glimmer-vm/blob/master/packages/%40glimmer/syntax/lib/types/nodes.ts#L268 */
@@ -12,10 +13,10 @@ const { traverse, preprocess } = require('@glimmer/syntax');
  */
 function tokensFromType(node, scopedTokens) {
   const tokensMap = {
-    StringLiteral: node => {
+    StringLiteral: (node) => {
       return node.value;
     },
-    PathExpression: node => {
+    PathExpression: (node) => {
       if (node.data === true || node.this === true) {
         return;
       }
@@ -50,8 +51,12 @@ function tokensFromType(node, scopedTokens) {
  */
 function addTokens(tokensSet, node, scopedTokens, nativeTokens = []) {
   const maybeTokens = tokensFromType(node, scopedTokens);
-  (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach(maybeToken => {
-    if (maybeToken !== undefined && !nativeTokens.includes(maybeToken) && !maybeToken.startsWith('@')) {
+  (Array.isArray(maybeTokens) ? maybeTokens : [maybeTokens]).forEach((maybeToken) => {
+    if (
+      maybeToken !== undefined &&
+      !nativeTokens.includes(maybeToken) &&
+      !maybeToken.startsWith('@')
+    ) {
       tokensSet.add(maybeToken);
     }
   });
@@ -73,7 +78,7 @@ function getTemplateTokens(html, nativeTokens) {
   traverse(ast, {
     Block: {
       enter({ blockParams }) {
-        blockParams.forEach(param => {
+        blockParams.forEach((param) => {
           scopedTokens.push(param);
         });
       },
@@ -85,7 +90,7 @@ function getTemplateTokens(html, nativeTokens) {
     },
     ElementNode: {
       enter(node) {
-        node.blockParams.forEach(param => {
+        node.blockParams.forEach((param) => {
           scopedTokens.push(param);
         });
         addTokens(tokensSet, node, scopedTokens);
@@ -103,226 +108,258 @@ function getTemplateTokens(html, nativeTokens) {
   return Array.from(tokensSet);
 }
 
-module.exports = function(babel, options) {
+module.exports = function (babel, options) {
   const { types: t, parse } = babel;
   const {
-    importPath = '@glimmerx/core',
-    importName = 'setComponentTemplate',
-    precompile: precompileOptions,
+    // Whether or not we'ret targeting Ember. If so, we use the Ember global
+    // instead of adding imports, and we use different default import paths.
+    ember = false,
+
+    setTemplatePath = '@glimmer/core',
+    setTemplateName = ember ? '_setComponentTemplate' : 'setComponentTemplate',
+
+    createTemplatePath = '@glimmer/core',
+    createTemplateName = 'createTemplate',
+
+    templateOnlyComponentPath = '@glimmer/core',
+    templateOnlyComponentName = ember ? '_templateOnlyComponent' : 'templateOnlyComponent',
+
+    precompile: precompileOptions = {},
+
+    // Users can pass a custom precompile function. This is used by Ember.
+    precompileTemplate = glimmerPrecompileTemplate,
   } = options || {};
 
-  const isPrecompileDisabled = precompileOptions && precompileOptions.disabled === true;
+  const shouldPrecompile = precompileOptions.disabled !== true;
 
-  function maybeAddTemplateSetterImport(state, programPath) {
-    if (!state.templateSetterId) {
-      state.templateSetterId = addNamed(programPath, importName, importPath, {
-        importedType: 'es6',
-      }).name;
+  function maybeAddImport(state, programPath, name, importPath) {
+    let stateKey = `__import__${name}`;
+
+    if (!state[stateKey]) {
+      if (ember) {
+        // In Ember, we destructure the value from the Ember global
+        const globalImport = t.variableDeclaration('var', [
+          t.variableDeclarator(
+            t.identifier(name),
+            t.memberExpression(t.identifier('Ember'), t.identifier(name))
+          ),
+        ]);
+
+        programPath.get('body.0').insertBefore(globalImport);
+
+        state[stateKey] = name;
+      } else {
+        state[stateKey] = addNamed(programPath, name, importPath, {
+          importedType: 'es6',
+        }).name;
+      }
     }
 
-    return state.templateSetterId;
+    return state[stateKey];
   }
 
-  function maybeAddGlimmerInlinePrecompileImport(state, programPath) {
-    if (!state.glimmerInlinePrecompileId) {
-      state.glimmerInlinePrecompileId = addDefault(programPath, 'glimmer-inline-precompile', {
-        nameHint: 'hbs',
-      }).name;
-    }
+  function maybeAddSetTemplateImport(state, programPath) {
+    return maybeAddImport(state, programPath, setTemplateName, setTemplatePath);
+  }
 
-    return state.glimmerInlinePrecompileId;
+  function maybeAddCreateTemplateImport(state, programPath) {
+    return maybeAddImport(state, programPath, createTemplateName, createTemplatePath);
+  }
+
+  function maybeAddTemplateOnlyComponentImport(state, programPath) {
+    return maybeAddImport(state, programPath, templateOnlyComponentName, templateOnlyComponentPath);
   }
 
   return {
-    name: '@glimmerx/babel-plugin-glimmer-components',
+    name: '@glimmerx/babel-plugin-component-templates',
     manipulateOptions({ parserOpts }) {
       parserOpts.plugins.push(['classProperties']);
     },
     visitor: {
-      Program(programPath, state) {
-        programPath.traverse({
-          ImportSpecifier(path) {
-            if (state.hbsImportId || path.parent.source.value !== '@glimmerx/component') {
-              return;
-            }
-            const importedName = path.node.imported.name;
-            const localName = path.node.local.name;
-            if (importedName === 'hbs') {
-              state.hbsImportId = localName;
-              // remove the hbs named import
-              if (path.parentPath.node.specifiers.length > 1) {
-                  path.remove();
-              } else {
-                path.parentPath.remove();
-              }
-            }
+      // This visitor exists to add an extra reference to all template bindings
+      // so they don't get removed eagerly. This is because we may end up using
+      // them later on and adding a reference ourselves.
+      Program: {
+        enter(path, state) {
+          const parentScope = path.scope.getProgramParent();
 
-          },
-          ImportDefaultSpecifier(path) {
-            if (state.glimmerComponentImportId || path.parent.source.value !== '@glimmerx/component') {
-              return;
-            }
-            const localName = path.node.local.name;
-            state.glimmerComponentImportId = localName;
-          },
-          TaggedTemplateExpression(path) {
-            const parentNode = path.parent;
-            if (path.node.tag.name !== state.hbsImportId) {
-              return;
-            }
+          // Get the bindings and filter out any that are typescript types
+          const bindings = Object.values(parentScope.bindings).filter(
+            (b) => !b.referencePaths.some((p) => p.parent.type === 'TSTypeReference')
+          );
 
-            /**
-             * If its a hbs`....` only template then convert it into
-             * class extends Component { static template = hbs`....`;}
-             * first and then compile
-             */
-            if (
-              parentNode.type !== 'ClassProperty' ||
-              !parentNode.static ||
-              parentNode.key.name !== 'template'
-            ) {
-              if (!state.glimmerComponentImportId) {
-                state.glimmerComponentImportId = addDefault(programPath, '@glimmerx/component', {
-                  nameHint: 'Component',
-                }).name;
-              }
+          if (bindings.length === 0) return;
 
-              let taggedTemplateExpression = t.TaggedTemplateExpression(t.Identifier(state.hbsImportId), t.TemplateLiteral([...path.node.quasi.quasis], []));
-              const ClassTemplateProperty = t.ClassProperty(t.Identifier('template'), taggedTemplateExpression, null, null);
-              ClassTemplateProperty.static = true;
-              path.replaceWith(
-                t.ClassExpression(
-                  null,
-                  t.Identifier(state.glimmerComponentImportId),
-                  t.ClassBody([ClassTemplateProperty])
-                )
-              );
-              return;
-            }
+          // create a new empty node to add a reference to in the binding
+          let firstNode = path.get('body.0');
+          firstNode.insertBefore(t.noop());
+          firstNode = path.get('body.0');
 
-            let setterId = maybeAddTemplateSetterImport(state, programPath);
-            let hbsImportId = isPrecompileDisabled
-              ? maybeAddGlimmerInlinePrecompileImport(state, programPath)
-              : null;
-            insertTemplateWrapper(path.parentPath, { setterId, hbsImportId });
+          bindings.forEach((b) => b.reference(firstNode));
+
+          // save the node and original bindings off to remove on exit
+          state.originalBindings = bindings;
+          state.emptyPath = firstNode;
+        },
+
+        exit(path, state) {
+          if (state.originalBindings) {
+            // dereference all the original bindings, and remove the empty path
+            state.originalBindings.forEach((b) => b.dereference(state.emptyPath));
+            state.emptyPath.remove();
+          }
+        },
+      },
+
+      ImportDefaultSpecifier(path, state) {
+        if (state.glimmerComponentImportId || path.parent.source.value !== '@glimmerx/component') {
+          return;
+        }
+        const localName = path.node.local.name;
+        state.glimmerComponentImportId = localName;
+      },
+
+      ImportSpecifier(path, state) {
+        if (state.hbsImportId || path.parent.source.value !== '@glimmerx/component') {
+          return;
+        }
+        const importedName = path.node.imported.name;
+        const localName = path.node.local.name;
+        if (importedName === 'hbs') {
+          state.hbsImportId = localName;
+          // remove the hbs named import
+          if (path.parentPath.node.specifiers.length > 1) {
+            path.remove();
+          } else {
             path.parentPath.remove();
-          },
-        });
-        // Babel TypeScript transform strips any bindings that aren't
-        // referenced, so we need to retain any values referenced in the
-        // template but not the JavaScript. There's a better way to do this when
-        // we generate the identifiers for the scope function.
-        const bindings = Object.values(programPath.scope.getAllBindings());
-        bindings.forEach(binding => {
-          binding.reference(programPath);
-        });
+          }
+        }
+      },
+
+      ClassExpression(path, state) {
+        const classBody = path.get('body').get('body');
+        const templateProp = findTemplateProperty(classBody, state.hbsImportId);
+
+        if (templateProp) {
+          insertTemplateWrapper(path.scope.getProgramParent().path, path, templateProp, state);
+          templateProp.remove();
+        }
+      },
+
+      ClassDeclaration(path, state) {
+        const classBody = path.get('body').get('body');
+        const templateProp = findTemplateProperty(classBody, state.hbsImportId);
+
+        if (templateProp) {
+          insertTemplateWrapper(path.scope.getProgramParent().path, path, templateProp, state);
+          templateProp.remove();
+        }
+      },
+
+      TaggedTemplateExpression(path, state) {
+        if (path.node.tag.name !== state.hbsImportId) {
+          return;
+        }
+
+        let programPath = path.scope.getProgramParent().path;
+
+        const setTemplateId = maybeAddSetTemplateImport(state, programPath);
+        const templateOnlyId = maybeAddTemplateOnlyComponentImport(state, programPath);
+
+        const templateNode = shouldPrecompile
+          ? buildTemplate(path)
+          : buildCreateTemplate(path, programPath, state);
+
+        path.replaceWith(
+          t.callExpression(t.identifier(setTemplateId), [
+            templateNode,
+            t.callExpression(t.identifier(templateOnlyId), []),
+          ])
+        );
       },
     },
   };
 
-  function insertTemplateWrapper(path, { setterId, hbsImportId }) {
-    const klass = path.findParent(path => path.isClassExpression() || path.isClassDeclaration());
+  function findTemplateProperty(classBody, hbsImportId) {
+    return classBody.find((propPath) => {
+      return (
+        propPath.node.static &&
+        propPath.node.key.name === 'template' &&
+        propPath.node.value.type === 'TaggedTemplateExpression' &&
+        propPath.node.value.tag.name === hbsImportId
+      );
+    });
+  }
 
-    const template = isPrecompileDisabled
-      ? buildLooseTemplate(path, hbsImportId) // Loosely compile templates, do not transform to op codes.
-      : buildTemplate(path);
+  function insertTemplateWrapper(programPath, classPath, templatePath, state) {
+    const setTemplateId = maybeAddSetTemplateImport(state, programPath);
 
-    if (klass.isClassExpression()) {
-      klass.replaceWith(t.callExpression(t.identifier(setterId), [klass.node, template]));
+    const template = shouldPrecompile
+      ? buildTemplate(templatePath)
+      : buildCreateTemplate(templatePath, programPath, state);
+
+    if (classPath.isClassExpression()) {
+      classPath.replaceWith(
+        t.callExpression(t.identifier(setTemplateId), [template, classPath.node])
+      );
     } else {
-      const klassId = klass.node.id;
+      const classId = classPath.node.id;
 
-      klass.insertAfter(t.callExpression(t.identifier(setterId), [klassId, template]));
+      classPath.insertAfter(t.callExpression(t.identifier(setTemplateId), [template, classId]));
     }
   }
 
-  function buildLooseTemplate(path, hbsImportId) {
-    function getTaggedTemplateExpression(path) {
-      const stringNode = path.node.value;
-      if (t.isTaggedTemplateExpression(stringNode)) {
-        return stringNode;
-      }
-    }
-
-    const compiledTemplateIdentifier = t.identifier('compiledTemplate');
-
-    const taggedTemplateExpression = getTaggedTemplateExpression(path);
-
-    taggedTemplateExpression.tag = t.identifier(hbsImportId); // Update the tag to be the same as our importId
-
-    const compiledTemplateStatement = t.variableDeclaration('const', [
-      t.variableDeclarator(compiledTemplateIdentifier, taggedTemplateExpression),
-    ]);
-
-    const templateSource = getTemplateString(path);
+  function getFilteredTemplateTokens(path, templateSource) {
     const templateScopeTokens = getTemplateTokens(templateSource);
 
-    const left = t.memberExpression(
-      t.memberExpression(compiledTemplateIdentifier, t.identifier('meta')),
-      t.identifier('scope')
-    );
+    const filtered = [];
+    const parentScope = path.scope.getProgramParent();
 
-    const scopeStatement = t.expressionStatement(
-      t.assignmentExpression('=', left, buildScopeFunction(path, templateScopeTokens).value)
-    );
+    Object.values(parentScope.bindings).forEach((binding) => {
+      binding.reference(path);
 
-    const callExpression = t.callExpression(
-      t.arrowFunctionExpression(
-        [],
-        t.blockStatement([
-          compiledTemplateStatement,
-          scopeStatement,
-          t.returnStatement(compiledTemplateIdentifier),
-        ])
-      ),
-      []
-    );
+      if (templateScopeTokens.includes(binding.identifier.name)) {
+        filtered.push(binding.identifier.name);
+      }
+    });
 
-    return callExpression;
+    return filtered;
   }
 
   function buildTemplate(path) {
     const templateSource = getTemplateString(path);
-    const templateScopeTokens = getTemplateTokens(templateSource);
-    const compiled = precompile(templateSource, precompileOptions);
-    const ast = parse(`(${compiled})`);
+    const templateScopeTokens = getFilteredTemplateTokens(path, templateSource);
 
-    t.traverseFast(ast, node => {
-      if (t.isObjectProperty(node)) {
-        if (node.key.value === 'meta') {
-          node.value.properties.push(buildScopeFunction(path, templateScopeTokens));
-        }
-        if (t.isStringLiteral(node.key)) {
-          node.key = t.identifier(node.key.value);
-        }
-      }
-    });
+    const compiledTemplate = precompileTemplate(
+      templateSource,
+      templateScopeTokens,
+      precompileOptions
+    );
+
+    let ast = parse(compiledTemplate);
+
     return ast.program.body[0].expression;
   }
 
-  function buildScopeFunction(path, templateScopeTokens) {
-    const parentScope = path.scope.getProgramParent();
-    const bindings = Object.values(parentScope.bindings);
+  function buildCreateTemplate(path, programPath, state) {
+    const createTemplateId = maybeAddCreateTemplateImport(state, programPath);
+    const templateSource = getTemplateString(path);
+    const tokens = getFilteredTemplateTokens(path, templateSource);
 
-    return t.objectProperty(
-      t.identifier('scope'),
-      t.arrowFunctionExpression(
-        [],
-        t.objectExpression(
-          bindings
-            .map(binding => {
-              const { identifier } = binding;
-              binding.reference(path);
-              return t.objectProperty(t.identifier(identifier.name), t.identifier(identifier.name), false, false);
-            })
-            .filter(prop => templateScopeTokens.includes(prop.key.name))
-        )
+    const scopeObject = t.objectExpression(
+      tokens.map((token) =>
+        t.objectProperty(t.identifier(token), t.identifier(token), false, false)
       )
     );
+
+    return t.callExpression(t.identifier(createTemplateId), [
+      scopeObject,
+      t.templateLiteral([t.templateElement({ raw: templateSource })], []),
+    ]);
   }
 
   function getTemplateString(path) {
-    const stringNode = path.node.value;
+    const stringNode = path.node.value || path.node;
 
     if (t.isTaggedTemplateExpression(stringNode)) {
       return stringNode.quasi.quasis[0].value.raw;

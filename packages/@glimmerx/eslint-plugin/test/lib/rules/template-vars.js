@@ -1,4 +1,3 @@
-/* globals describe it */
 const babelParser = require.resolve('babel-eslint');
 const rule = require('../../../lib/rules/template-vars');
 // This very unfortunate require is because of the way RuleTester is set up.
@@ -38,7 +37,7 @@ function testUnusedVars(code) {
   });
 }
 
-describe('no-unused-vars', function() {
+describe('no-unused-vars', function () {
   // eslint-disable-next-line no-invalid-this
   this.timeout(5000);
 

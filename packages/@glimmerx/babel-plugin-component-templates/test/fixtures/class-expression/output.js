@@ -1,10 +1,10 @@
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import Component from '@glimmerx/component';
 
-const MyComponent = _setComponentTemplate(class extends Component {}, {
-  id: "pX6MO7j4",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h1\",true],[9],[0,\"Hello world\"],[10]],\"hasEval\":false}",
+const MyComponent = _setComponentTemplate({
+  id: "hzw7dJc0",
+  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
-});
+}, class extends Component {});

@@ -1,17 +1,61 @@
-import { Helper as GlimmerHelper, Dict } from '@glimmer/interfaces';
-import HelperReference, { UserHelper } from './reference';
-import { DYNAMIC_SCOPE_SERVICES_KEY, service } from '@glimmerx/service';
-import { Reference } from '@glimmer/reference';
+import {
+  setHelperManager,
+  HelperManager,
+  helperCapabilities,
+  Owner,
+  TemplateArgs,
+} from '@glimmerx/core';
+import { Dict } from '@glimmer/interfaces';
 
-export function helper(helperFn: UserHelper): GlimmerHelper {
-  return (args, vm) => {
-    const dynamicScope = vm.dynamicScope();
-    let services;
+interface HelperOptions {
+  services: Dict<unknown>;
+}
 
-    if (dynamicScope) {
-      services = dynamicScope.get(DYNAMIC_SCOPE_SERVICES_KEY) as Reference<Dict<unknown>>;
-    }
+export type Helper<T = unknown, U = unknown> = (
+  positional: T,
+  named: U,
+  options: HelperOptions
+) => unknown;
 
-    return new HelperReference(helperFn, args, services);
-  };
+interface BasicHelperBucket {
+  fn: Helper;
+  args: TemplateArgs;
+  ownerProxy: Dict<unknown>;
+}
+
+class BasicHelperManager implements HelperManager<BasicHelperBucket> {
+  capabilities = helperCapabilities('glimmerjs-2.0.0');
+
+  constructor(private owner: Owner) {}
+
+  getValue({ fn, args, ownerProxy }: BasicHelperBucket): unknown {
+    return fn(args.positional, args.named, { services: ownerProxy });
+  }
+
+  createHelper(fn: Helper, args: TemplateArgs) {
+    const { owner } = this;
+
+    const ownerProxy = new Proxy(
+      {},
+      {
+        get(_target, key) {
+          return owner.lookup({ type: 'service', name: (key as unknown) as string });
+        },
+      }
+    );
+
+    return {
+      fn,
+      args,
+      ownerProxy,
+    };
+  }
+}
+
+const basicHelperManagerFactory = (owner: Owner) => new BasicHelperManager(owner);
+
+export function helper<T, U>(helperFunction: Helper<T, U>) {
+  setHelperManager(basicHelperManagerFactory, helperFunction);
+
+  return helperFunction;
 }

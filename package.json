@@ -1,52 +1,97 @@
 {
   "name": "glimmerx",
   "version": "0.1.0",
-  "description": "Lightweight runtime for Glimmer components",
-  "main": "dist/index.js",
-  "repository": "https://github.com/tomdale/glimmer-lite",
-  "author": "Tom Dale <tom@tomdale.net>",
-  "license": "MIT",
   "private": true,
+  "description": "Lightweight runtime for Glimmer components",
+  "repository": "https://github.com/glimmerjs/glimmer-experimental",
+  "license": "MIT",
+  "author": "Tom Dale <tom@tomdale.net>",
+  "main": "dist/index.js",
+  "workspaces": [
+    "packages/examples/*",
+    "packages/@glimmerx/*"
+  ],
   "scripts": {
     "build": "scripts/build.js",
     "format": "prettier --write 'packages/**/*.{js,ts}'",
-    "prepublishOnly": "scripts/build.js",
-    "start": "webpack-dev-server",
-    "test": "yarn lint && testem ci && yarn test:node",
-    "test:watch": "testem",
     "lint": "eslint . --cache --ext .js,.ts",
-    "test:node": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules",
-    "storybook": "yarn build && yarn workspace example-app storybook"
+    "prepublishOnly": "scripts/build.js",
+    "problems": "tsc -p tsconfig.json --noEmit",
+    "start": "webpack-dev-server",
+    "storybook": "yarn build && yarn workspace example-app storybook",
+    "test": "yarn lint && testem ci && yarn test:babel-plugins",
+    "test:babel-plugins": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-plugin-component-templates/test packages/@glimmerx/eslint-plugin/test/lib/rules",
+    "test:ember": "yarn workspace basic-addon ember try:one",
+    "test:playground": "yarn workspace glimmerx-playground test",
+    "test:watch": "testem"
   },
-  "workspaces": [
-    "packages/*",
-    "packages/@glimmerx/*"
-  ],
+  "browserslist": {
+    "production": [
+      "last 2 Edge versions",
+      "last 2 Chrome versions",
+      "last 2 Firefox versions",
+      "last 2 Safari versions"
+    ],
+    "development": [
+      "last 1 Chrome version",
+      "last 1 Firefox version",
+      "last 1 Safari version"
+    ]
+  },
   "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/preset-typescript": "^7.3.3",
-    "@types/qunit": "^2.9.0",
-    "@typescript-eslint/eslint-plugin": "^2.2.0",
-    "@typescript-eslint/parser": "^2.2.0",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-typescript": "^7.9.0",
+    "@glimmer/babel-plugin-glimmer-env": "2.0.0-beta.7",
+    "@types/qunit": "^2.9.1",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
     "babel-loader": "^8.0.6",
-    "eslint": "^5.10.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "fs-extra": "^8.1.0",
-    "lerna": "^3.15.0",
-    "prettier": "^1.18.2",
-    "qunit": "^2.9.2",
-    "testem": "^2.16.0",
-    "ts-loader": "^6.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "fs-extra": "^9.0.0",
+    "lerna": "^3.20.2",
+    "prettier": "^2.0.4",
+    "qunit": "^2.9.3",
+    "release-it": "^13.5.1",
+    "release-it-lerna-changelog": "^2.1.2",
+    "release-it-yarn-workspaces": "^1.3.0",
+    "testem": "^3.0.3",
+    "ts-loader": "^6.2.2",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "~3.2.4",
-    "webpack": "^4.34.0",
-    "webpack-cli": "^3.3.4",
-    "webpack-dev-server": "^3.7.1"
+    "typescript": "~3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "hooks": {
+      "after:bump": "yarn build"
+    },
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      },
+      "release-it-yarn-workspaces": true
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    },
+    "npm": false
   },
   "volta": {
-    "node": "12.10.0"
+    "node": "12.10.0",
+    "yarn": "1.22.4"
   }
 }

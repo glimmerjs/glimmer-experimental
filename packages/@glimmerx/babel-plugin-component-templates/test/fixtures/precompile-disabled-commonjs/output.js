@@ -1,8 +1,6 @@
 "use strict";
 
-var _glimmerInlinePrecompile = _interopRequireDefault(require("glimmer-inline-precompile"));
-
-var _core = require("@glimmerx/core");
+var _core = require("@glimmer/core");
 
 var _component = _interopRequireDefault(require("@glimmerx/component"));
 
@@ -14,21 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class MyComponent extends _component.default {}
 
-(0, _core.setComponentTemplate)(MyComponent, (() => {
-  const compiledTemplate = (0, _glimmerInlinePrecompile.default)`<h1>Hello world</h1><OtherComponent/>`;
-
-  compiledTemplate.meta.scope = () => ({
-    OtherComponent: _OtherComponent.default
-  });
-
-  return compiledTemplate;
-})())
-const MyComponentExpression = (0, _core.setComponentTemplate)(class extends _component.default {}, (() => {
-  const compiledTemplate = (0, _glimmerInlinePrecompile.default)`<YetAnotherComponent/>`;
-
-  compiledTemplate.meta.scope = () => ({
-    YetAnotherComponent: _YetAnotherComponent.default
-  });
-
-  return compiledTemplate;
-})());
+(0, _core.setComponentTemplate)((0, _core.createTemplate)({
+  OtherComponent: _OtherComponent.default
+}, `<h1>Hello world</h1><OtherComponent/>`), MyComponent)
+const MyComponentExpression = (0, _core.setComponentTemplate)((0, _core.createTemplate)({
+  YetAnotherComponent: _YetAnotherComponent.default
+}, `<YetAnotherComponent/>`), class extends _component.default {});

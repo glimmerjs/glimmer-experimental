@@ -1,18 +1,34 @@
 {
   "name": "@glimmerx/modifier",
-  "version": "0.1.10",
+  "version": "0.2.3",
   "description": "Modifier Functionality",
+  "keywords": [
+    "ember-addon"
+  ],
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
-  "repository": "https://github.com/tomdale/glimmer-lite",
+  "repository": "https://github.com/glimmerjs/glimmer-experimental",
   "author": "Tom Dale <tom@tomdale.net>",
   "license": "MIT",
   "private": false,
+  "files": [
+    "dist/**/*",
+    "addon/**/*",
+    "ember-addon-main.js"
+  ],
   "scripts": {
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/interfaces": "^0.41.0",
-    "@simple-dom/interface": "^1.4.0"
+    "@glimmer/core": "2.0.0-beta.7",
+    "@glimmer/modifier": "2.0.0-beta.7",
+    "ember-cli-babel": "^7.18.0"
+  },
+  "volta": {
+    "node": "12.10.0",
+    "yarn": "1.22.4"
+  },
+  "ember-addon": {
+    "main": "ember-addon-main.js"
   }
 }

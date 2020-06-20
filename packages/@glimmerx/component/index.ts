@@ -1,4 +1,6 @@
-export { default } from './src/Component';
-export { hbs } from './src/hbs';
-
+export { default } from '@glimmer/component';
 export { tracked } from '@glimmer/tracking';
+
+export function hbs(_strings: TemplateStringsArray) {
+  throw new Error('hbs template should have been compiled at build time');
+}

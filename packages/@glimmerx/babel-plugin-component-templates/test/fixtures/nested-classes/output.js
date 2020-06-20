@@ -1,28 +1,28 @@
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import Component from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 
 class MyComponent extends Component {
   get ChildComponent() {
-    return _setComponentTemplate(class extends Component {}, {
-      id: "cgsNpVe/",
-      block: "{\"symbols\":[],\"statements\":[[7,\"h2\",true],[9],[0,\"Goodbye world\"],[5,\"MyComponent\",[],[[],[]],null],[10]],\"hasEval\":false}",
+    return _setComponentTemplate({
+      id: "z5SJXwaW",
+      block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"Goodbye world\"],[7,\"MyComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
       meta: {
         scope: () => ({
           MyComponent: MyComponent
         })
       }
-    });
+    }, class extends Component {});
   }
 
 }
 
-_setComponentTemplate(MyComponent, {
-  id: "8f0eBcY+",
-  block: "{\"symbols\":[],\"statements\":[[7,\"h1\",true],[9],[0,\"Hello world\"],[5,\"OtherComponent\",[],[[],[]],null],[10]],\"hasEval\":false}",
+_setComponentTemplate({
+  id: "O/CNYunf",
+  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[7,\"OtherComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       OtherComponent: OtherComponent
     })
   }
-})
+}, MyComponent)

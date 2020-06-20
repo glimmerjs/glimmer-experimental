@@ -1,27 +1,15 @@
-import _hbs from "glimmer-inline-precompile";
-import { setComponentTemplate as _setComponentTemplate } from "@glimmerx/core";
+import { createTemplate as _createTemplate } from "@glimmer/core";
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import Component from '@glimmerx/component';
 import OtherComponent from './OtherComponent';
 import YetAnotherComponent from './YetAnotherComponent';
 
 class MyComponent extends Component {}
 
-_setComponentTemplate(MyComponent, (() => {
-  const compiledTemplate = _hbs`<h1>Hello world</h1><OtherComponent/>`;
+_setComponentTemplate(_createTemplate({
+  OtherComponent: OtherComponent
+}, `<h1>Hello world</h1><OtherComponent/>`), MyComponent)
 
-  compiledTemplate.meta.scope = () => ({
-    OtherComponent: OtherComponent
-  });
-
-  return compiledTemplate;
-})())
-
-const MyComponentExpression = _setComponentTemplate(class extends Component {}, (() => {
-  const compiledTemplate = _hbs`<YetAnotherComponent/>`;
-
-  compiledTemplate.meta.scope = () => ({
-    YetAnotherComponent: YetAnotherComponent
-  });
-
-  return compiledTemplate;
-})());
+const MyComponentExpression = _setComponentTemplate(_createTemplate({
+  YetAnotherComponent: YetAnotherComponent
+}, `<YetAnotherComponent/>`), class extends Component {});
