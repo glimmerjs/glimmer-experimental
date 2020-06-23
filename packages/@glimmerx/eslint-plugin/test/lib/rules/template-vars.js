@@ -192,7 +192,10 @@ ruleTester.run('template-vars', rule, {
               If check should not cause a failure
             {{/if}}
             {{#each @items key="@index" as |item| }}
-              Neither Should each
+              Neither should each
+              {{#with item.name as |name|}}
+                Neither should with
+              {{/with}}
             {{/each}}
           \`;
           method() {

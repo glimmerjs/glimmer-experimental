@@ -21,7 +21,7 @@ module.exports = {
       {
         type: 'object',
         properties: {
-          // ['if', 'each', 'unless', 'has-block', 'yield'] will always be 'nativeTokens'
+          // ['if', 'each', 'unless', 'has-block', 'yield', 'component, 'with'] will always be 'nativeTokens'
           // but you may add more via this configuration. One use-case is if a token is added to the
           // Javascript code implicitly (such as via a babel transform)
           nativeTokens: {
@@ -36,7 +36,7 @@ module.exports = {
     ],
   },
   create(context) {
-    const defaultNativeTokens = ['if', 'each', 'unless', 'has-block', 'yield', 'component'];
+    const defaultNativeTokens = ['if', 'each', 'unless', 'has-block', 'yield', 'component', 'with'];
     let isGlimmerSfc = false;
     let hbsImportId;
 
