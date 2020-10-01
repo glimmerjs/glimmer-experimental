@@ -22,13 +22,13 @@ Components are defined as classes with an inline template:
 ```js
 // src/MyComponent.js
 import Component from '@glimmerx/component';
-import Button from './Button'
+import Button from './Button';
 
 export default class MyComponent extends Component {
-    static template = hbs`
+  static template = hbs`
       <h1>Hello world!</h1>
       <Button @title="Click me" />
-    `
+    `;
 }
 ```
 
@@ -66,6 +66,7 @@ If using ESLint, you will also want to install / use the plugin provided, as the
 ```
 yarn add -D @glimmerx/eslint-plugin
 ```
+
 For setup/configuration of the plugin, please view the [Plugin Readme](packages/@glimmerx/eslint-plugin)
 
 ## API
@@ -73,12 +74,14 @@ For setup/configuration of the plugin, please view the [Plugin Readme](packages/
 ### `@glimmerx/component`
 
 #### `Component`
+
 `import Component from '@glimmerx/component'`
 
 The Glimmer component base class. Does not have any interesting API to speak
 of itself.
 
 #### `hbs`
+
 `import { hbs } from '@glimmerx/component'`
 
 A tagged template function used to specify component templates. The `hbs`
@@ -88,9 +91,9 @@ to be valid.
 ```js
 import Component, { hbs } from '@glimmerx/component';
 export default class extends Component {
-    static template = hbs`
+  static template = hbs`
       <button>Click me</button>
-    `
+    `;
 }
 ```
 
@@ -99,40 +102,42 @@ This example **does not** work:
 ```js
 import Component, { hbs } from '@glimmerx/component';
 export default class extends Component {
-    // Doesn't work!
-    //   * Property is not called `template`
-    //   * Property is not static
-    myTemplate = hbs`
+  // Doesn't work!
+  //   * Property is not called `template`
+  //   * Property is not static
+  myTemplate = hbs`
       <button>Click me</button>
-    `
+    `;
 }
 ```
 
 #### `tracked`
+
 `import { tracked } from '@glimmerx/component'`
 
 Decorator that marks a class property as tracked. For more information, see
-[Change Tracking with Tracked Properties](https://glimmerjs.com/guides/tracked-properties).
+[Change Tracking with Tracked Properties](https://guides.emberjs.com/release/in-depth-topics/autotracking-in-depth/).
 
 ```js
 import Component, { hbs, tracked } from '@glimmerx/component';
 export default class extends Component {
-    static template = hbs`{{this.count}}`;
+  static template = hbs`{{this.count}}`;
 
-    @tracked count = 0;
+  @tracked count = 0;
 
-    constructor() {
-      super(...arguments);
-      setInterval(() => {
-        this.count++;
-      }, 1000)
-    }
+  constructor() {
+    super(...arguments);
+    setInterval(() => {
+      this.count++;
+    }, 1000);
+  }
 }
 ```
 
 ### `@glimmerx/helper`
 
 #### `helper`
+
 Wrapper function to tag functions as helpers
 
 `import { helper } from @glimmerx/helper`
@@ -145,80 +150,83 @@ const myHelper = helper(([name], { greeting }) => {
   return `${greeting} ${name}`;
 });
 
-
 export default class extends Component {
-    static template = hbs`
+  static template = hbs`
       {{myHelper "foo" greeting="Hello"}}
-    `
+    `;
 }
 ```
 
 ### `@glimmerx/service`
 
 #### `service`
+
 `import { service } from '@glimmerx/service';`
 
 Decorator to inject services into a component.
 
 ```js
-  import Component, { hbs } from '@glimmerx/component';
-  import { service } from '@glimmerx/service';
-  export default class extends Component {
-      static template = hbs`
+import Component, { hbs } from '@glimmerx/component';
+import { service } from '@glimmerx/service';
+export default class extends Component {
+  static template = hbs`
         {{this.currentLocale}}
-      `
-      @service locale;
-      get currentLocale() {
-        return this.locale.currentLocale;
-      }
+      `;
+  @service locale;
+  get currentLocale() {
+    return this.locale.currentLocale;
   }
+}
 ```
 
 ### `@glimmerx/modifier`
 
 #### `on`
+
 `import { on } from '@glimmerx/modifier'`
 
 On modifier that allows components to add listeners for an dom event on an element
 
 ```js
-  import Component, { hbs } from '@glimmerx/component';
-  import { on } from '@glimmerx/modifier';
-  export default class extends Component {
-      static template = hbs`
+import Component, { hbs } from '@glimmerx/component';
+import { on } from '@glimmerx/modifier';
+export default class extends Component {
+  static template = hbs`
         <button {{on "click" this.buttonClicked}}>Click Me!</button>
-      `
+      `;
 
-      buttonClicked() {
-        console.log('The Button is clicked');
-      }
+  buttonClicked() {
+    console.log('The Button is clicked');
   }
+}
 ```
 
 #### `action`
+
 `import { action } from '@glimmerx/modifier'`
 
 A decorator to bind a function to a component instance. This is required to set the `this` scope for a passed in function to any modifier.
 
 ```js
-  import Component, { hbs, tracked } from '@glimmerx/component';
-  import { on, action } from '@glimmerx/modifier';
-  export default class extends Component {
-      static template = hbs`
+import Component, { hbs, tracked } from '@glimmerx/component';
+import { on, action } from '@glimmerx/modifier';
+export default class extends Component {
+  static template = hbs`
         <button {{on "click" this.incrementCounter}}>Counter: {{this.count}}</button>
-      `
-      @tracked count = 1;
+      `;
+  @tracked count = 1;
 
-      @action
-      incrementCounter() {
-        this.count++;
-      }
+  @action
+  incrementCounter() {
+    this.count++;
   }
+}
 ```
 
 ### `@glimmerx/core`
 
 #### `renderComponent`
+
 `import { renderComponent } from '@glimmerx/core'`
 
 Renders a component into the DOM. The first argument is a Glimmer component
@@ -244,8 +252,8 @@ class OtherComponent extends Component {
 renderComponent(MyComponent, {
   element: document.getElementById('app'),
   data: {
-    say: "Hello World"
-  }
+    say: 'Hello World',
+  },
 });
 ```
 
@@ -257,14 +265,15 @@ import LocaleService from './services/LocaleService';
 renderComponent(MyComponent, {
   element: document.getElementById('app'),
   services: {
-    locale: new LocaleService('en_US')
-  }
+    locale: new LocaleService('en_US'),
+  },
 });
 ```
 
 ### `@glimmerx/storybook`
 
 #### `storiesOf`
+
 `import { storiesOf } from '@glimmerx/storybook'`
 
 Integrates Storybook into your host GlimmerJs application.
@@ -275,6 +284,7 @@ import SampleComponent from '../src/SampleComponent';
 
 storiesOf('Sample', module).add('SampleComponent', () => hbs`<SampleComponent />`);
 ```
+
 For more details refer [README](./packages/@glimmerx/storybook/README.md).
 
 ## Experimental Features
