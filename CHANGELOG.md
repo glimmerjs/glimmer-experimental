@@ -1,3 +1,23 @@
+## v0.2.4 (2020-10-01)
+
+#### :bug: Bug Fix
+* `@glimmerx/blueprint`
+  * [#84](https://github.com/glimmerjs/glimmer-experimental/pull/84) Update blueprints ([@chadhietala](https://github.com/chadhietala))
+* `@glimmerx/eslint-plugin`
+  * [#76](https://github.com/glimmerjs/glimmer-experimental/pull/76) Update ESLint plugin to handle Handlebar's native #with token ([@erinsinger93](https://github.com/erinsinger93))
+
+#### :memo: Documentation
+* [#85](https://github.com/glimmerjs/glimmer-experimental/pull/85) Update change tracking reference ([@chadhietala](https://github.com/chadhietala))
+
+#### :house: Internal
+* [#73](https://github.com/glimmerjs/glimmer-experimental/pull/73) Add hook for release-it to run build before releasing ([@chiragpat](https://github.com/chiragpat))
+
+#### Committers: 3
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+- Erin Singer ([@erinsinger93](https://github.com/erinsinger93))
+
+
 ## v0.2.3 (2020-05-18)
 
 #### :house: Internal
