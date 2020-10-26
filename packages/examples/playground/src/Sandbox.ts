@@ -7,7 +7,8 @@ function renderSnippet(snippet: string): HTMLElement {
 
   const { default: component, services } = evalSnippet(snippet);
 
-  renderComponent(component, { element, services });
+  // Call renderComponent withing a Promise resolve so that it doesn't get autotracked
+  Promise.resolve().then(() => renderComponent(component, { element, services }));
 
   return element;
 }

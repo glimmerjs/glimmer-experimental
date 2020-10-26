@@ -11,8 +11,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class MyComponent extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "wvnbwYrJ",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello \"],[7,\"ExternalComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "KK5UHDcn",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello \"],[8,\"ExternalComponent\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       ExternalComponent: _somewhere.OtherComponent
@@ -23,8 +23,8 @@ class MyComponent extends _component.default {}
 class OtherComponent extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "wvnbwYrJ",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello \"],[7,\"ExternalComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "KK5UHDcn",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello \"],[8,\"ExternalComponent\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       ExternalComponent: _somewhere.OtherComponent

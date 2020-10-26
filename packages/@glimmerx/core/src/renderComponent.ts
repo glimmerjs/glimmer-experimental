@@ -26,9 +26,9 @@ export default function renderComponent(
     return glimmerJsRenderComponent(ComponentClass, optionsOrElement);
   }
 
-  const { element, args, services } = optionsOrElement;
+  const { element, args, services, rehydrate } = optionsOrElement;
 
   const owner = new Owner(services ?? {});
 
-  return glimmerJsRenderComponent(ComponentClass, { element, args, owner });
+  return glimmerJsRenderComponent(ComponentClass, { element, args, owner, rehydrate });
 }
