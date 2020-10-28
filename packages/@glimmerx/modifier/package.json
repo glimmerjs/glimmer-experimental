@@ -20,8 +20,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/core": "2.0.0-beta.7",
-    "@glimmer/modifier": "2.0.0-beta.7",
+    "@glimmer/core": "2.0.0-beta.11",
+    "@glimmer/modifier": "2.0.0-beta.11",
     "ember-cli-babel": "^7.18.0"
   },
   "volta": {

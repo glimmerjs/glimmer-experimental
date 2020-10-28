@@ -9,15 +9,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class Class1Declaration extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "hzw7dJc0",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "9bMgfwbA",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
 }, Class1Declaration)
 const Class1Expression = (0, _core.setComponentTemplate)({
-  id: "hzw7dJc0",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "9bMgfwbA",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
@@ -26,15 +26,15 @@ const Class1Expression = (0, _core.setComponentTemplate)({
 class Class2Declaration extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "85zTPBgs",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"\\n    Goodbye world\\n  \"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "+VA0BbEt",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h2\"],[12],[2,\"\\n    Goodbye world\\n  \"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
 }, Class2Declaration)
 const Class2Expression = (0, _core.setComponentTemplate)({
-  id: "d1fbtzoG",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"\\n    Goodbye world\"],[7,\"Class1Expression\",[],[[],[]],null],[1,1,0,0,\"\\n  \"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "U1swtToI",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h2\"],[12],[2,\"\\n    Goodbye world\"],[8,\"Class1Expression\",[],[[],[]],null],[2,\"\\n  \"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       Class1Expression: Class1Expression

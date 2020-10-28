@@ -5,8 +5,8 @@ import OtherComponent from './OtherComponent';
 class MyComponent extends Component {
   get ChildComponent() {
     return _setComponentTemplate({
-      id: "z5SJXwaW",
-      block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"Goodbye world\"],[7,\"MyComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
+      id: "+zgtSPG4",
+      block: "{\"symbols\":[],\"statements\":[[10,\"h2\"],[12],[2,\"Goodbye world\"],[8,\"MyComponent\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
       meta: {
         scope: () => ({
           MyComponent: MyComponent
@@ -18,8 +18,8 @@ class MyComponent extends Component {
 }
 
 _setComponentTemplate({
-  id: "O/CNYunf",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[7,\"OtherComponent\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "9oyaIEZ1",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[8,\"OtherComponent\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       OtherComponent: OtherComponent

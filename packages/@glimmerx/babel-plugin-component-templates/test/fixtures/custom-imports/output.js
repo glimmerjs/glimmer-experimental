@@ -5,16 +5,16 @@ import Component from '@glimmerx/component';
 class Class1Declaration extends Component {}
 
 _dangerouslySetComponentTemplate({
-  id: "hzw7dJc0",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "9bMgfwbA",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
 }, Class1Declaration)
 
 const Class1Expression = _dangerouslySetComponentTemplate({
-  id: "hzw7dJc0",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h1\",true],[10],[1,1,0,0,\"Hello world\"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "9bMgfwbA",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
@@ -23,16 +23,16 @@ const Class1Expression = _dangerouslySetComponentTemplate({
 class Class2Declaration extends Component {}
 
 _dangerouslySetComponentTemplate({
-  id: "85zTPBgs",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"\\n    Goodbye world\\n  \"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "+VA0BbEt",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h2\"],[12],[2,\"\\n    Goodbye world\\n  \"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({})
   }
 }, Class2Declaration)
 
 const Class2Expression = _dangerouslySetComponentTemplate({
-  id: "64616wXU",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h2\",true],[10],[1,1,0,0,\"\\n    Goodbye world\"],[7,\"Class2Declaration\",[],[[],[]],null],[1,1,0,0,\"\\n  \"],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "uIjvs0yQ",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h2\"],[12],[2,\"\\n    Goodbye world\"],[8,\"Class2Declaration\",[],[[],[]],null],[2,\"\\n  \"],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       Class2Declaration: Class2Declaration
@@ -41,8 +41,8 @@ const Class2Expression = _dangerouslySetComponentTemplate({
 }, class extends Component {});
 
 const TOComponent = _dangerouslySetComponentTemplate({
-  id: "iXWF5ni9",
-  block: "{\"symbols\":[],\"statements\":[[9,\"h3\",true],[10],[1,1,0,0,\"Hello again world\"],[7,\"Class2Expression\",[],[[],[]],null],[11]],\"hasEval\":false,\"upvars\":[]}",
+  id: "tsv3hFVE",
+  block: "{\"symbols\":[],\"statements\":[[10,\"h3\"],[12],[2,\"Hello again world\"],[8,\"Class2Expression\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
   meta: {
     scope: () => ({
       Class2Expression: Class2Expression

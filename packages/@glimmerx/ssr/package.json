@@ -15,8 +15,8 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/interfaces": "^0.50.1",
-    "@glimmer/ssr": "2.0.0-beta.7",
+    "@glimmer/interfaces": "0.62.4",
+    "@glimmer/ssr": "2.0.0-beta.11",
     "@glimmerx/core": "^0.2.5"
   },
   "volta": {
