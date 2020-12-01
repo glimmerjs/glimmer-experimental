@@ -1,19 +1,18 @@
 {
   "name": "rehydration-example-app",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "Example application using rehydration with @glimmerx packages",
   "main": "dist/commonjs/index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
   "author": "Chirag Patel",
   "license": "MIT",
   "private": true,
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
-    "@glimmerx/core": "^0.2.5",
-    "@glimmerx/component": "^0.2.5",
-    "@glimmerx/modifier": "^0.2.5",
-    "@glimmerx/ssr": "^0.2.5"
+    "@glimmerx/core": "^0.3.0",
+    "@glimmerx/component": "^0.3.0",
+    "@glimmerx/modifier": "^0.3.0",
+    "@glimmerx/ssr": "^0.3.0"
   },
   "volta": {
     "node": "12.10.0",

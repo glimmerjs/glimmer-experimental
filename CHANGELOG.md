@@ -1,3 +1,13 @@
+## v0.3.0 (2020-12-01)
+
+#### :rocket: Enhancement
+* `@glimmerx/babel-plugin-component-templates`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/ssr`, `@glimmerx/storybook`, `examples`
+  * [#87](https://github.com/glimmerjs/glimmer-experimental/pull/87) Adding support for rehydration and some example apps  ([@chiragpat](https://github.com/chiragpat))
+
+#### Committers: 1
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+
+
 
 
 ## v0.2.4 (2020-10-01)
