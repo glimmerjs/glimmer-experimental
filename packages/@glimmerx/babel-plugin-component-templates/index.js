@@ -310,12 +310,10 @@ module.exports = function (babel, options) {
     const templateScopeTokens = getTemplateTokens(templateSource);
 
     const filtered = [];
-    const parentScope = path.scope.getProgramParent();
-
-    Object.values(parentScope.bindings).forEach((binding) => {
-      binding.reference(path);
-
-      if (templateScopeTokens.includes(binding.identifier.name)) {
+    templateScopeTokens.forEach((token) => {
+      const binding = path.scope.getBinding(token);
+      if (binding) {
+        binding.reference(path);
         filtered.push(binding.identifier.name);
       }
     });

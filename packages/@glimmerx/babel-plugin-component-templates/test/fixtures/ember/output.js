@@ -12,9 +12,9 @@ _setComponentTemplate({
   block: "{\"symbols\":[],\"statements\":[[11,\"h1\"],[4,[38,0],null,null],[12],[2,\"Hello world \"],[1,[34,1]],[8,\"MySubComponent\",[],[[],[]],[[\"default\"],[{\"statements\":[[8,\"MaybeComponent\",[],[[],[]],null]],\"parameters\":[]}]]],[13]],\"hasEval\":false,\"upvars\":[\"maybeModifier\",\"unknownValue\"]}",
   meta: {
     scope: () => ({
+      maybeModifier: maybeModifier,
       unknownValue: unknownValue,
-      MaybeComponent: MaybeComponent,
-      maybeModifier: maybeModifier
+      MaybeComponent: MaybeComponent
     })
   }
 }, MyComponent)
