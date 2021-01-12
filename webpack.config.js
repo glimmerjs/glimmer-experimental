@@ -2,7 +2,7 @@ const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const commonBabelPlugins = [
-  ['@glimmer/babel-plugin-glimmer-env', { DEBUG: true }],
+  ['@glimmer/babel-plugin-glimmer-env', { DEBUG: false }],
   '@glimmerx/babel-plugin-component-templates',
   ['@babel/plugin-proposal-decorators', { legacy: true }],
   '@babel/plugin-proposal-class-properties',

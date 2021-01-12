@@ -24,13 +24,11 @@ interface BasicHelperBucket {
 }
 
 class BasicHelperManager implements HelperManager<BasicHelperBucket> {
-  capabilities = helperCapabilities('glimmerjs-2.0.0');
+  capabilities = helperCapabilities('3.23', {
+    hasValue: true,
+  });
 
-  constructor(private owner: Owner) {}
-
-  getValue({ fn, args, ownerProxy }: BasicHelperBucket): unknown {
-    return fn(args.positional, args.named, { services: ownerProxy });
-  }
+  constructor(private owner: Owner | undefined) {}
 
   createHelper(fn: Helper, args: TemplateArgs) {
     const { owner } = this;
@@ -39,7 +37,7 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
       {},
       {
         get(_target, key) {
-          return owner.lookup({ type: 'service', name: (key as unknown) as string });
+          return owner && owner.lookup({ type: 'service', name: (key as unknown) as string });
         },
       }
     );
@@ -50,9 +48,17 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
       ownerProxy,
     };
   }
+
+  getValue({ fn, args, ownerProxy }: BasicHelperBucket): unknown {
+    return fn(args.positional, args.named, { services: ownerProxy });
+  }
+
+  getDebugName(fn: Function) {
+    return fn.name || '(anonymous function)';
+  }
 }
 
-const basicHelperManagerFactory = (owner: Owner) => new BasicHelperManager(owner);
+const basicHelperManagerFactory = (owner: Owner | undefined) => new BasicHelperManager(owner);
 
 export function helper<T, U>(helperFunction: Helper<T, U>) {
   setHelperManager(basicHelperManagerFactory, helperFunction);

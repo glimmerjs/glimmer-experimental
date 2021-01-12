@@ -2,9 +2,9 @@ import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
 import Component from '@glimmerx/component';
 
 const MyComponent = _setComponentTemplate({
-  id: "9bMgfwbA",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({})
-  }
+  "id": "UnWFMClF",
+  "block": "[[[10,\"h1\"],[12],[1,\"Hello world\"],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": null,
+  "isStrictMode": true
 }, class extends Component {});

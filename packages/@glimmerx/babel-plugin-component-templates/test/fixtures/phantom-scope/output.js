@@ -6,11 +6,9 @@ import PhantomComponent from './PhantomComponent';
 class MyComponent extends Component {}
 
 _setComponentTemplate({
-  id: "6F9NpduU",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world \"],[8,\"OtherComponent\",[],[[],[]],null],[2,\" \"],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({
-      OtherComponent: OtherComponent
-    })
-  }
+  "id": "vVhfCDf6",
+  "block": "[[[10,\"h1\"],[12],[1,\"Hello world \"],[8,[32,0],null,null,null],[1,\" \"],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": () => [OtherComponent],
+  "isStrictMode": true
 }, MyComponent)
