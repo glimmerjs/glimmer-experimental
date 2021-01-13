@@ -6,11 +6,11 @@ import OtherComponent from './OtherComponent';
 import YetAnotherComponent from './YetAnotherComponent';
 
 const template1 = _setComponentTemplate(_createTemplate({
-  OtherComponent: OtherComponent,
-  _t: _t
+  _t: _t,
+  OtherComponent: OtherComponent
 }, `{{_t "bar"}}<h1>Hello world</h1><OtherComponent/>`), _templateOnlyComponent());
 
 const template2 = _setComponentTemplate(_createTemplate({
-  YetAnotherComponent: YetAnotherComponent,
-  _t: _t
+  _t: _t,
+  YetAnotherComponent: YetAnotherComponent
 }, `{{_t "foo"}}<YetAnotherComponent/>`), _templateOnlyComponent());
