@@ -6,23 +6,21 @@ function root() {
     class OtherComponent extends Component {}
 
     _setComponentTemplate({
-      id: "L9WxEO3m",
-      block: "{\"symbols\":[],\"statements\":[[2,\"Hello World\"]],\"hasEval\":false,\"upvars\":[]}",
-      meta: {
-        scope: () => ({})
-      }
+      "id": "JlcONgyA",
+      "block": "[[[1,\"Hello World\"]],[],false,[]]",
+      "moduleName": "(unknown template module)",
+      "scope": null,
+      "isStrictMode": true
     }, OtherComponent)
 
     class MyComponent extends Component {}
 
     _setComponentTemplate({
-      id: "X+3KCppa",
-      block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[8,\"OtherComponent\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
-      meta: {
-        scope: () => ({
-          OtherComponent: OtherComponent
-        })
-      }
+      "id": "L6QsX14w",
+      "block": "[[[10,\"h1\"],[12],[8,[32,0],null,null,null],[13]],[],false,[]]",
+      "moduleName": "(unknown template module)",
+      "scope": () => [OtherComponent],
+      "isStrictMode": true
     }, MyComponent)
   }
 }

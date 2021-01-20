@@ -5,11 +5,9 @@ import Component from '@glimmerx/component';
 class MyComponent extends Component {}
 
 _setComponentTemplate({
-  id: "tBsr36lW",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[1,[30,[36,0],[\"foo\"],null]],[13]],\"hasEval\":false,\"upvars\":[\"_t\"]}",
-  meta: {
-    scope: () => ({
-      _t: _t
-    })
-  }
+  "id": "BFMB8fiz",
+  "block": "[[[10,\"h1\"],[12],[1,[28,[32,0],[\"foo\"],null]],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": () => [_t],
+  "isStrictMode": true
 }, MyComponent)

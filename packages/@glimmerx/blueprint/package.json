@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/glimmerjs/glimmer-experimental#readme",
   "dependencies": {
-    "@glimmer/blueprint": "2.0.0-beta.11",
+    "@glimmer/blueprint": "2.0.0-beta.12",
     "ember-cli-string-utils": "^1.1.0",
     "walk-sync": "^2.0.2"
   },

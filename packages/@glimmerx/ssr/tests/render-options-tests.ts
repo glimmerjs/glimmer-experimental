@@ -1,6 +1,4 @@
-import Component from '@glimmerx/component';
-import { setComponentTemplate } from '@glimmerx/core';
-import { compileTemplate } from '@glimmerx/core/tests/utils';
+import Component, { hbs } from '@glimmerx/component';
 import HTMLSerializer from '@simple-dom/serializer';
 import voidMap from '@simple-dom/void-map';
 import { SerializableNode } from '@simple-dom/interface';
@@ -8,7 +6,9 @@ import { renderToString, RenderOptions } from '..';
 
 QUnit.module('@glimmer/ssr rendering', () => {
   QUnit.test('options.serializer', async (assert) => {
-    class MyComponent extends Component {}
+    class MyComponent extends Component {
+      static template = hbs`<h1>Hello World</h1>`;
+    }
 
     class CustomHTMLSerializer extends HTMLSerializer {
       text(text: SerializableNode) {
@@ -17,8 +17,6 @@ QUnit.module('@glimmer/ssr rendering', () => {
     }
 
     const options: RenderOptions = { serializer: new CustomHTMLSerializer(voidMap) };
-
-    setComponentTemplate(compileTemplate(`<h1>Hello World</h1>`), MyComponent);
 
     const output = await renderToString(MyComponent, options);
 

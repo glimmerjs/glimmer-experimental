@@ -9,5 +9,5 @@ export function foo(): Dict<unknown> {
 }
 
 export class MyComponent extends Component {
-  static template = hbs`<h1 {{maybeModifier}}>Hello world {{unknownValue}}<MySubComponent><MaybeComponent /></MySubComponent></h1>`;
+  static template = hbs`<h1 {{maybeModifier}}>Hello world {{unknownValue}}<MaybeComponent /></h1>`;
 }

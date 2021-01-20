@@ -11,23 +11,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class MyComponent extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "KK5UHDcn",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello \"],[8,\"ExternalComponent\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({
-      ExternalComponent: _somewhere.OtherComponent
-    })
-  }
+  "id": "rUcvMrKh",
+  "block": "[[[10,\"h1\"],[12],[1,\"Hello \"],[8,[32,0],null,null,null],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": () => [_somewhere.OtherComponent],
+  "isStrictMode": true
 }, MyComponent)
 
 class OtherComponent extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "KK5UHDcn",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello \"],[8,\"ExternalComponent\",[],[[],[]],null],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({
-      ExternalComponent: _somewhere.OtherComponent
-    })
-  }
+  "id": "rUcvMrKh",
+  "block": "[[[10,\"h1\"],[12],[1,\"Hello \"],[8,[32,0],null,null,null],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": () => [_somewhere.OtherComponent],
+  "isStrictMode": true
 }, OtherComponent)

@@ -7,12 +7,9 @@ import SecondPhantomComponent from './SecondPhantomComponent';
 class MyComponent extends Component {}
 
 _setComponentTemplate({
-  id: "rfDBNlmm",
-  block: "{\"symbols\":[\"SecondPhantomComponent\"],\"statements\":[[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Hello world \\n\"],[6,[37,0],null,null,[[\"default\"],[{\"statements\":[[2,\"            \"],[8,[32,1],[],[[],[]],null],[2,\"\\n            \"],[1,[32,1]],[2,\"\\n\"]],\"parameters\":[1]}]]],[2,\"        \"],[8,\"SecondPhantomComponent\",[],[[],[]],null],[2,\"\\n    \"],[13]],\"hasEval\":false,\"upvars\":[\"OtherComponent\"]}",
-  meta: {
-    scope: () => ({
-      OtherComponent: OtherComponent,
-      SecondPhantomComponent: SecondPhantomComponent
-    })
-  }
+  "id": "k3C9+Wms",
+  "block": "[[[1,\"\\n    \"],[10,\"h1\"],[12],[1,\"Hello world \\n\"],[6,[32,0],null,null,[[\"default\"],[[[[1,\"            \"],[8,[30,1],null,null,null],[1,\"\\n            \"],[1,[30,1]],[1,\"\\n\"]],[1]]]]],[1,\"        \"],[8,[32,1],null,null,null],[1,\"\\n    \"],[13]],[\"SecondPhantomComponent\"],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": () => [OtherComponent, SecondPhantomComponent],
+  "isStrictMode": true
 }, MyComponent)

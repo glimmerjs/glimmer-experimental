@@ -7,11 +7,9 @@ import SecondPhantomComponent from './SecondPhantomComponent';
 class MyComponent extends Component {}
 
 _setComponentTemplate({
-  id: "gcTTvmeO",
-  block: "{\"symbols\":[\"PhantomComponent\",\"SecondPhantomComponent\"],\"statements\":[[2,\"\\n    \"],[10,\"h1\"],[12],[2,\"Hello world \\n\"],[6,[37,0],null,null,[[\"default\"],[{\"statements\":[[2,\"            \"],[8,[32,2],[],[[],[]],null],[2,\"\\n            \"],[1,[32,2]],[2,\"\\n\"]],\"parameters\":[2]}]]],[2,\"        \"],[8,\"OtherComponent\",[],[[],[]],[[\"default\"],[{\"statements\":[[2,\"\\n            \"],[8,[32,1],[],[[],[]],null],[2,\" \\n            \"],[1,[32,1]],[2,\"\\n        \"]],\"parameters\":[1]}]]],[2,\"\\n    \"],[13]],\"hasEval\":false,\"upvars\":[\"OtherComponent\"]}",
-  meta: {
-    scope: () => ({
-      OtherComponent: OtherComponent
-    })
-  }
+  "id": "msP/XLKt",
+  "block": "[[[1,\"\\n    \"],[10,\"h1\"],[12],[1,\"Hello world \\n\"],[6,[32,0],null,null,[[\"default\"],[[[[1,\"            \"],[8,[30,1],null,null,null],[1,\"\\n            \"],[1,[30,1]],[1,\"\\n\"]],[1]]]]],[1,\"        \"],[8,[32,0],null,null,[[\"default\"],[[[[1,\"\\n            \"],[8,[30,2],null,null,null],[1,\" \\n            \"],[1,[30,2]],[1,\"\\n        \"]],[2]]]]],[1,\"\\n    \"],[13]],[\"SecondPhantomComponent\",\"PhantomComponent\"],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": () => [OtherComponent],
+  "isStrictMode": true
 }, MyComponent)

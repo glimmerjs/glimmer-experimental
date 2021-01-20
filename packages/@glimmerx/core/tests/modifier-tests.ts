@@ -1,13 +1,13 @@
 const { module, test } = QUnit;
 
 import { on, action } from '@glimmerx/modifier';
-import Component, { tracked } from '@glimmerx/component';
-import { renderComponent, setComponentTemplate, didRender } from '..';
-import { compileTemplate } from './utils';
+import Component, { tracked, hbs } from '@glimmerx/component';
+import { renderComponent, didRender } from '..';
 
 module('Modifier Tests', () => {
   test('Supports the on modifier', async (assert) => {
     class MyComponent extends Component {
+      static template = hbs`<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`;
       @tracked count = 0;
 
       @action
@@ -15,14 +15,6 @@ module('Modifier Tests', () => {
         this.count++;
       }
     }
-
-    setComponentTemplate(
-      compileTemplate(
-        `<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`,
-        () => ({ on })
-      ),
-      MyComponent
-    );
 
     const element = document.getElementById('qunit-fixture')!;
 
@@ -42,5 +34,22 @@ module('Modifier Tests', () => {
       `<button>Count: 1</button>`,
       'the component was rerendered'
     );
+  });
+
+  test('supports simple functions as modifiers', async (assert) => {
+    assert.expect(3);
+
+    function myModifier(element, arg1, arg2) {
+      assert.equal(arg1, 'foo');
+      assert.equal(arg2, 'bar');
+      assert.ok(element.classList.contains('test-element'));
+    }
+
+    class MyComponent extends Component {
+      static template = hbs`<div {{myModifier "foo" "bar"}} class="test-element"></div>`;
+    }
+
+    const element = document.getElementById('qunit-fixture')!;
+    await renderComponent(MyComponent, element);
   });
 });

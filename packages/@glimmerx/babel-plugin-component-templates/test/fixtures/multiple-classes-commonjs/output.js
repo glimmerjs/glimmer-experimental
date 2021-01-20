@@ -9,35 +9,33 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 class Class1Declaration extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "9bMgfwbA",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({})
-  }
+  "id": "UnWFMClF",
+  "block": "[[[10,\"h1\"],[12],[1,\"Hello world\"],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": null,
+  "isStrictMode": true
 }, Class1Declaration)
 const Class1Expression = (0, _core.setComponentTemplate)({
-  id: "9bMgfwbA",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h1\"],[12],[2,\"Hello world\"],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({})
-  }
+  "id": "UnWFMClF",
+  "block": "[[[10,\"h1\"],[12],[1,\"Hello world\"],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": null,
+  "isStrictMode": true
 }, class extends _component.default {});
 
 class Class2Declaration extends _component.default {}
 
 (0, _core.setComponentTemplate)({
-  id: "+VA0BbEt",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h2\"],[12],[2,\"\\n    Goodbye world\\n  \"],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({})
-  }
+  "id": "PN1+SdGD",
+  "block": "[[[10,\"h2\"],[12],[1,\"\\n    Goodbye world\\n  \"],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": null,
+  "isStrictMode": true
 }, Class2Declaration)
 const Class2Expression = (0, _core.setComponentTemplate)({
-  id: "U1swtToI",
-  block: "{\"symbols\":[],\"statements\":[[10,\"h2\"],[12],[2,\"\\n    Goodbye world\"],[8,\"Class1Expression\",[],[[],[]],null],[2,\"\\n  \"],[13]],\"hasEval\":false,\"upvars\":[]}",
-  meta: {
-    scope: () => ({
-      Class1Expression: Class1Expression
-    })
-  }
+  "id": "E/B0dLEA",
+  "block": "[[[10,\"h2\"],[12],[1,\"\\n    Goodbye world\"],[8,[32,0],null,null,null],[1,\"\\n  \"],[13]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": () => [Class1Expression],
+  "isStrictMode": true
 }, class extends _component.default {});
