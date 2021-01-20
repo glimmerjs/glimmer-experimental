@@ -1,3 +1,13 @@
+## v0.4.0 (2021-01-20)
+
+#### :boom: Breaking Change
+* `@glimmerx/babel-plugin-component-templates`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/ssr`, `@glimmerx/storybook`, `examples`
+  * [#93](https://github.com/glimmerjs/glimmer-experimental/pull/93) Update to latest glimmerjs and glimmer-vm ([@chiragpat](https://github.com/chiragpat))
+
+#### Committers: 1
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+
+
 ## v0.3.0 (2020-12-01)
 
 #### :rocket: Enhancement
