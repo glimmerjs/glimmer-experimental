@@ -171,5 +171,18 @@ export default function renderTests(
       const html = await render(MyComponent);
       assert.strictEqual(html, `<button>Count: 0</button>`, 'the component was rendered');
     });
+
+    test('supports functions as simple helpers', async (assert) => {
+      function upperCase(str: string) {
+        return str.toUpperCase();
+      }
+
+      class MyComponent extends Component {
+        static template = hbs`Hello {{upperCase "test"}}`;
+      }
+
+      const html = await render(MyComponent);
+      assert.strictEqual(html, 'Hello TEST', 'the component rendered');
+    });
   });
 }

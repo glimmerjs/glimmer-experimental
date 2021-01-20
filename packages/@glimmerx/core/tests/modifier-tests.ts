@@ -35,4 +35,21 @@ module('Modifier Tests', () => {
       'the component was rerendered'
     );
   });
+
+  test('supports simple functions as modifiers', async (assert) => {
+    assert.expect(3);
+
+    function myModifier(element, arg1, arg2) {
+      assert.equal(arg1, 'foo');
+      assert.equal(arg2, 'bar');
+      assert.ok(element.classList.contains('test-element'));
+    }
+
+    class MyComponent extends Component {
+      static template = hbs`<div {{myModifier "foo" "bar"}} class="test-element"></div>`;
+    }
+
+    const element = document.getElementById('qunit-fixture')!;
+    await renderComponent(MyComponent, element);
+  });
 });
