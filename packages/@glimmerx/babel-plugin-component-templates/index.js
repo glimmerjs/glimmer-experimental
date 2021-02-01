@@ -2,6 +2,7 @@ const glimmerPrecompileTemplate = require('@glimmer/babel-plugin-strict-template
   .precompileTemplate;
 const { addNamed } = require('@babel/helper-module-imports');
 const { traverse, preprocess } = require('@glimmer/syntax');
+const { precompile } = require('@glimmer/compiler');
 
 /* AST.Node reference: https://github.com/glimmerjs/glimmer-vm/blob/master/packages/%40glimmer/syntax/lib/types/nodes.ts#L268 */
 
@@ -364,3 +365,5 @@ module.exports = function (babel, options) {
 };
 
 module.exports.getTemplateTokens = getTemplateTokens;
+// Reexport the precompile function from @glimmer/compiler for any other babel plugins so that they have consistent versioning for the compiler
+module.exports.precompile = precompile;
