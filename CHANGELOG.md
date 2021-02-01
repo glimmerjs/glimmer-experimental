@@ -1,3 +1,13 @@
+## v0.4.1 (2021-02-01)
+
+#### :rocket: Enhancement
+* `@glimmerx/babel-plugin-component-templates`
+  * [#95](https://github.com/glimmerjs/glimmer-experimental/pull/95) Reexport precompile from babel-plugin-component-templates ([@chiragpat](https://github.com/chiragpat))
+
+#### Committers: 1
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+
+
 ## v0.4.0 (2021-01-20)
 
 #### :boom: Breaking Change
