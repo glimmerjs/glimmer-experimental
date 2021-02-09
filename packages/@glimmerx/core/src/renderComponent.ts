@@ -6,7 +6,7 @@ import {
 import { Dict } from '@glimmer/interfaces';
 import Owner from './owner';
 
-export interface RenderComponentOptions extends Omit<GlimmerJsRenderComponentOptions, 'owner'> {
+export interface RenderComponentOptions extends GlimmerJsRenderComponentOptions {
   services?: Dict<unknown>;
 }
 
@@ -26,9 +26,15 @@ export default function renderComponent(
     return glimmerJsRenderComponent(ComponentClass, optionsOrElement);
   }
 
-  const { element, args, services, rehydrate } = optionsOrElement;
+  const { element, args, owner: maybeOwner, services, rehydrate } = optionsOrElement;
 
-  const owner = new Owner(services ?? {});
+  // service option should be removed on next "major bump"
+  const owner = maybeOwner || new Owner(services ?? {});
 
-  return glimmerJsRenderComponent(ComponentClass, { element, args, owner, rehydrate });
+  return glimmerJsRenderComponent(ComponentClass, {
+    element,
+    args,
+    owner,
+    rehydrate,
+  });
 }

@@ -3,6 +3,7 @@ import Component, { tracked, hbs } from '@glimmerx/component';
 import { helper } from '@glimmerx/helper';
 import { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
+import { Owner } from '..';
 
 const { module, test } = QUnit;
 
@@ -183,6 +184,83 @@ export default function renderTests(
 
       const html = await render(MyComponent);
       assert.strictEqual(html, 'Hello TEST', 'the component rendered');
+    });
+
+    test('options.owner can render', async (assert) => {
+      const owner = new Owner({});
+
+      class MyComponent extends Component {
+        static template = hbs`<h1>Hello World</h1>`;
+      }
+
+      const html = await render(MyComponent, {
+        owner,
+      });
+
+      assert.strictEqual(html, '<h1>Hello World</h1>');
+    });
+
+    test('options.owner can define services', async (assert) => {
+      class LocaleService {
+        get currentLocale() {
+          return 'en_US';
+        }
+      }
+
+      class MyComponent extends Component {
+        static template = hbs`<h1>{{this.myLocale}}</h1>`;
+
+        @service locale: LocaleService;
+        get myLocale() {
+          return this.locale.currentLocale;
+        }
+      }
+
+      const owner = new Owner({
+        locale: new LocaleService(),
+      });
+
+      const html = await render(MyComponent, {
+        owner,
+      });
+
+      assert.strictEqual(html, '<h1>en_US</h1>');
+    });
+
+    test('options.owner when present; ignores options.services', async (assert) => {
+      class LocaleService {
+        get currentLocale() {
+          return 'en_US';
+        }
+      }
+
+      class InvalidLocaleService extends LocaleService {
+        get currentLocale() {
+          return 'xx_YY';
+        }
+      }
+
+      class MyComponent extends Component {
+        static template = hbs`<h1>{{this.myLocale}}</h1>`;
+
+        @service locale: LocaleService;
+        get myLocale() {
+          return this.locale.currentLocale;
+        }
+      }
+
+      const owner = new Owner({
+        locale: new LocaleService(),
+      });
+
+      const html = await render(MyComponent, {
+        owner,
+        services: {
+          locale: new InvalidLocaleService(),
+        },
+      });
+
+      assert.strictEqual(html, '<h1>en_US</h1>');
     });
   });
 }
