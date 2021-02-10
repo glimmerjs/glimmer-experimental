@@ -1,3 +1,9 @@
 export { service } from './src/decorator';
 
-export default class Service {}
+import { OWNER } from '@glimmer/owner';
+
+export default class Service {
+  constructor(owner) {
+    this[OWNER] = owner;
+  }
+}

@@ -1,9 +1,10 @@
 import Component, { tracked, hbs } from '@glimmerx/component';
 
 import { helper } from '@glimmerx/helper';
-import { service } from '@glimmerx/service';
+import Service, { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
 import { Owner } from '..';
+import LazyOwner from '../../ssr/tests/lib/LazyOwner';
 
 const { module, test } = QUnit;
 
@@ -260,6 +261,55 @@ export default function renderTests(
         },
       });
 
+      assert.strictEqual(html, '<h1>en_US</h1>');
+    });
+
+    test('can render with a lazy owner and nested services', async (assert) => {
+      const ctx = Object.freeze({
+        locale: 'en_US',
+      });
+
+      class RequestContext extends Service {
+        static from(ctx) {
+          return class extends this {
+            context = ctx;
+          };
+        }
+      }
+
+      class Play extends Service {
+        @service request;
+
+        get locale() {
+          return this.request.context.locale;
+        }
+      }
+
+      class Locale extends Service {
+        @service play;
+        get currentLocale() {
+          return this.play.locale;
+        }
+      }
+
+      class MyComponent extends Component {
+        static template = hbs`<h1>{{this.myLocale}}</h1>`;
+
+        @service locale: Locale;
+        get myLocale() {
+          return this.locale.currentLocale;
+        }
+      }
+
+      const owner = new LazyOwner({
+        request: RequestContext.from(ctx),
+        play: Play,
+        locale: Locale,
+      });
+
+      const html = await render(MyComponent, {
+        owner,
+      });
       assert.strictEqual(html, '<h1>en_US</h1>');
     });
   });
