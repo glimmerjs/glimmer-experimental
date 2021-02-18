@@ -1,3 +1,13 @@
+## v0.4.2 (2021-02-18)
+
+#### :rocket: Enhancement
+* `@glimmerx/core`, `@glimmerx/service`, `@glimmerx/ssr`
+  * [#97](https://github.com/glimmerjs/glimmer-experimental/pull/97) Improve services API ([@wondersloth](https://github.com/wondersloth))
+
+#### Committers: 1
+- Matthew Edwards ([@wondersloth](https://github.com/wondersloth))
+
+
 ## v0.4.1 (2021-02-01)
 
 #### :rocket: Enhancement

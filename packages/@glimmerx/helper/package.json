@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/helper",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Helper Functionality",
   "keywords": [
     "ember-addon"
@@ -20,7 +20,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmerx/core": "0.4.1",
+    "@glimmerx/core": "0.4.2",
     "@glimmer/helper": "2.0.0-beta.12",
     "@glimmer/interfaces": "0.73.0",
     "ember-cli-babel": "^7.18.0"

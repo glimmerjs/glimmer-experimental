@@ -1,6 +1,6 @@
 {
   "name": "basic-addon",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The default blueprint for ember-cli addons.",
   "private": true,
   "keywords": [
@@ -24,17 +24,17 @@
     "test:ember-compatibility": "ember try:each"
   },
   "dependencies": {
-    "@glimmerx/component": "^0.4.1",
-    "@glimmerx/helper": "^0.4.1",
-    "@glimmerx/modifier": "^0.4.1",
-    "@glimmerx/service": "^0.4.1",
+    "@glimmerx/component": "^0.4.2",
+    "@glimmerx/helper": "^0.4.2",
+    "@glimmerx/modifier": "^0.4.2",
+    "@glimmerx/service": "^0.4.2",
     "ember-cli-babel": "^7.19.0",
     "ember-cli-htmlbars": "^5.3.1"
   },
   "devDependencies": {
     "@ember/optional-features": "^1.3.0",
     "@glimmer/tracking": "2.0.0-beta.12",
-    "@glimmerx/eslint-plugin": "^0.4.1",
+    "@glimmerx/eslint-plugin": "^0.4.2",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.5.3",
