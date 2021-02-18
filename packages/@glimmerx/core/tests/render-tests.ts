@@ -1,7 +1,7 @@
 import Component, { tracked, hbs } from '@glimmerx/component';
 
 import { helper } from '@glimmerx/helper';
-import { service } from '@glimmerx/service';
+import Service, { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
 
 const { module, test } = QUnit;
@@ -105,6 +105,7 @@ export default function renderTests(
         static template = hbs`<h1>{{this.myLocale}}</h1>`;
 
         @service locale: LocaleService;
+
         get myLocale() {
           return this.locale.currentLocale;
         }
@@ -183,6 +184,66 @@ export default function renderTests(
 
       const html = await render(MyComponent);
       assert.strictEqual(html, 'Hello TEST', 'the component rendered');
+    });
+
+    test('can render with various services', async (assert) => {
+      const ctx = Object.freeze({
+        locale: 'en_US',
+      });
+
+      class Meta {
+        id;
+
+        constructor(id) {
+          this.id = id;
+        }
+      }
+
+      const meta = new Meta('ABC123');
+
+      class Request extends Service {
+        @service context;
+
+        get locale() {
+          return this.context.locale;
+        }
+      }
+
+      class Locale extends Service {
+        @service request;
+
+        get currentLocale() {
+          return this.request.locale;
+        }
+      }
+
+      class MyComponent extends Component {
+        static template = hbs`<h1>{{this.myLocale}},{{this.metaId}}</h1>`;
+
+        @service locale: Locale;
+        @service meta: Meta;
+
+        get myLocale() {
+          return this.locale.currentLocale;
+        }
+        get metaId() {
+          return this.meta.id;
+        }
+      }
+
+      const services = {
+        context: ctx, // Pojo
+        request: Request, // Constructor
+        locale: Locale, // Constructor,
+        meta: meta,
+      };
+
+      const options = {
+        services,
+      };
+
+      const html = await render(MyComponent, options);
+      assert.strictEqual(html, '<h1>en_US,ABC123</h1>');
     });
   });
 }
