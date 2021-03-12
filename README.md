@@ -239,7 +239,7 @@ import MyComponent from './MyComponent';
 renderComponent(MyComponent, document.getElementById('app'));
 ```
 
-Renders a component with data passed as arguments to the component. First arugment is the Glimmer Component, the second argument is an object of render options, with the target DOM element and the data to pass to the component to render.
+Renders a component with arguments passed to the component. First argument is the Glimmer Component, the second argument is an object of render options, with the target DOM element and the arguments to pass to the component to render.
 
 ```js
 import { renderComponent } from '@glimmerx/core';
@@ -251,7 +251,7 @@ class OtherComponent extends Component {
 
 renderComponent(MyComponent, {
   element: document.getElementById('app'),
-  data: {
+  args: {
     say: 'Hello World',
   },
 });
