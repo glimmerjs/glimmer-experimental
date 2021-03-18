@@ -18,7 +18,8 @@
   },
   "devDependencies": {
     "@glimmer/interfaces": "0.73.0",
-    "@glimmerx/storybook": "^0.4.2"
+    "@glimmerx/storybook": "^0.4.2",
+    "@storybook/addon-essentials": "^6.1.21"
   },
   "volta": {
     "node": "12.10.0",
