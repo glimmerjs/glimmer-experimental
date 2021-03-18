@@ -45,7 +45,10 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@storybook/core": "^v5.3.18",
+    "@storybook/core": "^v6.1.21",
+    "@storybook/addons": "^6.1.21",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
     "global": "^4.4.0"
   },
   "peerDependencies": {
