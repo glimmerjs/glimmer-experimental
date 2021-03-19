@@ -37,4 +37,9 @@ Colored.args = {
 };
 
 // Export an inline story in CSF format
-export const inLineBasic = () => hbs`<OtherComponent @count=77/>`;
+export const inLineBasic = (args) =>
+  hbs`<OtherComponent @count={{args.count}} @bgcolor={{args.bgcolor}} }}/>`;
+inLineBasic.args = {
+  ...Basic.args,
+  bgcolor: 'lightblue',
+};

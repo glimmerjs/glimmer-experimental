@@ -46,11 +46,11 @@ Then add the following NPM scripts to your package.json in order to start or bui
 #### Step 3: Create the config file
 For a basic Storybook configuration, the only thing you need to do is tell Storybook where to find stories.
 
-To do that, create a file at .storybook/config.js with the following content:
+To do that, create a file at .storybook/main.js with the following content:
 ```js
-import { configure } from '@glimmerx/storybook';
-
-configure(require.context('../src', true, /\.stories\.js$/), module);
+module.exports = {
+  stories: ['../src/**/*.stories.@(js|ts)']
+}
 ```
 That will load all the stories underneath your ../src directory that match the pattern *.stories.js. We recommend co-locating your stories with your source files, but you can place them wherever you choose.
 
@@ -58,27 +58,50 @@ That will load all the stories underneath your ../src directory that match the p
 Now create a ../stories/index.js file, and write your first story like this:
 
 ```js
-import { storiesOf } from '@glimmerx/storybook';
 import OtherComponent from './OtherComponent';
 import { hbs } from '@glimmerx/component';
 
-storiesOf('Example Stories', module)
-.add('OtherComponent', () => hbs`<OtherComponent @count=101/>`)
-.add('OtherComponent with render options', () => ({
-  componentClass: OtherComponent,
-  renderOptions: {
-    args: {
-      count: 1007
-    }
-  }
-}));
+// default export determines how stories show up
+export default {
+  title: ' Example OtherComponent stories using CSF',
+  component: OtherComponent,
+  argTypes: {
+    bgcolor: { control: 'color' },
+    count: { control: 'number' },
+  },
+};
+
+// Story template that can be reused for creating and exporting stories
+const Template = (args: Record<string, number | string>) => {
+  return {
+    componentClass: OtherComponent,
+    renderOptions: {
+      args: {
+        ...args,
+      },
+    },
+  };
+};
+
+// Creating and exporing basic story
+export const Basic = Template.bind({});
+Basic.args = {
+  count: 100,
+};
+
+// Export an inline story in CSF format
+export const inLineBasic = (args) => hbs`<OtherComponent @count={{args.count}} @bgcolor={{args.bgcolor}} }}/>`;
+inLineBasic.args = {
+  ...Basic.args,
+  bgcolor: 'lightblue',
+};
 ```
 Each story is a single state of your component. In the above case, there is a story using the SampleComponent.
 
 #### Finally: Run your Storybook
 Now everything is ready. Run your storybook with:
 ```
-yarn run storybook
+yarn storybook
 ```
 Storybook should start, on a random open port in dev-mode.
 
