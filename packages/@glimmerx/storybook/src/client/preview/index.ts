@@ -28,7 +28,7 @@ export const storiesOf: ClientApi['storiesOf'] = (kind, m) => {
 };
 
 // eslint-disable-next-line func-style
-export const configure: ClientApi['configure'] = (...args) => api.configure(...args, framework);
+export const configure: ClientApi['configure'] = (...args) => api.configure(framework, ...args);
 export const addDecorator: ClientApi['addDecorator'] = api.clientApi.addDecorator;
 export const addParameters: ClientApi['addParameters'] = api.clientApi.addParameters;
 export const clearDecorators: ClientApi['clearDecorators'] = api.clientApi.clearDecorators;
