@@ -1,19 +1,13 @@
-declare const Babel;
+declare const Babel: any;
 
-import glimmerEnvPlugin from '@glimmer/babel-plugin-glimmer-env';
-import componentTemplatesPlugin from '@glimmerx/babel-plugin-component-templates';
-
-Babel.registerPlugin('@glimmer/babel-plugin-glimmer-env', glimmerEnvPlugin);
-Babel.registerPlugin('@glimmerx/babel-plugin-component-templates', componentTemplatesPlugin);
+import glimmerXPreset from '@glimmerx/babel-preset';
+import { precompile } from '@glimmer/compiler';
 
 export default function compile(js: string): { code: string } {
   return Babel.transform(js, {
     filename: 'main.ts',
-    plugins: [
-      ['@glimmer/babel-plugin-glimmer-env', { DEBUG: true }],
-      '@glimmerx/babel-plugin-component-templates',
-    ],
     presets: [
+      [glimmerXPreset, { __loadPlugins: true, precompile }],
       [
         'env',
         {
@@ -25,8 +19,6 @@ export default function compile(js: string): { code: string } {
           ],
         },
       ],
-      ['stage-2', { decoratorsLegacy: true }],
-      'typescript',
     ],
   });
 }

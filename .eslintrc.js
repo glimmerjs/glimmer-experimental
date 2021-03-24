@@ -5,6 +5,9 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: 'module',
   },
+  env: {
+    es6: true,
+  },
   extends: [
     'eslint:recommended',
     'plugin:prettier/recommended',
@@ -30,7 +33,6 @@ module.exports = {
         '**/scripts/**/*.js',
         '**/blueprints/**/*.js',
         'webpack.config.js',
-        'packages/babel-plugins/**/*.js',
         'packages/@glimmerx/blueprint/index.js',
       ],
       env: {
@@ -40,19 +42,9 @@ module.exports = {
     },
     {
       files: [
-        'packages/@glimmerx/babel-plugin-component-templates/**/*.js',
+        'packages/@glimmerx/babel-preset/**/*.js',
         'packages/@glimmerx/eslint-plugin/**/*.js',
-      ],
-      env: {
-        es6: true,
-        node: true,
-        mocha: true,
-      },
-    },
-    {
-      files: [
-        'packages/@glimmerx/babel-plugin-component-templates/test/**/code.js',
-        'packages/@glimmerx/babel-plugin-component-templates/test/**/output.js',
+        'packages/@glimmerx/webpack-loader/**/*.js',
       ],
       env: {
         es6: true,
@@ -65,17 +57,6 @@ module.exports = {
       files: ['bin/**/*.js'],
       rules: {
         'no-process-exit': 'off',
-      },
-    },
-    // source Js
-    {
-      files: ['**/src/**/*.js', '**/test/**/*.js'],
-      env: {
-        es2020: true,
-        browser: true,
-      },
-      parserOptions: {
-        sourceType: 'module',
       },
     },
     // TypeScript source
@@ -91,8 +72,18 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
 
+        '@typescript-eslint/ban-types': ['error', {
+          types: {
+            // we currently use `object` as "valid WeakMap key" in a lot of APIs
+            object: false,
+          }
+        }],
+
         // We should try to remove this eventually
         '@typescript-eslint/explicit-function-return-type': 'off',
+
+        // We should also try to remove this eventually
+        '@typescript-eslint/ban-ts-ignore': 'off',
 
         // disabling this one because of DEBUG APIs, if we ever find a better
         // way to suport those we should re-enable it

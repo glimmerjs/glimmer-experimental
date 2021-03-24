@@ -25,8 +25,7 @@ module('Modifier Tests', () => {
       'the component was rendered'
     );
 
-    const button = element.querySelector('button')!;
-    button.click();
+    element.querySelector('button')!.click();
 
     await didRender();
     assert.strictEqual(
@@ -39,7 +38,7 @@ module('Modifier Tests', () => {
   test('supports simple functions as modifiers', async (assert) => {
     assert.expect(3);
 
-    function myModifier(element, arg1, arg2) {
+    function myModifier(element: Element, arg1: string, arg2: string) {
       assert.equal(arg1, 'foo');
       assert.equal(arg2, 'bar');
       assert.ok(element.classList.contains('test-element'));

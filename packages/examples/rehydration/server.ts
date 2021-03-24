@@ -6,7 +6,7 @@ interface ExpressResponse {
 }
 
 export default async function handler(
-  _: {},
+  _: unknown,
   res: ExpressResponse,
   clientsideBundleLocation: string
 ) {

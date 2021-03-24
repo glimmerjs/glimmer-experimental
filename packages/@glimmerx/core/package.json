@@ -17,9 +17,9 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/core": "2.0.0-beta.12",
-    "@glimmer/interfaces": "0.73.0",
-    "@glimmer/manager": "0.73.0"
+    "@glimmer/core": "2.0.0-beta.15",
+    "@glimmer/interfaces": "0.77.3",
+    "@glimmer/manager": "0.77.3"
   },
   "volta": {
     "node": "12.10.0",

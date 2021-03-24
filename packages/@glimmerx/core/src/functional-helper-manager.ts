@@ -19,7 +19,7 @@ export default class FunctionalHelperManager implements HelperManager<Functional
     return fn(...args.positional);
   }
 
-  getDebugName(fn: Function) {
+  getDebugName(fn: { name?: string }) {
     return fn.name || '(anonymous function)';
   }
 }

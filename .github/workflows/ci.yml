@@ -35,7 +35,7 @@ jobs:
 
       strategy:
         matrix:
-          ember-version: [default, release, beta, canary, lts-3.16]
+          ember-version: [default, release, beta, canary, "3.25"]
 
       steps:
         - uses: actions/checkout@v2

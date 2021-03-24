@@ -1,4 +1,4 @@
-const { getTemplateTokens } = require('@glimmerx/babel-plugin-component-templates');
+const { getTemplateLocals } = require('@glimmer/syntax');
 
 module.exports = {
   docs: {
@@ -21,7 +21,7 @@ module.exports = {
       {
         type: 'object',
         properties: {
-          // ['if', 'each', 'unless', 'has-block', 'yield', 'component, 'with'] will always be 'nativeTokens'
+          // keywords will will always be 'nativeTokens'
           // but you may add more via this configuration. One use-case is if a token is added to the
           // Javascript code implicitly (such as via a babel transform)
           nativeTokens: {
@@ -36,16 +36,11 @@ module.exports = {
     ],
   },
   create(context) {
-    const defaultNativeTokens = ['if', 'each', 'unless', 'has-block', 'yield', 'component', 'with'];
     let isGlimmerSfc = false;
     let hbsImportId;
 
     const [mode = 'all', configOpts] = context.options;
-    let nativeTokens = defaultNativeTokens;
-
-    if (configOpts && configOpts.nativeTokens) {
-      nativeTokens = nativeTokens.concat(configOpts.nativeTokens);
-    }
+    let nativeTokens = (configOpts && configOpts.nativeTokens) || [];
 
     return {
       ImportSpecifier(node) {
@@ -66,10 +61,10 @@ module.exports = {
         const templateElementNode = node.quasi.quasis[0];
         const templateString = templateElementNode.value.raw;
 
-        const templateScopeTokens = getTemplateTokens(templateString, nativeTokens);
+        const templateScopeTokens = getTemplateLocals(templateString);
         templateScopeTokens.forEach((token) => {
           const isTokenPresent = context.markVariableAsUsed(token);
-          if (!isTokenPresent && mode === 'all') {
+          if (!isTokenPresent && !nativeTokens.includes(token) && mode === 'all') {
             context.report({
               data: {
                 token,

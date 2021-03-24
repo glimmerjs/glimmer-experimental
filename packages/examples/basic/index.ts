@@ -1,6 +1,8 @@
 import { renderComponent } from '@glimmerx/core';
 import MyComponent from './src/MyComponent';
 import LocaleService from './src/services/LocaleService';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { ButtonListService } from 'basic-addon';
 
 document.addEventListener(

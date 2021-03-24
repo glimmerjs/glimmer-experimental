@@ -1,0 +1,32 @@
+{
+  "name": "@glimmerx/webpack-loader",
+  "version": "0.5.0",
+  "description": "GlimmerX Webpack Loader",
+  "repository": "https://github.com/glimmerjs/glimmer.js",
+  "author": "Tom Dale <tom@tomdale.net>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "mocha -r esm"
+  },
+  "dependencies": {
+    "@glimmer/syntax": "0.77.5",
+    "validate-peer-dependencies": "^1.1.0",
+    "loader-utils": "2.0.0",
+    "schema-utils": "3.0.0"
+  },
+  "peerDependencies": {
+    "@glimmerx/babel-preset": "^0.5.0",
+    "babel-plugin-htmlbars-inline-precompile": "^5.2.1"
+  },
+  "devDependencies": {
+    "babel-plugin-tester": "^6.4.0",
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "mocha": "^6.2.0"
+  },
+  "volta": {
+    "node": "12.16.1",
+    "yarn": "1.22.4"
+  }
+}

@@ -10,7 +10,7 @@
 **/bower_components/**
 
 # Fixtures
-**/packages/@glimmerx/babel-plugin-component-templates/test/**/code.js
-**/packages/@glimmerx/babel-plugin-component-templates/test/**/output.js
-**/packages/@glimmerx/babel-plugin-component-templates/test/**/code.ts
-**/packages/@glimmerx/babel-plugin-component-templates/test/**/output.ts
+**/packages/@glimmerx/babel-preset/test/**/code.js
+**/packages/@glimmerx/babel-preset/test/**/output.js
+**/packages/@glimmerx/babel-preset/test/**/code.ts
+**/packages/@glimmerx/babel-preset/test/**/output.ts

@@ -1,4 +1,5 @@
 import { Owner, getOwner } from '@glimmerx/core';
+import { assert } from '@glimmer/debug';
 
 function makeServiceDecorator(
   name: string
@@ -7,7 +8,14 @@ function makeServiceDecorator(
     enumerable: true,
     configurable: false,
     get() {
-      return getOwner<Owner>(this).lookup({ type: 'service', name });
+      const owner = getOwner<Owner>(this);
+
+      assert(
+        owner,
+        `Attempted to lookup the ${name} service on an instance of ${this}, but there was no owner set on that object`
+      );
+
+      return owner.lookup({ type: 'service', name });
     },
   });
 }

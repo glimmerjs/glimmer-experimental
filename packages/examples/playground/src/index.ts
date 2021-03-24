@@ -3,4 +3,4 @@ import App from './App';
 
 const containerElement = document.getElementById('app');
 
-renderComponent(App, containerElement);
+renderComponent(App, containerElement!);

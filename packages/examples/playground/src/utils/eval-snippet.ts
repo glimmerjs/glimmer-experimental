@@ -16,7 +16,7 @@ const modules = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function require(moduleName: string): unknown {
+function require(moduleName: keyof typeof modules): unknown {
   return modules[moduleName];
 }
 
