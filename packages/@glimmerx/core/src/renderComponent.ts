@@ -7,6 +7,7 @@ import { Dict } from '@glimmer/interfaces';
 import Owner from './owner';
 
 export interface RenderComponentOptions extends Omit<GlimmerJsRenderComponentOptions, 'owner'> {
+  owner?: Dict<unknown>;
   services?: Dict<unknown>;
 }
 
@@ -27,8 +28,7 @@ export default function renderComponent(
   }
 
   const { element, args, services, rehydrate } = optionsOrElement;
-
-  const owner = new Owner(services ?? {});
+  const owner = optionsOrElement.owner || new Owner(services ?? {});
 
   return glimmerJsRenderComponent(ComponentClass, { element, args, owner, rehydrate });
 }
