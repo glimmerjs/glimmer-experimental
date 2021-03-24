@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/modifier",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Modifier Functionality",
   "keywords": [
     "ember-addon"

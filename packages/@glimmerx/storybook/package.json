@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/storybook",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "storybook for glimmerjs",
   "keywords": [
     "storybook",
@@ -55,9 +55,9 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@glimmer/babel-plugin-strict-template-precompile": "2.0.0-beta.12",
-    "@glimmerx/babel-plugin-component-templates": "^0.4.2",
-    "@glimmerx/component": "^0.4.2",
-    "@glimmerx/core": "^0.4.2",
+    "@glimmerx/babel-plugin-component-templates": "^0.5.0",
+    "@glimmerx/component": "^0.5.0",
+    "@glimmerx/core": "^0.5.0",
     "babel-loader": "^8.1.0"
   },
   "engines": {

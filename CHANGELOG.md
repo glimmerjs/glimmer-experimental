@@ -1,3 +1,17 @@
+## v0.5.0 (2021-03-24)
+
+#### :boom: Breaking Change
+* `@glimmerx/storybook`, `examples`
+  * [#101](https://github.com/glimmerjs/glimmer-experimental/pull/101) Updating @glimmerx/storybook to Storybook-v6 ([@aroskar](https://github.com/aroskar))
+
+#### :memo: Documentation
+* [#99](https://github.com/glimmerjs/glimmer-experimental/pull/99) Update README.md ([@kaermorchen](https://github.com/kaermorchen))
+
+#### Committers: 2
+- Abhishek Aroskar ([@aroskar](https://github.com/aroskar))
+- Stanislav Romanov ([@kaermorchen](https://github.com/kaermorchen))
+
+
 ## v0.4.2 (2021-02-18)
 
 #### :rocket: Enhancement
