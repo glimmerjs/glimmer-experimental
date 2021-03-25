@@ -1,6 +1,6 @@
 import FunctionalModifierManager from './src/functional-modifier-manager';
 import FunctionalHelperManager from './src/functional-helper-manager';
-import { setModifierManager, setHelperManager } from '@glimmer/manager';
+import { setModifierManager, setHelperManager } from '@glimmer/core';
 
 const FUNCTIONAL_MODIFIER_MANAGER = new FunctionalModifierManager();
 const FUNCTIONAL_MODIFIER_MANAGER_FACTORY = () => FUNCTIONAL_MODIFIER_MANAGER;
@@ -29,6 +29,5 @@ export {
   setModifierManager,
   setOwner,
   getOwner,
-  TemplateArgs,
   didRender,
 } from '@glimmer/core';

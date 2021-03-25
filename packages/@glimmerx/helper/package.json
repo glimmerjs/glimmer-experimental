@@ -21,9 +21,9 @@
   },
   "dependencies": {
     "@glimmerx/core": "0.5.0",
-    "@glimmer/helper": "2.0.0-beta.12",
-    "@glimmer/interfaces": "0.73.0",
-    "ember-cli-babel": "^7.18.0"
+    "@glimmer/helper": "2.0.0-beta.15",
+    "@glimmer/interfaces": "0.77.3",
+    "ember-cli-babel": "7.26.2"
   },
   "volta": {
     "node": "12.10.0",

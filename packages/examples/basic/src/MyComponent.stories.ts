@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { storiesOf } from '@glimmerx/storybook';
 import MyComponent from './MyComponent';
 import LocaleService from './services/LocaleService';

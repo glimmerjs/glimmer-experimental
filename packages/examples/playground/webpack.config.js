@@ -40,11 +40,15 @@ module.exports = () => {
     mode: IS_PRODUCTION ? 'production' : 'development',
     entry,
     plugins,
+    node: {
+      fs: 'empty',
+      path: 'empty',
+    },
     module: {
       rules: [
         {
           test: /\.(js|mjs|ts)$/,
-          use: 'babel-loader',
+          use: ['babel-loader', '@glimmerx/webpack-loader'],
         },
         {
           test: /\.css$/,
@@ -61,6 +65,9 @@ module.exports = () => {
     },
     resolve: {
       extensions: ['.ts', '.js', '.json'],
+      alias: {
+        path: require.resolve('path-browserify'),
+      },
     },
     output: {
       filename: '[name].bundle.js',

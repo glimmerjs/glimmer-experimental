@@ -1,13 +1,12 @@
 import { modifierCapabilities, ModifierManager } from '@glimmer/core';
 import { Arguments } from '@glimmer/interfaces';
-import { SimpleElement } from '@simple-dom/interface';
 
 type SimpleModifierFn = (...args: unknown[]) => (() => void) | undefined;
 
 interface FunctionalModifierState {
   fn: SimpleModifierFn;
   args: Arguments;
-  element: SimpleElement | undefined;
+  element: Element | undefined;
   destructor: (() => void) | undefined;
 }
 
@@ -17,7 +16,8 @@ export default class FunctionalModifierManager implements ModifierManager<Functi
   createModifier(fn: SimpleModifierFn, args: Arguments): FunctionalModifierState {
     return { fn, args, element: undefined, destructor: undefined };
   }
-  installModifier(state: FunctionalModifierState, element: SimpleElement) {
+
+  installModifier(state: FunctionalModifierState, element: Element) {
     state.element = element;
     this.setupModifier(state);
   }

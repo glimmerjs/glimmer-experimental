@@ -14,7 +14,7 @@ export function renderToString(
   definition: ComponentDefinition,
   { args, serializer, services, rehydrate }: RenderOptions = {}
 ): Promise<string> {
-  const owner = new Owner(services ?? {});
+  const owner = new Owner(services || {});
 
   return glimmerJsRenderToString(definition, { args, serializer, owner, rehydrate });
 }
@@ -24,7 +24,7 @@ export function renderToStream(
   definition: ComponentDefinition,
   { args, serializer, services, rehydrate }: RenderOptions = {}
 ): void {
-  const owner = new Owner(services ?? {});
+  const owner = new Owner(services || {});
 
   glimmerJsRenderToStream(stream, definition, { args, serializer, owner, rehydrate });
 }

@@ -15,11 +15,13 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/component": "2.0.0-beta.12",
-    "@glimmer/tracking": "2.0.0-beta.12",
-    "@glimmerx/babel-plugin-component-templates": "^0.5.0",
-    "ember-cli-babel": "^7.17.2",
-    "ember-cli-babel-plugin-helpers": "^1.1.0"
+    "@glimmer/component": "2.0.0-beta.15",
+    "@glimmer/tracking": "2.0.0-beta.15",
+    "ember-cli-babel": "^7.26.2",
+    "ember-cli-babel-plugin-helpers": "^1.1.0",
+    "ember-cli-htmlbars": "^5.7.1",
+    "ember-cli-version-checker": "5.1.2",
+    "ember-template-imports": "^1.1.1"
   },
   "volta": {
     "node": "12.10.0",

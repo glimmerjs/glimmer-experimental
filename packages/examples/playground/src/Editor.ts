@@ -27,7 +27,7 @@ function setupEditor(
 
   const updateLayout = (): void => {
     const lineHeight = editor.getOptions().get(monaco.editor.EditorOption.lineHeight);
-    const lineCount = editor.getModel().getLineCount();
+    const lineCount = editor.getModel()!.getLineCount();
     const contentHeight = lineHeight * lineCount + 12;
 
     element.style.height = `${contentHeight}px`;

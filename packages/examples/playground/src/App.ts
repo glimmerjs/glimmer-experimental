@@ -27,7 +27,7 @@ export default class HelloWorld extends Component {
 `;
 
 export default class App extends Component {
-  @tracked snippet = new URLSearchParams(location.search).get('snippet') ?? DEFAULT_SNIPPET;
+  @tracked snippet = new URLSearchParams(location.search).get('snippet') || DEFAULT_SNIPPET;
 
   @action updateSnippet(snippet: string): void {
     const params = new URLSearchParams(location.search);

@@ -9,7 +9,7 @@ export interface FactoryIdentifier {
 
 const SERVICES_CACHE = Symbol('Services');
 
-function isConstructor(func) {
+function isConstructor(func: unknown): func is { new (owner: Owner): unknown } {
   return (
     (func && typeof func === 'function' && func.prototype && func.prototype.constructor) === func
   );

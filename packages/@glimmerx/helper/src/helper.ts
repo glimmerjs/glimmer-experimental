@@ -1,14 +1,8 @@
-import {
-  setHelperManager,
-  HelperManager,
-  helperCapabilities,
-  Owner,
-  TemplateArgs,
-} from '@glimmerx/core';
-import { Dict } from '@glimmer/interfaces';
+import { setHelperManager, HelperManager, helperCapabilities, Owner } from '@glimmerx/core';
+import { Arguments } from '@glimmer/interfaces';
 
 interface HelperOptions {
-  services: Dict<unknown>;
+  services: Record<string, unknown>;
 }
 
 export type Helper<T = unknown, U = unknown> = (
@@ -19,8 +13,8 @@ export type Helper<T = unknown, U = unknown> = (
 
 interface BasicHelperBucket {
   fn: Helper;
-  args: TemplateArgs;
-  ownerProxy: Dict<unknown>;
+  args: Arguments;
+  ownerProxy: Record<string, unknown>;
 }
 
 class BasicHelperManager implements HelperManager<BasicHelperBucket> {
@@ -30,7 +24,7 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
 
   constructor(private owner: Owner | undefined) {}
 
-  createHelper(fn: Helper, args: TemplateArgs) {
+  createHelper(fn: Helper, args: Arguments) {
     const { owner } = this;
 
     const ownerProxy = new Proxy(
@@ -53,7 +47,7 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
     return fn(args.positional, args.named, { services: ownerProxy });
   }
 
-  getDebugName(fn: Function) {
+  getDebugName(fn: { name: string }) {
     return fn.name || '(anonymous function)';
   }
 }

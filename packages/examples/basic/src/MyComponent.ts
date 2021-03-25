@@ -1,9 +1,14 @@
 import Component, { tracked, hbs } from '@glimmerx/component';
 import { helper } from '@glimmerx/helper';
 import OtherComponent from './OtherComponent';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import GtsComponent from './GtsComponent';
 import { service } from '@glimmerx/service';
 import { on, action } from '@glimmerx/modifier';
 import LocaleService from './services/LocaleService';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { ButtonList } from 'basic-addon';
 
 const myHelper = helper(function ([name]: [string], { greeting }: { greeting: string }) {
@@ -32,7 +37,14 @@ class MyComponent extends Component {
       <p>Component is not in a CJK locale</p>
     {{/if}}
 
-    <OtherComponent @count={{this.count}} /> <br/>
+    <div>
+      Other Component:
+      <OtherComponent @count={{this.count}} />
+    </div>
+    <div>
+      Gts Component:
+      <GtsComponent @count={{this.count}} />
+    </div>
     <button {{on "click" this.increment}}>Increment</button>
     <TemplateOnlyComponent @name="For Glimmerx"/>
 

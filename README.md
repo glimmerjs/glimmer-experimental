@@ -54,11 +54,11 @@ npm:
 yarn add @glimmerx/core @glimmerx/component
 ```
 
-You will also need to install a Babel plugin that compiles templates with the
-Glimmer compiler:
+You will also need to install a Babel preset that handles Glimmer templates and
+other language features, such as decorators and class fields:
 
 ```
-yarn add -D @glimmerx/babel-plugin-component-templates
+yarn add -D @glimmerx/babel-preset
 ```
 
 If using ESLint, you will also want to install / use the plugin provided, as the `no-unused-vars` core rule will fail without it

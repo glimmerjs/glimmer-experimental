@@ -12,55 +12,51 @@ export function webpack(config: Configuration) {
       rules: [
         ...configRules,
         {
-          test: /\.ts$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    modules: false,
-                  },
+          test: /\.(ts|gts)$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  '@glimmerx/babel-preset',
+                  [
+                    '@babel/preset-env',
+                    {
+                      modules: false,
+                    },
+                  ],
+                  '@babel/preset-typescript',
                 ],
-                '@babel/preset-typescript',
-              ],
-              plugins: [
-                '@glimmerx/babel-plugin-component-templates',
-                '@glimmer/babel-plugin-strict-template-precompile',
-                ['@babel/plugin-proposal-decorators', { legacy: true }],
-                ['@babel/plugin-proposal-class-properties', { loose: true }],
-              ],
+              },
             },
-          },
+            '@glimmerx/webpack-loader',
+          ],
         },
         {
-          test: /\.(js)$/,
-          use: {
-            loader: 'babel-loader',
-            options: {
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    modules: false,
-                  },
+          test: /\.(js|gjs)$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  '@glimmerx/babel-preset',
+                  [
+                    '@babel/preset-env',
+                    {
+                      modules: false,
+                    },
+                  ],
                 ],
-              ],
-              plugins: [
-                '@glimmerx/babel-plugin-component-templates',
-                '@glimmer/babel-plugin-strict-template-precompile',
-                ['@babel/plugin-proposal-decorators', { legacy: true }],
-                ['@babel/plugin-proposal-class-properties', { loose: true }],
-              ],
+              },
             },
-          },
+            '@glimmerx/webpack-loader',
+          ],
         },
       ],
     },
     resolve: {
       plugins: [],
-      extensions: ['.js', '.ts'],
+      extensions: ['.js', '.ts', '.gjs', '.gts'],
       alias: {
         '@glimmerx/core$': require.resolve('@glimmerx/core'),
         '@glimmerx/component$': require.resolve('@glimmerx/component'),

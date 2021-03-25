@@ -1,13 +1,6 @@
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
-const commonBabelPlugins = [
-  ['@glimmer/babel-plugin-glimmer-env', { DEBUG: false }],
-  '@glimmerx/babel-plugin-component-templates',
-  ['@babel/plugin-proposal-decorators', { legacy: true }],
-  '@babel/plugin-proposal-class-properties',
-];
-
 const commonConfig = {
   mode: 'development',
   externals: {
@@ -19,7 +12,7 @@ const commonConfig = {
         mainFields: ['module', 'main'],
       }),
     ],
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.gjs', '.gts'],
   },
   output: {
     filename: '[name].bundle.js',
@@ -53,14 +46,16 @@ const browserConfig = {
   module: {
     rules: [
       {
-        test: /(\.ts|\.js)$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: commonBabelPlugins,
-            presets: ['@babel/preset-typescript', '@babel/preset-env'],
+        test: /(\.ts|\.js|\.gts|\.gjs)$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@glimmerx/babel-preset', '@babel/preset-typescript', '@babel/preset-env'],
+            },
           },
-        },
+          '@glimmerx/webpack-loader',
+        ],
       },
     ],
   },
@@ -85,24 +80,27 @@ const nodeConfig = {
   module: {
     rules: [
       {
-        test: /(\.ts|\.js)$/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: commonBabelPlugins,
-            presets: [
-              '@babel/preset-typescript',
-              [
-                '@babel/preset-env',
-                {
-                  targets: {
-                    node: true,
+        test: /(\.ts|\.js|\.gts|\.gjs)$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                '@glimmerx/babel-preset',
+                '@babel/preset-typescript',
+                [
+                  '@babel/preset-env',
+                  {
+                    targets: {
+                      node: true,
+                    },
                   },
-                },
+                ],
               ],
-            ],
+            },
           },
-        },
+          '@glimmerx/webpack-loader',
+        ],
       },
     ],
   },

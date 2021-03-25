@@ -192,17 +192,13 @@ export default function renderTests(
       });
 
       class Meta {
-        id;
-
-        constructor(id) {
-          this.id = id;
-        }
+        constructor(public id: string) {}
       }
 
       const meta = new Meta('ABC123');
 
       class Request extends Service {
-        @service context;
+        @service context: { locale: string };
 
         get locale() {
           return this.context.locale;
@@ -210,7 +206,7 @@ export default function renderTests(
       }
 
       class Locale extends Service {
-        @service request;
+        @service request: Request;
 
         get currentLocale() {
           return this.request.locale;
