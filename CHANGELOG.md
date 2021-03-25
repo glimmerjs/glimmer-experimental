@@ -1,3 +1,13 @@
+## v0.6.0 (2021-03-25)
+
+#### :boom: Breaking Change
+* `@glimmerx/babel-plugin-component-templates`, `@glimmerx/babel-preset`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/eslint-plugin`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/service`, `@glimmerx/ssr`, `@glimmerx/storybook`, `@glimmerx/webpack-loader`, `examples`
+  * [#102](https://github.com/glimmerjs/glimmer-experimental/pull/102) Update Glimmer.js to the latest ([@pzuraq](https://github.com/pzuraq))
+
+#### Committers: 1
+- Chris Garrett ([@pzuraq](https://github.com/pzuraq))
+
+
 ## v0.5.0 (2021-03-24)
 
 #### :boom: Breaking Change

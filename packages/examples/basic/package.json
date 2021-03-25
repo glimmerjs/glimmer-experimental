@@ -1,6 +1,6 @@
 {
   "name": "basic-example-app",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Example application using @glimmerx packages",
   "main": "dist/commonjs/index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
@@ -13,12 +13,12 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "@glimmerx/core": "^0.5.0",
-    "basic-addon": "0.5.0"
+    "@glimmerx/core": "^0.6.0",
+    "basic-addon": "0.6.0"
   },
   "devDependencies": {
     "@glimmer/interfaces": "0.77.3",
-    "@glimmerx/storybook": "^0.5.0",
+    "@glimmerx/storybook": "^0.6.0",
     "@storybook/addon-essentials": "^6.1.21"
   },
   "volta": {

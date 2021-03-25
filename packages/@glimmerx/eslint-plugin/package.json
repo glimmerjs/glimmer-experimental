@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/eslint-plugin",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "ESLint Plugin to enable and streamline glimmerx development",
   "main": "index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
