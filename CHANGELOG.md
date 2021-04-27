@@ -1,3 +1,13 @@
+## v0.6.3 (2021-04-27)
+
+#### :bug: Bug Fix
+* `@glimmerx/compiler`
+  * [#107](https://github.com/glimmerjs/glimmer-experimental/pull/107) bug: file field incorrect in compiler ([@chadhietala](https://github.com/chadhietala))
+
+#### Committers: 1
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+
+
 ## v0.6.2 (2021-04-27)
 
 #### :bug: Bug Fix

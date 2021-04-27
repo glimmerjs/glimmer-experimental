@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/webpack-loader",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "GlimmerX Webpack Loader",
   "repository": "https://github.com/glimmerjs/glimmer.js",
   "author": "Tom Dale <tom@tomdale.net>",
@@ -16,7 +16,7 @@
     "schema-utils": "3.0.0"
   },
   "peerDependencies": {
-    "@glimmerx/babel-preset": "^0.6.2",
+    "@glimmerx/babel-preset": "^0.6.3",
     "babel-plugin-htmlbars-inline-precompile": "^5.2.1"
   },
   "devDependencies": {
