@@ -1,3 +1,16 @@
+## v0.6.1 (2021-04-27)
+
+#### :bug: Bug Fix
+* `@glimmerx/babel-preset`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/service`, `@glimmerx/ssr`, `examples`
+  * [#105](https://github.com/glimmerjs/glimmer-experimental/pull/105) Bump glimmer/* packages to beta-16 ([@chadhietala](https://github.com/chadhietala))
+* `@glimmerx/blueprint`
+  * [#103](https://github.com/glimmerjs/glimmer-experimental/pull/103) Fix blueprint after babel preset pkg rename ([@josemarluedke](https://github.com/josemarluedke))
+
+#### Committers: 2
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+- Josemar Luedke ([@josemarluedke](https://github.com/josemarluedke))
+
+
 ## v0.6.0 (2021-03-25)
 
 #### :boom: Breaking Change

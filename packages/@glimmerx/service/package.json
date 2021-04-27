@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/service",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Services Functionality",
   "keywords": [
     "ember-addon"
@@ -20,7 +20,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmerx/core": "0.6.0",
+    "@glimmerx/core": "0.6.1",
     "@glimmer/debug": "2.0.0-beta.16",
     "@glimmer/env": "^0.1.7",
     "ember-cli-babel": "7.26.2"

@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/babel-preset",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "GlimmerX Babel Preset",
   "repository": "https://github.com/glimmerjs/glimmer.js",
   "author": "Tom Dale <tom@tomdale.net>",
