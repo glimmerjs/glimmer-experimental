@@ -1,4 +1,4 @@
-var _class, _descriptor, _temp;
+var _class, _descriptor, _cantTouchThis, _hammerTime;
 
 import { createTemplateFactory as _createTemplateFactory } from "@glimmer/core";
 
@@ -23,12 +23,19 @@ if (false
 (false && !(false) && deprecate('this is deprecated', false, {
   id: 'foo'
 }));
-let Test = (_class = (_temp = class Test {
+let Test = (_class = (_cantTouchThis = new WeakMap(), _hammerTime = new WeakSet(), class Test {
   constructor() {
+    _hammerTime.add(this);
+
     _initializerDefineProperty(this, "bar", _descriptor, this);
+
+    _cantTouchThis.set(this, {
+      writable: true,
+      value: 'mc hammer'
+    });
   }
 
-}, _temp), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "bar", [tracked], {
+}), (_descriptor = _applyDecoratedDescriptor(_class.prototype, "bar", [tracked], {
   configurable: true,
   enumerable: true,
   writable: true,
@@ -36,6 +43,8 @@ let Test = (_class = (_temp = class Test {
     return 123;
   }
 })), _class);
+
+function _hammerTime2() {}
 
 _createTemplateFactory(
 /*

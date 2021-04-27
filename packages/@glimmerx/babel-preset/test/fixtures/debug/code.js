@@ -13,6 +13,10 @@ deprecate('this is deprecated', false, { id: 'foo' });
 
 class Test {
   @tracked bar = 123;
+
+  #cantTouchThis = 'mc hammer';
+
+  #hammerTime() {}
 }
 
 precompileTemplate('Hello, world!', { strictMode: true, scope: { Test } });
