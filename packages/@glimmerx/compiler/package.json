@@ -1,0 +1,24 @@
+{
+  "name": "@glimmerx/compiler",
+  "version": "0.6.0",
+  "description": "Compiler functionality",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/modules/index.js",
+  "repository": "https://github.com/glimmerjs/glimmer-experimental",
+  "author": "Tom Dale <tom@tomdale.net>",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@glimmer/compiler": "0.73.0"
+  },
+  "volta": {
+    "node": "12.10.0",
+    "yarn": "1.22.4"
+  }
+}

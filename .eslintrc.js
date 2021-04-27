@@ -8,10 +8,7 @@ module.exports = {
   env: {
     es6: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   plugins: ['@typescript-eslint', '@glimmerx', 'prettier'],
   rules: {
     '@glimmerx/template-vars': 'error',
@@ -32,6 +29,7 @@ module.exports = {
         '**/bin/**/*.js',
         '**/scripts/**/*.js',
         '**/blueprints/**/*.js',
+        '**/compiler/**/*.js',
         'webpack.config.js',
         'packages/@glimmerx/blueprint/index.js',
       ],
@@ -72,12 +70,15 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
 
-        '@typescript-eslint/ban-types': ['error', {
-          types: {
-            // we currently use `object` as "valid WeakMap key" in a lot of APIs
-            object: false,
-          }
-        }],
+        '@typescript-eslint/ban-types': [
+          'error',
+          {
+            types: {
+              // we currently use `object` as "valid WeakMap key" in a lot of APIs
+              object: false,
+            },
+          },
+        ],
 
         // We should try to remove this eventually
         '@typescript-eslint/explicit-function-return-type': 'off',
@@ -90,7 +91,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
 
         '@typescript-eslint/no-use-before-define': 'off',
-      }
+      },
     },
   ],
 };
