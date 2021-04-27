@@ -2359,6 +2359,17 @@
   dependencies:
     ember-cli-string-utils "^1.1.0"
 
+"@glimmer/compiler@0.73.0":
+  version "0.73.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.73.0.tgz#206d3b3bf5de07bfa95591bc6aa9c43493e52bce"
+  integrity sha512-vBq4CNPdA1wdKysOshbkjUgy2YHc8IfPIdish4qIx7S3g2ibfH9+EfcFHwb+CrXnijG7dUrVMu/AUmuurbvTNQ==
+  dependencies:
+    "@glimmer/interfaces" "0.73.0"
+    "@glimmer/syntax" "0.73.0"
+    "@glimmer/util" "0.73.0"
+    "@glimmer/wire-format" "0.73.0"
+    "@simple-dom/interface" "^1.4.0"
+
 "@glimmer/compiler@0.77.6":
   version "0.77.6"
   resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.77.6.tgz#010ca57c3031071ef317181c6f8ecba71526101f"
@@ -2492,6 +2503,13 @@
     "@glimmer/component" "2.0.0-beta.16"
     "@glimmer/core" "2.0.0-beta.16"
     "@glimmer/runtime" "0.77.6"
+
+"@glimmer/interfaces@0.73.0":
+  version "0.73.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.73.0.tgz#ea926b2542cf666a9a479e8aa67224cc11f7710d"
+  integrity sha512-DagAc0Ul+lrid54QKrUVctlKfloIZMRhaz/oaEJ3nVf4Nqz/6YtT3tOrJ+fOxLYjsDy3Dq0uJMDOHzdd6IqS2g==
+  dependencies:
+    "@simple-dom/interface" "^1.4.0"
 
 "@glimmer/interfaces@0.77.3":
   version "0.77.3"
@@ -2655,6 +2673,16 @@
     "@simple-dom/serializer" "^1.4.0"
     "@simple-dom/void-map" "^1.4.0"
 
+"@glimmer/syntax@0.73.0":
+  version "0.73.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.73.0.tgz#f45f820d19fba8e7d87054f4bb87b7ce9edd1aac"
+  integrity sha512-dgxEUocjkbtlfkDPLFDkJO+RhZigffnOeDkdDAR4lbsEFgm0Pd3zNvnFhYyXSg/UUzioLdknyuixlwihG9OGow==
+  dependencies:
+    "@glimmer/interfaces" "0.73.0"
+    "@glimmer/util" "0.73.0"
+    "@handlebars/parser" "^2.0.0"
+    simple-html-tokenizer "^0.5.10"
+
 "@glimmer/syntax@0.77.5":
   version "0.77.5"
   resolved "https://registry.yarnpkg.com/@glimmer/syntax/-/syntax-0.77.5.tgz#b841803dd54ea86de7e8ae8850b3760000033bf2"
@@ -2692,6 +2720,15 @@
   dependencies:
     "@glimmer/env" "^0.1.7"
     "@glimmer/validator" "0.77.6"
+
+"@glimmer/util@0.73.0":
+  version "0.73.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/util/-/util-0.73.0.tgz#21c93fd7f822ba641485953c3ad4d7e929ec17c1"
+  integrity sha512-S8DfVvNAIOUxSawKjSSxa8U6yu2VVcZjaMVy4yoJR0QKpo++V6x1HDBjDOQU0xKgr98lCJqoAnPKZT6t1/eahg==
+  dependencies:
+    "@glimmer/env" "0.1.7"
+    "@glimmer/interfaces" "0.73.0"
+    "@simple-dom/interface" "^1.4.0"
 
 "@glimmer/util@0.77.3":
   version "0.77.3"
@@ -2772,6 +2809,14 @@
     "@glimmer/interfaces" "0.77.6"
     "@glimmer/util" "0.77.6"
 
+"@glimmer/wire-format@0.73.0":
+  version "0.73.0"
+  resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.73.0.tgz#2069aa68763dc409a3ea28b3819298376b4de5be"
+  integrity sha512-I3iLdUXClTDUuusq+/FiYA3g6Crr8KW4VmX6qgOxE4aG8kWqnlmDZNX73RvWJVDS0t7t/Cjrv+YwOf51DA75pg==
+  dependencies:
+    "@glimmer/interfaces" "0.73.0"
+    "@glimmer/util" "0.73.0"
+
 "@glimmer/wire-format@0.77.6":
   version "0.77.6"
   resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.77.6.tgz#d3a1a9e27c16c9c89f48cd8500f36960dd648325"
@@ -2779,6 +2824,11 @@
   dependencies:
     "@glimmer/interfaces" "0.77.6"
     "@glimmer/util" "0.77.6"
+
+"@handlebars/parser@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@handlebars/parser/-/parser-2.1.0.tgz#100e625d53c339e2b571c91fa93a455e93670fe2"
+  integrity sha512-R14NuNaSKZ6eE9y4t0fg/1f8iKd5ZJtSOTIseGFzXINTV17XffhLG2Y0CvdKOgyVQ7+UnXi89YGzRo/xsgwHIA==
 
 "@handlebars/parser@~2.0.0":
   version "2.0.0"
