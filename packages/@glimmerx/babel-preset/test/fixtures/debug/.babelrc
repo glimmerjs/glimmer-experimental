@@ -1,5 +1,5 @@
 {
   "presets": [
-    ["@glimmer/babel-preset", { "isDebug": true }]
+    ["@glimmerx/babel-preset", { "isDebug": true }]
   ]
 }

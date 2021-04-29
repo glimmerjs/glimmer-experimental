@@ -18,6 +18,4 @@ export default class Test extends Component {
   #cantTouchThis = 'mc hammer';
 
   #hammerTime() {}
-
-
 }

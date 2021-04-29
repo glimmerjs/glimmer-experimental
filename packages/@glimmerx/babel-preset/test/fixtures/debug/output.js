@@ -1,7 +1,5 @@
 var _class, _descriptor, _cantTouchThis, _hammerTime;
 
-import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
-
 function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -10,8 +8,11 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
 
 function _initializerWarningHelper(descriptor, context) { throw new Error('Decorating class property failed. Please ensure that ' + 'proposal-class-properties is enabled and runs after the decorators transform.'); }
 
+import { setComponentTemplate as _setComponentTemplate } from "@glimmer/core";
+import { createTemplateFactory as _createTemplateFactory } from "@glimmer/core";
 import { assert, deprecate } from '@glimmer/debug';
-import { tracked } from '@glimmer/tracking';
+import { tracked } from '@glimmerx/tracking';
+import Component from '@glimmerx/component';
 
 if (true
 /* DEBUG */
@@ -23,8 +24,21 @@ if (true
 (true && !(false) && deprecate('this is deprecated', false, {
   id: 'foo'
 }));
-let Test = (_class = (_cantTouchThis = new WeakMap(), _hammerTime = new WeakSet(), class Test {
-  constructor() {
+
+let Test = _setComponentTemplate(_createTemplateFactory(
+/*
+  Hello World
+*/
+{
+  "id": null,
+  "block": "[[[1,\"Hello World\"]],[],false,[]]",
+  "moduleName": "(unknown template module)",
+  "scope": null,
+  "isStrictMode": true
+}), (_class = (_cantTouchThis = new WeakMap(), _hammerTime = new WeakSet(), class Test extends Component {
+  constructor(...args) {
+    super(...args);
+
     _hammerTime.add(this);
 
     _initializerDefineProperty(this, "bar", _descriptor, this);
@@ -42,18 +56,8 @@ let Test = (_class = (_cantTouchThis = new WeakMap(), _hammerTime = new WeakSet(
   initializer: function () {
     return 123;
   }
-})), _class);
+})), _class));
 
 function _hammerTime2() {}
 
-_setComponentTemplate(Test,
-/*
-  Hello, world!
-*/
-{
-  "id": null,
-  "block": "[[[1,\"Hello, world!\"]],[],false,[]]",
-  "moduleName": "(unknown template module)",
-  "scope": null,
-  "isStrictMode": true
-});
+export { Test as default };
