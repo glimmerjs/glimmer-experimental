@@ -2,6 +2,7 @@ declare const Babel: any;
 
 import glimmerXPreset from '@glimmerx/babel-preset';
 import { precompile } from '@glimmer/compiler';
+import babelPresetEnv from '@babel/preset-env';
 
 export default function compile(js: string): { code: string } {
   return Babel.transform(js, {
@@ -9,7 +10,7 @@ export default function compile(js: string): { code: string } {
     presets: [
       [glimmerXPreset, { __loadPlugins: true, precompile }],
       [
-        'env',
+        babelPresetEnv,
         {
           targets: [
             'last 2 Edge versions',
