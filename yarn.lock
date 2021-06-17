@@ -2339,10 +2339,10 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@glimmer/babel-preset@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/babel-preset/-/babel-preset-2.0.0-beta.16.tgz#396cc6c9e6ef2fd7e6400a2789afa38c624eb4cb"
-  integrity sha512-C8g3BBK8AaKko/AB7KrazmtmXdDU9To1VfNuJ7YVHNwqsdh2zhsUA+aKaE1glJcfMe8SaJ+guax9QUzSLOxnpQ==
+"@glimmer/babel-preset@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/babel-preset/-/babel-preset-2.0.0-beta.17.tgz#e76f8c4e82d049efda9ce00e59ac6a45a2666f44"
+  integrity sha512-1J7HLMSoTJ0DkwmXD4lmkG9gzngFwH0yvcqWITIZvR9ZQjpwNrJnDLjPLAgnr1SPe2s/nJVg28x/s06R4rk9Mw==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.8.3"
     "@babel/plugin-proposal-decorators" "^7.8.3"
@@ -2352,10 +2352,10 @@
     babel-plugin-debug-macros "^0.3.4"
     babel-plugin-htmlbars-inline-precompile "^5.2.0"
 
-"@glimmer/blueprint@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/blueprint/-/blueprint-2.0.0-beta.16.tgz#0bc869763b4724e0a233a35109fc11829fb8812d"
-  integrity sha512-XU08qba9AJ7pmVABynwQnTfgmv34mtEXCibjlRFoG35X3kn/laKWSoI91GRLc0xIJn3bm/UwaiVEfO8GDL0J1A==
+"@glimmer/blueprint@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/blueprint/-/blueprint-2.0.0-beta.17.tgz#9111f90d3abbe26dd1771c79674fbbbed5082aec"
+  integrity sha512-DBPnjK+NPmjT0j4DbvajJ8cdFbyrrnZSXutHQGLJUapHSIptrdEk1hPbsUTzhpLnxGy2Z7zWxk+sa6MY7CHQUQ==
   dependencies:
     ember-cli-string-utils "^1.1.0"
 
@@ -2381,12 +2381,12 @@
     "@glimmer/wire-format" "0.77.6"
     "@simple-dom/interface" "^1.4.0"
 
-"@glimmer/component@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/component/-/component-2.0.0-beta.16.tgz#90de26ec8209a3f20b17a03dae566dc013626552"
-  integrity sha512-1jnL93XjsnoJNZgFz1mu2R9aPoRv3ZKfCp/YjY4sylvbz5jHSRyjc94QpV/gKDGaxTOUOpZrbauL6oUPLB5uRA==
+"@glimmer/component@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/component/-/component-2.0.0-beta.17.tgz#b2b2c475419d9f6ed23e1f5e5d01a6cf5ff251a5"
+  integrity sha512-f1IMzbcsdTQ8MdgovqnYEfga7k5cbtr4JibagQKhdcm3RSbgiYXlASq+RInoV+KOqSUbuwtvqpNAp+/SNlH5eQ==
   dependencies:
-    "@glimmer/core" "2.0.0-beta.16"
+    "@glimmer/core" "2.0.0-beta.17"
     "@glimmer/env" "^0.1.7"
     "@glimmer/util" "0.77.6"
     broccoli-file-creator "^2.1.1"
@@ -2419,10 +2419,10 @@
     ember-cli-typescript "3.0.0"
     ember-compatibility-helpers "^1.1.2"
 
-"@glimmer/core@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/core/-/core-2.0.0-beta.16.tgz#2f8a835821626d53dad3c681b893b0de5cc143f7"
-  integrity sha512-0giHB9corbWoqyeE6iU6yrsjf0ZilUT7xW0bLxf8XNtjTTymQQ18DXGwGwk0RMB+rZookusdvnS9DF+GRQEGBw==
+"@glimmer/core@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/core/-/core-2.0.0-beta.17.tgz#3a5acbc50dc7759c3512b532f4711a8466276a20"
+  integrity sha512-8AnL2i8MYi39Z1e66RwSr1zWfMDOcKovsWPnlOKB0rKG5QlsPweOAHt3eFxee1cQVXZh+0mQ84gkLkQ9o6icpA==
   dependencies:
     "@glimmer/env" "^0.1.7"
     "@glimmer/global-context" "0.77.6"
@@ -2435,10 +2435,10 @@
     "@glimmer/validator" "0.77.6"
     "@simple-dom/interface" "^1.4.0"
 
-"@glimmer/debug@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/debug/-/debug-2.0.0-beta.16.tgz#75049bf722040f17fdd0e314717212cbdc635739"
-  integrity sha512-4DEFj1UILIT2Mnat+DEo9zLQZ0O+3dkxuiUvHyW87csTSIC6dXmd+hRNHX+Px4VwAofPZ2wdkzukGryay02baA==
+"@glimmer/debug@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/debug/-/debug-2.0.0-beta.17.tgz#36663ce774f56e829ff0747e5ff6859f72c62eb5"
+  integrity sha512-7+hIeztKB1tpYCGMjDypoNGLv4Kd2KXYmK4yeWMLftX7ZMISJW/8oUWztWd3eakxRLP3rCKloHTMsL2s2ptyXQ==
   dependencies:
     "@glimmer/global-context" "0.77.6"
 
@@ -2495,13 +2495,13 @@
   dependencies:
     "@glimmer/env" "^0.1.7"
 
-"@glimmer/helper@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/helper/-/helper-2.0.0-beta.16.tgz#e26b5ac55b2fff8c1b4bbdda2e2d32adac2d14ac"
-  integrity sha512-kGSpby2c1PC4CYrSPvRJ+NUiItyFgxnsrRDAY+mc+ekQxk4iLKEhir9ZCOFn8CVnmRuYptqMWw9abm1P5DR14Q==
+"@glimmer/helper@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/helper/-/helper-2.0.0-beta.17.tgz#fb5d29b1d3a253f18ba971c6a8e37f8452d0bdd1"
+  integrity sha512-u4n6IpSz2ewUQ93L7ecsG0m6uAXaO3d+LvbBa4Dg7MHqNVNZbC1grmOw78oZc2KWv7FdZmLCSK0R0umfXyL92w==
   dependencies:
-    "@glimmer/component" "2.0.0-beta.16"
-    "@glimmer/core" "2.0.0-beta.16"
+    "@glimmer/component" "2.0.0-beta.17"
+    "@glimmer/core" "2.0.0-beta.17"
     "@glimmer/runtime" "0.77.6"
 
 "@glimmer/interfaces@0.73.0":
@@ -2568,10 +2568,10 @@
     "@glimmer/util" "0.77.6"
     "@glimmer/validator" "0.77.6"
 
-"@glimmer/modifier@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/modifier/-/modifier-2.0.0-beta.16.tgz#63ce204a56158ade8ae18833b3e00818a1e4d88d"
-  integrity sha512-npc7L3chR2OODnSZuG4bWOoRYrE+qS7tN04JL1XqDk6SybUA435nbQArxIV3byas2XB77L+y2GJhDRTB8GQFnQ==
+"@glimmer/modifier@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/modifier/-/modifier-2.0.0-beta.17.tgz#ec59b6b316a333d0c1ed6f313ca7baa442c81a5f"
+  integrity sha512-rYEPf/vVNkkysQuVUdOYJvnAQYAbGFJ98EnBgNdtB1HPLmfcHXbB2Km4PbKv/6sKMqkp7R37zdo8t3P/4DFFiw==
   dependencies:
     "@glimmer/runtime" "0.77.6"
 
@@ -2659,12 +2659,12 @@
     "@glimmer/wire-format" "0.77.6"
     "@simple-dom/interface" "^1.4.0"
 
-"@glimmer/ssr@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/ssr/-/ssr-2.0.0-beta.16.tgz#58f294dd001f03e83f827a6f430f599129306075"
-  integrity sha512-qjTaIlbwHYoDdh5TfZ1VD1A1YYW+yS16hWEWDR63BxLvqbe2Qs6XjJv5hOkRX5F/ntKaZF++Fbqn7QoGTv0zzQ==
+"@glimmer/ssr@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/ssr/-/ssr-2.0.0-beta.17.tgz#1ccec3298e656da1a6cc04b01a82794e512756c5"
+  integrity sha512-onQHC9y7AJ0fH0Xf3imMzLem9CKeajCl2wJ8nLcjksV6z+9CYDtpOZOpWLgKzlVO0Eyt/XDUADJr/EQUkrpT3Q==
   dependencies:
-    "@glimmer/core" "2.0.0-beta.16"
+    "@glimmer/core" "2.0.0-beta.17"
     "@glimmer/node" "0.77.6"
     "@glimmer/reference" "0.77.6"
     "@glimmer/runtime" "0.77.6"
@@ -2713,10 +2713,10 @@
     handlebars "^4.5.1"
     simple-html-tokenizer "^0.5.9"
 
-"@glimmer/tracking@2.0.0-beta.16":
-  version "2.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@glimmer/tracking/-/tracking-2.0.0-beta.16.tgz#02186d69a5eb0e1b81e4949d85a0eac363459694"
-  integrity sha512-WqI+ClBupe4U/J7sw6+zn11PmBnmybcOR3cdoLYSlljnoBayPd+8lq98he0Tli0xnxjv2f57GcXFtUeO6vNo8g==
+"@glimmer/tracking@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/tracking/-/tracking-2.0.0-beta.17.tgz#a617a29aaa599cc3a1dbef7e561166354ba18644"
+  integrity sha512-dzPqdgPC5IE0COrgvi/J+Vzqcfq6TAOiZHAKSEJXGhnthk4iOFOEJWiYZe1B0azBcNd2t7FUHGoFf7j1gFIwlw==
   dependencies:
     "@glimmer/env" "^0.1.7"
     "@glimmer/validator" "0.77.6"
