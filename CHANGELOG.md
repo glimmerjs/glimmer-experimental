@@ -1,3 +1,16 @@
+## v0.6.4 (2021-06-17)
+
+#### :bug: Bug Fix
+* `@glimmerx/babel-preset`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/service`, `@glimmerx/ssr`, `examples`
+  * [#119](https://github.com/glimmerjs/glimmer-experimental/pull/119) Bump to glimmerjs to beta.17 ([@chiragpat](https://github.com/chiragpat))
+* `@glimmerx/babel-preset`
+  * [#109](https://github.com/glimmerjs/glimmer-experimental/pull/109) bug repro: Association does not happen ([@chadhietala](https://github.com/chadhietala))
+
+#### Committers: 2
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+
+
 ## v0.6.3 (2021-04-27)
 
 #### :bug: Bug Fix
