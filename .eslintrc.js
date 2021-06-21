@@ -42,7 +42,9 @@ module.exports = {
       files: [
         'packages/@glimmerx/babel-preset/**/*.js',
         'packages/@glimmerx/eslint-plugin/**/*.js',
+        'packages/@glimmerx/prettier-plugin-component-templates/**/*.js',
         'packages/@glimmerx/webpack-loader/**/*.js',
+        'packages/@glimmerx/prettier-plugin-component-templates/test/index.js',
       ],
       env: {
         es6: true,
