@@ -4,6 +4,8 @@ import path from 'path';
 import { expect } from 'chai';
 
 describe('integration', function () {
+  this.timeout(3000); // Adjust timeout for slow? test.
+
   const defaults = { extension: '.js', message: 'should match snapshot' };
   function transform(testKey, options = {}) {
     const { extension, message } = { ...defaults, ...options };
@@ -16,12 +18,12 @@ describe('integration', function () {
     const prettierOptions = require(configFile);
 
     const code = fs.readFileSync(codeFile, 'utf8');
+    const expected = fs.readFileSync(outputFile, 'utf8');
 
     const actual = prettier.format(code, {
       filepath: codeFile, // Provide the path so prettier can infer parser based off file extension
       ...prettierOptions,
     });
-    const expected = fs.readFileSync(outputFile, 'utf8');
 
     expect(actual).to.equal(expected, message);
   }
