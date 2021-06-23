@@ -8,8 +8,8 @@ module.exports = {
   env: {
     es6: true,
   },
-  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-  plugins: ['@typescript-eslint', '@glimmerx', 'prettier'],
+  extends: ['eslint:recommended'],
+  plugins: ['@typescript-eslint', '@glimmerx'],
   rules: {
     '@glimmerx/template-vars': 'error',
   },
@@ -44,7 +44,6 @@ module.exports = {
         'packages/@glimmerx/eslint-plugin/**/*.js',
         'packages/@glimmerx/prettier-plugin-component-templates/**/*.js',
         'packages/@glimmerx/webpack-loader/**/*.js',
-        'packages/@glimmerx/prettier-plugin-component-templates/test/index.js',
       ],
       env: {
         es6: true,
@@ -65,11 +64,9 @@ module.exports = {
       extends: [
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'prettier/@typescript-eslint',
       ],
       rules: {
         '@typescript-eslint/no-explicit-any': 'error',
-        '@typescript-eslint/explicit-function-return-type': 'error',
         '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
 
         '@typescript-eslint/ban-types': [
