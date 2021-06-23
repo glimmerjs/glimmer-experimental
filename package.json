@@ -54,7 +54,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "fs-extra": "^9.0.0",
     "lerna": "^3.20.2",
-    "prettier": "^2.3.0",
+    "prettier": "^2.3.1",
     "qunit": "^2.9.3",
     "release-it": "^13.5.1",
     "release-it-lerna-changelog": "^2.1.2",
