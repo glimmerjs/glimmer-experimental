@@ -7,7 +7,9 @@ import { renderComponent, didRender } from '..';
 module('Modifier Tests', () => {
   test('Supports the on modifier', async (assert) => {
     class MyComponent extends Component {
-      static template = hbs`<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`;
+      static template = hbs`
+        <button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>
+      `;
       @tracked count = 0;
 
       @action
@@ -19,17 +21,17 @@ module('Modifier Tests', () => {
     const element = document.getElementById('qunit-fixture')!;
 
     await renderComponent(MyComponent, element);
+
     assert.strictEqual(
-      element.innerHTML,
+      element.innerHTML.trim(),
       `<button>Count: 0</button>`,
       'the component was rendered'
     );
 
     element.querySelector('button')!.click();
-
     await didRender();
     assert.strictEqual(
-      element.innerHTML,
+      element.innerHTML.trim(),
       `<button>Count: 1</button>`,
       'the component was rerendered'
     );

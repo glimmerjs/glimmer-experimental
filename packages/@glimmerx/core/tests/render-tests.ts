@@ -159,7 +159,9 @@ export default function renderTests(
 
     test('a component can use modifiers', async (assert) => {
       class MyComponent extends Component {
-        static template = hbs`<button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>`;
+        static template = hbs`
+          <button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>
+        `;
 
         @tracked count = 0;
 
@@ -170,7 +172,7 @@ export default function renderTests(
       }
 
       const html = await render(MyComponent);
-      assert.strictEqual(html, `<button>Count: 0</button>`, 'the component was rendered');
+      assert.strictEqual(html.trim(), `<button>Count: 0</button>`, 'the component was rendered');
     });
 
     test('supports functions as simple helpers', async (assert) => {
