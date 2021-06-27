@@ -15,7 +15,7 @@
     "build": "scripts/build.js",
     "format:check": "prettier --check 'packages/**/*.{js,ts}'",
     "format": "prettier --write 'packages/**/*.{js,ts}'",
-    "lint": "eslint . --ext .js,.ts",
+    "lint": "eslint . --cache --ext .js,.ts",
     "prepublishOnly": "scripts/build.js",
     "problems": "tsc -p tsconfig.json --noEmit",
     "start": "webpack-dev-server",
