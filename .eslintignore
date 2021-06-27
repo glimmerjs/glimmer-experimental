@@ -14,3 +14,5 @@
 **/packages/@glimmerx/babel-preset/test/**/output.js
 **/packages/@glimmerx/babel-preset/test/**/code.ts
 **/packages/@glimmerx/babel-preset/test/**/output.ts
+**/packages/@glimmerx/prettier-plugin-component-templates/test/fixtures/**/code.*
+**/packages/@glimmerx/prettier-plugin-component-templates/test/fixtures/**/output.*

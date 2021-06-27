@@ -31,7 +31,7 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
       {},
       {
         get(_target, key) {
-          return owner && owner.lookup({ type: 'service', name: (key as unknown) as string });
+          return owner && owner.lookup({ type: 'service', name: key as unknown as string });
         },
       }
     );

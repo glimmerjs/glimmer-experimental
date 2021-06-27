@@ -5,8 +5,8 @@ import { ButtonList, ButtonListService } from 'basic-addon';
 
 const { module, test } = QUnit;
 
-module('Integration | Component | button-list', function() {
-  test('it renders', async function(assert) {
+module('Integration | Component | button-list', function () {
+  test('it renders', async function (assert) {
     const container = document.getElementById('qunit-fixture');
 
     await renderComponent(

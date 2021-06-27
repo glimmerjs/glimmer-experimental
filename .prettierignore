@@ -1,1 +1,4 @@
 packages/@glimmerx/babel-preset/test/
+packages/@glimmerx/prettier-plugin-component-templates/test/fixtures/*/code.*
+packages/@glimmerx/prettier-plugin-component-templates/test/fixtures/*/output.*
+

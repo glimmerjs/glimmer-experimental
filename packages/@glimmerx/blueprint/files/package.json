@@ -33,14 +33,12 @@
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2",
+    "eslint": "^7.29.0",
     "file-loader": "^6.0.0",
     "glob": "7.1.6",
     "html-webpack-plugin": "^4.0.4",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.2",
+    "prettier": "^2.3.1",
     "qunit": "^2.9.3",
     "qunit-dom": "^1.1.0",
     "style-loader": "^1.1.3",
@@ -61,12 +59,10 @@
     },
     "plugins": [
       "@glimmerx",
-      "@typescript-eslint",
-      "prettier"
+      "@typescript-eslint"
     ],
     "extends": [
-      "eslint:recommended",
-      "plugin:prettier/recommended"
+      "eslint:recommended"
     ],
     "ignorePatterns": [
       "dist/",
@@ -83,8 +79,7 @@
         ],
         "extends": [
           "plugin:@typescript-eslint/eslint-recommended",
-          "plugin:@typescript-eslint/recommended",
-          "prettier/@typescript-eslint"
+          "plugin:@typescript-eslint/recommended"
         ]
       },
       {

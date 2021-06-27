@@ -6,9 +6,5 @@ class ButtonModel {
 }
 
 export default class ButtonListService extends Service {
-  buttons = [
-    new ButtonModel(),
-    new ButtonModel(),
-    new ButtonModel(),
-  ];
+  buttons = [new ButtonModel(), new ButtonModel(), new ButtonModel()];
 }
