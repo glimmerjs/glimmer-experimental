@@ -1,5 +1,7 @@
 import Component, { hbs } from '@glimmerx/component';
 
+const StripWhitespace = hbs``;
+
 const InlineText = hbs` Hello World`;
 
 const HardlineText = hbs`
@@ -16,6 +18,7 @@ const HardlineTagText = hbs`
 
 export default class Simple extends Component {
   static template = hbs`
+    <StripWhiteSpace />
     <InlineText />
     <HardlineText />
     <InlineTagWrappedText />

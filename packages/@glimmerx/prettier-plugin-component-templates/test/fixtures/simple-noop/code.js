@@ -1,5 +1,8 @@
 import Component, { hbs } from '@glimmerx/component';
 
+// const NoText = hbs``;
+const NoText = hbs``;
+
 // const InlineText = hbs`Hello World`;
 const InlineText = hbs`Hello World`;
 
@@ -28,9 +31,10 @@ const HardlineTagText = hbs`
 // Should fix indent
 export default class Simple extends Component {
   static template = hbs`
-    <InlineText />
-      <HardlineText />
-        <InlineTagWrappedText />
-          <HardlineTagText />
+    <NoText />
+      <InlineText />
+        <HardlineText />
+          <InlineTagWrappedText />
+            <HardlineTagText />
   `;
 }
