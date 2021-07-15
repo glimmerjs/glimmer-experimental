@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/storybook",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "storybook for glimmerjs",
   "keywords": [
     "storybook",
@@ -50,10 +50,10 @@
     "global": "^4.4.0"
   },
   "peerDependencies": {
-    "@glimmerx/babel-preset": "^0.6.4",
-    "@glimmerx/component": "^0.6.4",
-    "@glimmerx/core": "^0.6.4",
-    "@glimmerx/webpack-loader": "^0.6.4",
+    "@glimmerx/babel-preset": "^0.6.5",
+    "@glimmerx/component": "^0.6.5",
+    "@glimmerx/core": "^0.6.5",
+    "@glimmerx/webpack-loader": "^0.6.5",
     "babel-loader": "^8.1.0"
   },
   "engines": {

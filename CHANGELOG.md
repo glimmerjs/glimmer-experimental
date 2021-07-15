@@ -1,3 +1,13 @@
+## v0.6.5 (2021-07-15)
+
+#### :rocket: Enhancement
+* `@glimmerx/blueprint`, `@glimmerx/core`, `@glimmerx/eslint-plugin`, `@glimmerx/helper`, `@glimmerx/prettier-plugin-component-templates`, `@glimmerx/service`, `@glimmerx/storybook`, `examples`
+  * [#117](https://github.com/glimmerjs/glimmer-experimental/pull/117) Added prettier-plugin for formatting glimmer component templates ([@wondersloth](https://github.com/wondersloth))
+
+#### Committers: 1
+- Matthew Edwards ([@wondersloth](https://github.com/wondersloth))
+
+
 ## v0.6.4 (2021-06-17)
 
 #### :bug: Bug Fix
