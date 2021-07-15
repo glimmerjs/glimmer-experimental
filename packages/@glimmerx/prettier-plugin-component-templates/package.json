@@ -1,0 +1,27 @@
+{
+  "name": "@glimmerx/prettier-plugin-component-templates",
+  "version": "0.0.1",
+  "description": "A prettier formatter for glimmer component templates",
+  "main": "index.js",
+  "repository": "https://github.com/glimmerjs/glimmer-experimental",
+  "author": "Matt Edwards <matt.m.edwards@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "index.js",
+    "lib/**/*"
+  ],
+  "scripts": {
+    "test": "mocha -r esm"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "esm": "^3.2.25",
+    "mocha": "^7.1.1",
+    "prettier": "^2.3.1"
+  },
+  "volta": {
+    "node": "12.10.0",
+    "yarn": "1.22.4"
+  }
+}

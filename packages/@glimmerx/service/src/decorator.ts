@@ -36,5 +36,5 @@ export function service(
     return makeServiceDecorator(targetOrServiceName);
   }
 
-  return makeServiceDecorator((key as unknown) as string)(targetOrServiceName, key!);
+  return makeServiceDecorator(key as unknown as string)(targetOrServiceName, key!);
 }

@@ -28,7 +28,8 @@ const TemplateOnlyComponent = hbs`<h1>I am rendered by a template only component
 
 class MyComponent extends Component {
   static template = hbs`
-    <h1>Hello {{this.message}}</h1> <br/>
+    <h1>Hello {{this.message}}</h1>
+    <br />
     {{myHelper "foo" greeting="Hello"}}
     <p>Current locale: {{this.currentLocale}}</p>
     {{#if (isCJK)}}
@@ -46,10 +47,10 @@ class MyComponent extends Component {
       <GtsComponent @count={{this.count}} />
     </div>
     <button {{on "click" this.increment}}>Increment</button>
-    <TemplateOnlyComponent @name="For Glimmerx"/>
+    <TemplateOnlyComponent @name="For Glimmerx" />
 
-    <ButtonList/>
-    <ButtonList/>
+    <ButtonList />
+    <ButtonList />
   `;
 
   message = 'hello world';

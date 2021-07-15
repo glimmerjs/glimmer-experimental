@@ -14,7 +14,11 @@ export default class ButtonList extends Component {
 
   static template = hbs`
     {{#each this.buttonList.buttons as |button|}}
-      <SimpleButton ...attributes @count={{button.count}} @onClick={{fn this.increaseCount button}} />
+      <SimpleButton
+        ...attributes
+        @count={{button.count}}
+        @onClick={{fn this.increaseCount button}}
+      />
     {{/each}}
   `;
 }
