@@ -1,4 +1,4 @@
-# prettier-plugin-glimmer-experimental
+# @glimmerx/prettier-plugin-component-templates
 
 ## Background
 
