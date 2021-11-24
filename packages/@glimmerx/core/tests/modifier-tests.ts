@@ -3,6 +3,7 @@ const { module, test } = QUnit;
 import { on, action } from '@glimmerx/modifier';
 import Component, { tracked, hbs } from '@glimmerx/component';
 import { renderComponent, didRender } from '..';
+import { Modifier } from '..';
 
 module('Modifier Tests', () => {
   test('Supports the on modifier', async (assert) => {
@@ -48,6 +49,26 @@ module('Modifier Tests', () => {
 
     class MyComponent extends Component {
       static template = hbs`<div {{myModifier "foo" "bar"}} class="test-element"></div>`;
+    }
+
+    const element = document.getElementById('qunit-fixture')!;
+    await renderComponent(MyComponent, element);
+  });
+
+  test('supports simple class as modifiers', async (assert) => {
+    assert.expect(4);
+
+    class myModifier extends Modifier {
+      didInstall() {
+        assert.equal(this.args.positional[0], 'foo');
+        assert.equal(this.args.positional[1], 'bar');
+        assert.equal(this.args.named.baz, 'qux');
+        assert.ok(this.element.classList.contains('test-element'));
+      }
+    }
+
+    class MyComponent extends Component {
+      static template = hbs`<div {{myModifier "foo" "bar" baz="qux"}} class="test-element"></div>`;
     }
 
     const element = document.getElementById('qunit-fixture')!;
