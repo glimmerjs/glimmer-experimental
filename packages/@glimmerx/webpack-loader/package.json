@@ -10,7 +10,7 @@
     "test": "mocha -r esm"
   },
   "dependencies": {
-    "@glimmer/syntax": "0.77.5",
+    "@glimmer/syntax": "0.77.6",
     "validate-peer-dependencies": "^1.1.0",
     "loader-utils": "2.0.0",
     "schema-utils": "3.0.0"
