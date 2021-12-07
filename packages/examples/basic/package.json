@@ -17,7 +17,7 @@
     "basic-addon": "0.6.5"
   },
   "devDependencies": {
-    "@glimmer/interfaces": "0.77.3",
+    "@glimmer/interfaces": "0.77.6",
     "@glimmerx/storybook": "^0.6.5",
     "@storybook/addon-essentials": "^6.1.21"
   },

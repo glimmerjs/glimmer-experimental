@@ -20,7 +20,7 @@
     "mocha": "^7.1.1"
   },
   "peerDependencies": {
-    "@glimmer/syntax": "^0.77.5",
+    "@glimmer/syntax": "^0.77.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.29.0"
   },

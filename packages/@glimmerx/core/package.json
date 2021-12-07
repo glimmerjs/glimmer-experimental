@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@glimmer/core": "2.0.0-beta.17",
-    "@glimmer/interfaces": "0.77.3",
-    "@glimmer/manager": "0.77.3"
+    "@glimmer/interfaces": "0.77.6",
+    "@glimmer/manager": "0.77.6"
   },
   "volta": {
     "node": "12.10.0",
