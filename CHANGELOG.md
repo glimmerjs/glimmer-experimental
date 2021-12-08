@@ -1,3 +1,23 @@
+## v0.6.6 (2021-12-08)
+
+#### :rocket: Enhancement
+* `@glimmerx/storybook`, `examples`
+  * [#129](https://github.com/glimmerjs/glimmer-experimental/pull/129) Bump storybook from 6.1.21 to 6.4.1 ([@tarinrickett](https://github.com/tarinrickett))
+
+#### :bug: Bug Fix
+* `@glimmerx/core`, `@glimmerx/eslint-plugin`, `@glimmerx/helper`, `@glimmerx/ssr`, `@glimmerx/webpack-loader`, `examples`
+  * [#130](https://github.com/glimmerjs/glimmer-experimental/pull/130) Change all glimmer-vm dependencies to be consitent at 0.77.6 ([@chiragpat](https://github.com/chiragpat))
+
+#### :memo: Documentation
+* `@glimmerx/prettier-plugin-component-templates`
+  * [#122](https://github.com/glimmerjs/glimmer-experimental/pull/122) Fix typo in README.md title ([@wondersloth](https://github.com/wondersloth))
+
+#### Committers: 3
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+- Matt Edwards ([@wondersloth](https://github.com/wondersloth))
+- [@tarinrickett](https://github.com/tarinrickett)
+
+
 ## v0.6.5 (2021-07-15)
 
 #### :rocket: Enhancement

@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/compiler",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Compiler functionality",
   "main": "index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
