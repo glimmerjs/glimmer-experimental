@@ -26,6 +26,19 @@ export default function renderMain({ storyFn, showMain }: RenderMainArgs) {
     glimmerStoryComponent = storyFnResult;
   }
 
+  /**
+   * Fix an issue with template tag where the actual element is inserted as a sibling instead of being a child of #document-fragment
+   * Wrap this inside of window.onload for the iframe to finish
+   */
+  window.addEventListener('load', () => {
+    rootElement.querySelectorAll('template').forEach((element: HTMLTemplateElement) => {
+      const { firstElementChild } = element;
+      if (firstElementChild) {
+        element.content.append(firstElementChild);
+      }
+    });
+  });
+
   rootElement.innerHTML = '';
   showMain();
   return renderComponent(glimmerStoryComponent, glimmerRenderComponentOptions);
