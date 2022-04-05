@@ -81,20 +81,20 @@ export default class Component {
 import { hbs as notHbs } from '@glimmerx/component';
 import myHelper from './myHelper';
 export default class Component {
-  static template = hbs`I am using {{myHelper}} here, but I forgot to import hbs,
-    and also forgot to tag this template literal with hbs.`;
+  static template = hbs`I am using {{myHelper}} here, but I imported hbs under a different local name,
+    and tagged this template literal with hbs rather than its local name.`;
   method() {
     return false;
   }
 }
 ```
 
-The following example will cause a failure for the rule `@glimmerx/template-vars`, because it usees vars in TemplateLiterals that are not declared in scope
+The following example will cause a failure for the rule `@glimmerx/template-vars`, because it uses vars in TemplateLiterals that are not declared in scope
 
 ```js
 import { hbs } from '@glimmerx/component';
 export default class Component {
-  static template = hbs`I am using {{myHelper}} here, but I forgot to tag this template literal with hbs.`;
+  static template = hbs`I am using {{myHelper}} here, but I forgot to include the myHelper import.`;
   method() {
     return false;
   }
