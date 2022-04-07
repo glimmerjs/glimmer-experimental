@@ -50,7 +50,7 @@ module.exports = {
     messages: {
       undefToken: 'Token {{ token }} is used in an hbs tagged template literal, but is not defined',
       undefLocalMethod:
-        'Local Method {{ method }} is used in an hbs tagged template literal, but is not defined',
+        'Local Token {{ token }} is used in an hbs tagged template literal, but is not defined',
     },
     // example: '@glimmerx/glimmerx/template-vars': [2, 'unused-only', { nativeTokens: ['anImplicitToken'] }]
     schema: [
@@ -82,8 +82,8 @@ module.exports = {
 
     const [mode = 'all', configOpts] = context.options;
     let nativeTokens = (configOpts && configOpts.nativeTokens) || [];
-    let localUsedMethods = [];
-    let localDefinedMethods = [];
+    let localUsedVars = [];
+    let localDefinedVars = [];
     return {
       ImportSpecifier(node) {
         if (isGlimmerSfc || node.parent.source.value !== '@glimmerx/component') {
@@ -104,7 +104,7 @@ module.exports = {
         const templateString = templateElementNode.value.raw;
 
         const templateScopeTokens = getTemplateLocals(templateString);
-        localUsedMethods = localUsedMethods.concat(getThisTemplateLocals(templateString));
+        localUsedVars = localUsedVars.concat(getThisTemplateLocals(templateString));
 
         templateScopeTokens.forEach((token) => {
           const isTokenPresent = context.markVariableAsUsed(token);
@@ -120,23 +120,27 @@ module.exports = {
         });
       },
       MethodDefinition(node) {
-        localDefinedMethods.push(node.key.name);
+        localDefinedVars.push(node.key.name);
+      },
+      // needs to handle services
+      ClassProperty(node) {
+        localDefinedVars.push(node.key.name);
       },
       'ClassBody:exit'(node) {
-        let localUndefinedMethods = localUsedMethods.filter(
-          (method) => !localDefinedMethods.includes(method)
+        let localUndefinedMethods = localUsedVars.filter(
+          (method) => !localDefinedVars.includes(method)
         );
-        localUndefinedMethods.forEach((method) => {
+        localUndefinedMethods.forEach((token) => {
           context.report({
             data: {
-              method,
+              token,
             },
             messageId: 'undefLocalMethod',
             node: node,
           });
         });
-        localUsedMethods = [];
-        localDefinedMethods = [];
+        localUsedVars = [];
+        localDefinedVars = [];
 
         //TODO: this assumes 1 class body, and cannot handle nested classes
       },

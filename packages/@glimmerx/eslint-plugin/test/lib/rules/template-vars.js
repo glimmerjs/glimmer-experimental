@@ -277,6 +277,40 @@ ruleTester.run('template-vars', rule, {
       `,
       options: ['unused-only'],
     },
+    {
+      code: `
+        import { hbs } from '@glimmerx/component';
+        export default class Component {
+          @service myService;
+          static template = hbs\`I am using {{this.foo1}},{{this.bar1}}, {{this.count1}}, {{this.myService}} here, and I've defined all locally.\`;
+
+          get foo1() {
+            return 1;
+          }
+
+          bar1 = 1;
+          @tracked count1 = 0;
+        }
+      `,
+      options: ['unused-only'],
+    },
+    {
+      code: `
+        class MyComponent extends Component {
+          static template = hbs\`
+            <button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>
+          \`;
+
+          @tracked count = 0;
+
+          @action
+          incrementCounter() {
+            this.count++;
+          }
+        }
+      `,
+      options: ['unused-only'],
+    },
   ],
   invalid: [
     {
