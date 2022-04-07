@@ -11,7 +11,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/compiler": "0.73.0"
+    "@glimmer/compiler": "0.84.0"
   },
   "volta": {
     "node": "12.10.0",
