@@ -28,7 +28,7 @@
     "@glimmerx/helper": "^0.6.6",
     "@glimmerx/modifier": "^0.6.6",
     "@glimmerx/service": "^0.6.6",
-    "ember-cli-babel": "7.26.2",
+    "ember-cli-babel": "^7.26.11",
     "ember-cli-htmlbars": "^5.7.1"
   },
   "devDependencies": {
@@ -39,7 +39,7 @@
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^2.4.1",
-    "ember-cli": "~3.17.0",
+    "ember-cli": "~3.28.0",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-inject-live-reload": "^2.0.2",
     "ember-cli-sri": "^2.1.1",
