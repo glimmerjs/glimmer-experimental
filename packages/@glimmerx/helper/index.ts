@@ -1,4 +1,4 @@
-export { helper, Helper } from './src/helper';
+export { helper, HelperFunction, Helper } from './src/helper';
 
 import { fn as glimmerFn } from '@glimmer/helper';
 
