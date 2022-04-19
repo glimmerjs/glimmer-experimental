@@ -3,7 +3,7 @@ export { tracked } from '@glimmer/tracking';
 
 // This type exists to provide a non-user-constructible, non-subclassable
 // type representing the conceptual "instance type" of a template-only component.
-// The abstract field of type `never` presents subclassing in userspace of
+// The abstract field of type `never` prevents subclassing in userspace of
 // the value returned from `hbs`.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export declare abstract class TemplateComponentInstance<S> {

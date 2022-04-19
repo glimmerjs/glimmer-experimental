@@ -13,7 +13,7 @@ export type HelperFunction<T = unknown, U = unknown> = (
 
 // This type exists to provide a non-user-constructible, non-subclassable
 // type representing the conceptual "instance type" of a helper.
-// The abstract field of type `never` presents subclassing in userspace of
+// The abstract field of type `never` prevents subclassing in userspace of
 // the value returned from `helper()`.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export declare abstract class HelperInstance<S> {
