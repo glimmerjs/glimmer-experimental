@@ -10,7 +10,7 @@
     "test": "mocha -r esm"
   },
   "dependencies": {
-    "@glimmer/babel-preset": "2.0.0-beta.17"
+    "@glimmer/babel-preset": "2.0.0-beta.20"
   },
   "devDependencies": {
     "babel-plugin-tester": "^6.4.0",

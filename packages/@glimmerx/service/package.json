@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@glimmerx/core": "0.6.6",
-    "@glimmer/debug": "2.0.0-beta.17",
+    "@glimmer/debug": "2.0.0-beta.20",
     "@glimmer/env": "^0.1.7",
     "ember-cli-babel": "7.26.2"
   },

@@ -33,7 +33,6 @@ let Test = _setComponentTemplate(_createTemplateFactory(
   "id": null,
   "block": "[[[1,\"Hello World\"]],[],false,[]]",
   "moduleName": "(unknown template module)",
-  "scope": null,
   "isStrictMode": true
 }), (_class = (_cantTouchThis = new WeakMap(), _hammerTime = new WeakSet(), class Test extends Component {
   constructor(...args) {
