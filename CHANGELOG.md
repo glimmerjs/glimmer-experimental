@@ -1,3 +1,18 @@
+## v0.6.7 (2022-07-25)
+
+#### :rocket: Enhancement
+* `@glimmerx/component`, `@glimmerx/helper`, `@glimmerx/modifier`
+  * [#148](https://github.com/glimmerjs/glimmer-experimental/pull/148) Update types for extensibility ([@dfreeman](https://github.com/dfreeman))
+
+#### :house: Internal
+* `@glimmerx/babel-preset`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/service`, `examples`
+  * [#154](https://github.com/glimmerjs/glimmer-experimental/pull/154) Fix CI ([@dfreeman](https://github.com/dfreeman))
+
+#### Committers: 3
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+- Dan Freeman ([@dfreeman](https://github.com/dfreeman))
+- Steven Wan ([@Swannerino](https://github.com/Swannerino))
+
 ## v0.6.6 (2021-12-08)
 
 #### :rocket: Enhancement
