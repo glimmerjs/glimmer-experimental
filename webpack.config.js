@@ -85,6 +85,7 @@ const nodeConfig = {
           {
             loader: 'babel-loader',
             options: {
+              plugins: ['@babel/plugin-proposal-decorators'],
               presets: [
                 '@glimmerx/babel-preset',
                 '@babel/preset-typescript',

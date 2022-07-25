@@ -1,7 +1,7 @@
 import { expectTypeOf } from 'expect-type';
 import { helper, Helper, fn, FnHelper } from '@glimmerx/helper';
 
-declare module '@glimmerx/helper/dist/commonjs/src/helper' {
+declare module '@glimmerx/helper' {
   // For the purposes of testing, make the instance type dependent on the `S` parameter,
   // even if in practice the variance wouldn't be quite right.
   export interface HelperInstance<S> {
