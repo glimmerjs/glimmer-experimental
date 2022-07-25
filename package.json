@@ -20,11 +20,12 @@
     "problems": "tsc -p tsconfig.json --noEmit",
     "start": "webpack-dev-server",
     "storybook": "yarn build && yarn workspace basic-example-app storybook",
-    "test": "yarn format:check && yarn lint && testem ci && yarn test:babel-plugins && yarn test:prettier",
+    "test": "yarn format:check && yarn lint && testem ci && yarn test:babel-plugins && yarn test:types && yarn test:prettier",
     "test:babel-plugins": "mocha -r esm --timeout 5000 packages/@glimmerx/babel-preset/test packages/@glimmerx/eslint-plugin/test/lib/rules",
     "test:ember": "yarn workspace basic-addon ember try:one",
     "test:prettier": "mocha -r esm packages/@glimmerx/prettier-plugin-component-templates/test",
     "test:playground": "yarn workspace glimmerx-playground test",
+    "test:types": "tsc --noEmit --project type-tests",
     "test:watch": "testem"
   },
   "browserslist": {
@@ -51,6 +52,7 @@
     "@typescript-eslint/parser": "^4.18.0",
     "babel-loader": "^8.0.6",
     "eslint": "^7.29.0",
+    "expect-type": "^0.13.0",
     "fs-extra": "^9.0.0",
     "lerna": "^3.20.2",
     "prettier": "^2.3.1",

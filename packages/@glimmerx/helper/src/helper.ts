@@ -5,14 +5,29 @@ interface HelperOptions {
   services: Record<string, unknown>;
 }
 
-export type Helper<T = unknown, U = unknown> = (
+export type HelperFunction<T = unknown, U = unknown> = (
   positional: T,
   named: U,
   options: HelperOptions
 ) => unknown;
 
+// This type exists to provide a non-user-constructible, non-subclassable
+// type representing the conceptual "instance type" of a helper.
+// The abstract field of type `never` prevents subclassing in userspace of
+// the value returned from `helper()`.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export declare abstract class HelperInstance<S> {
+  protected abstract __concrete__: never;
+}
+
+// Making `Helper` a bare constructor type allows for type parameters to be
+// preserved when `helper()` is passed a generic function. By making it
+// `abstract` and impossible to subclass (see above), we prevent users from
+// attempting to instantiate a return value from `helper()`.
+export type Helper<S> = abstract new () => HelperInstance<S>;
+
 interface BasicHelperBucket {
-  fn: Helper;
+  fn: HelperFunction;
   args: Arguments;
   ownerProxy: Record<string, unknown>;
 }
@@ -24,7 +39,7 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
 
   constructor(private owner: Owner | undefined) {}
 
-  createHelper(fn: Helper, args: Arguments) {
+  createHelper(fn: HelperFunction, args: Arguments) {
     const { owner } = this;
 
     const ownerProxy = new Proxy(
@@ -54,8 +69,17 @@ class BasicHelperManager implements HelperManager<BasicHelperBucket> {
 
 const basicHelperManagerFactory = (owner: Owner | undefined) => new BasicHelperManager(owner);
 
-export function helper<T, U>(helperFunction: Helper<T, U>) {
+export function helper<P extends unknown[], N, R>(
+  helperFunction: (positional: P, named: N, options: HelperOptions) => R
+): Helper<{ Args: { Named: N; Positional: P }; Return: R }> {
   setHelperManager(basicHelperManagerFactory, helperFunction);
 
-  return helperFunction;
+  // Despite actually returning the given function, from a template's
+  // perspective its associated helper manager now makes it something
+  // different. It wouldn't be legal to invoke it according to its
+  // original type any more, and we need to reflect that.
+  return helperFunction as unknown as Helper<{
+    Args: { Named: N; Positional: P };
+    Return: R;
+  }>;
 }
