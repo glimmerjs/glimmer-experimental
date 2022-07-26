@@ -24,6 +24,7 @@
   },
   "exclude": [
     "./packages/@glimmerx/storybook",
+    "./packages/@glimmerx/prettier-plugin-component-templates",
     "./type-tests"
   ]
 }
