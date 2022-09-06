@@ -1,6 +1,6 @@
 {
   "name": "partial-rehydration-example-app",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "description": "Example application using partial rehydration with @glimmerx packages",
   "main": "dist/commonjs/index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
@@ -9,10 +9,10 @@
   "private": true,
   "scripts": {},
   "dependencies": {
-    "@glimmerx/core": "^0.6.7",
-    "@glimmerx/component": "^0.6.7",
-    "@glimmerx/modifier": "^0.6.7",
-    "@glimmerx/ssr": "^0.6.7"
+    "@glimmerx/core": "^0.6.8",
+    "@glimmerx/component": "^0.6.8",
+    "@glimmerx/modifier": "^0.6.8",
+    "@glimmerx/ssr": "^0.6.8"
   },
   "volta": {
     "node": "12.10.0",

@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/component",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "description": "Base component class",
   "keywords": [
     "ember-addon"

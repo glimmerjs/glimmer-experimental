@@ -1,3 +1,12 @@
+## v0.6.8 (2022-09-06)
+
+#### :house: Internal
+* `@glimmerx/babel-preset`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/service`, `@glimmerx/ssr`, `examples`
+  * [#158](https://github.com/glimmerjs/glimmer-experimental/pull/158) Bump Glimmer Deps ([@chadhietala](https://github.com/chadhietala))
+
+#### Committers: 1
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+
 ## v0.6.7 (2022-07-25)
 
 #### :rocket: Enhancement
