@@ -34,7 +34,7 @@
   "devDependencies": {
     "@ember/optional-features": "^1.3.0",
     "@ember/test-helpers": "^2.7.0",
-    "@glimmer/tracking": "2.0.0-beta.20",
+    "@glimmer/tracking": "2.0.0-beta.21",
     "@glimmerx/eslint-plugin": "^0.6.7",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
