@@ -7,7 +7,7 @@
 Generate a new project using the GlimmerX blueprint:
 
 ```sh
-npx ember-cli new hello-glimmerx --blueprint @glimmerx/blueprint
+npx ember-cli new hello-glimmerx --yarn --blueprint @glimmerx/blueprint
 ```
 
 ## Introduction
