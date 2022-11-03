@@ -1,15 +1,56 @@
-const { getTemplateLocals } = require('@glimmer/syntax');
+const { getTemplateLocals, preprocess, traverse } = require('@glimmer/syntax');
+
+/**
+ * Adds tokens to the tokensSet if they're a path prefixed with `this.`
+ */
+
+function addTokens(tokensSet, node) {
+  if (node.type === 'PathExpression') {
+    if (node.this === true) {
+      // this will only look at the first level of methods on this, with no handling for (properties/methods) of methods
+      const topLevelMaybeToken = node.parts[0];
+
+      if (tokensSet.has(topLevelMaybeToken) === false) {
+        tokensSet.add(topLevelMaybeToken);
+      }
+    }
+  }
+}
+
+/**
+ * Parses and traverses a given handlebars html template to extract all references to local methods via `this.myMethod`
+ */
+
+function getThisTemplateLocals(html) {
+  const ast = preprocess(html);
+  const tokensSet = new Set();
+  traverse(ast, {
+    ElementNode(node) {
+      addTokens(tokensSet, node);
+    },
+
+    PathExpression(node) {
+      addTokens(tokensSet, node);
+    },
+  });
+  let tokens = [];
+  tokensSet.forEach((s) => tokens.push(s));
+
+  return tokens;
+}
 
 module.exports = {
   docs: {
     description:
-      'Components / Helpers referenced in hbs template literals should not trigger no-unused-vars failures, but should trigger no-undef if they are not defined propery',
+      'Components / Helpers referenced in hbs template literals should not trigger no-unused-vars failures, but should trigger template-vars if they are not defined propery',
     category: 'Variables',
     recommended: true,
   },
   meta: {
     messages: {
       undefToken: 'Token {{ token }} is used in an hbs tagged template literal, but is not defined',
+      undefLocalMethod:
+        'Local Token {{ token }} is used in an hbs tagged template literal, but is not defined',
     },
     // example: '@glimmerx/glimmerx/template-vars': [2, 'unused-only', { nativeTokens: ['anImplicitToken'] }]
     schema: [
@@ -41,7 +82,8 @@ module.exports = {
 
     const [mode = 'all', configOpts] = context.options;
     let nativeTokens = (configOpts && configOpts.nativeTokens) || [];
-
+    let localUsedVars = [];
+    let localDefinedVars = [];
     return {
       ImportSpecifier(node) {
         if (isGlimmerSfc || node.parent.source.value !== '@glimmerx/component') {
@@ -62,6 +104,8 @@ module.exports = {
         const templateString = templateElementNode.value.raw;
 
         const templateScopeTokens = getTemplateLocals(templateString);
+        localUsedVars = localUsedVars.concat(getThisTemplateLocals(templateString));
+
         templateScopeTokens.forEach((token) => {
           const isTokenPresent = context.markVariableAsUsed(token);
           if (!isTokenPresent && !nativeTokens.includes(token) && mode === 'all') {
@@ -74,6 +118,31 @@ module.exports = {
             });
           }
         });
+      },
+      MethodDefinition(node) {
+        localDefinedVars.push(node.key.name);
+      },
+      // needs to handle services
+      ClassProperty(node) {
+        localDefinedVars.push(node.key.name);
+      },
+      'ClassBody:exit'(node) {
+        let localUndefinedMethods = localUsedVars.filter(
+          (method) => !localDefinedVars.includes(method)
+        );
+        localUndefinedMethods.forEach((token) => {
+          context.report({
+            data: {
+              token,
+            },
+            messageId: 'undefLocalMethod',
+            node: node,
+          });
+        });
+        localUsedVars = [];
+        localDefinedVars = [];
+
+        //TODO: this assumes 1 class body, and cannot handle nested classes
       },
     };
   },

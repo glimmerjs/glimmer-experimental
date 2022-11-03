@@ -131,8 +131,8 @@ describe('no-unused-vars', function () {
       import { hbs as notHbs } from '@glimmerx/component';
       import myHelper from './myHelper';
       export default class Component {
-        static template = hbs\`I am using {{myHelper}} here, but I forgot to import hbs,
-          and also forgot to tag this template literal with hbs.\`;
+        static template = hbs\`I am using {{myHelper}} here, but I imported hbs under a different local name,
+        and tagged this template literal with hbs rather than its local name.\`;
         method() {
           return false;
         }
@@ -277,13 +277,47 @@ ruleTester.run('template-vars', rule, {
       `,
       options: ['unused-only'],
     },
+    {
+      code: `
+        import { hbs } from '@glimmerx/component';
+        export default class Component {
+          @service myService;
+          static template = hbs\`I am using {{this.foo1}},{{this.bar1}}, {{this.count1}}, {{this.myService}} here, and I've defined all locally.\`;
+
+          get foo1() {
+            return 1;
+          }
+
+          bar1 = 1;
+          @tracked count1 = 0;
+        }
+      `,
+      options: ['unused-only'],
+    },
+    {
+      code: `
+        class MyComponent extends Component {
+          static template = hbs\`
+            <button {{on "click" this.incrementCounter}}>Count: {{this.count}}</button>
+          \`;
+
+          @tracked count = 0;
+
+          @action
+          incrementCounter() {
+            this.count++;
+          }
+        }
+      `,
+      options: ['unused-only'],
+    },
   ],
   invalid: [
     {
       code: `
         import { hbs } from '@glimmerx/component';
         export default class Component {
-          static template = hbs\`I am using {{myHelper}} here, but I forgot to tag this template literal with hbs.\`;
+          static template = hbs\`I am using {{myHelper}} here, but I forgot to import myHelper.\`;
           method() {
             return false;
           }
@@ -296,6 +330,46 @@ ruleTester.run('template-vars', rule, {
         },
       ],
       options: ['all'],
+    },
+    {
+      code: `
+        import { hbs } from '@glimmerx/component';
+        export default class Component {
+          static template = hbs\`I am using {{this.myHelper}} here, but I forgot to define myHelper.\`;
+          method() {
+            return false;
+          }
+          test = true;
+        }
+      `,
+      errors: [
+        {
+          messageId: 'undefLocalMethod',
+        },
+      ],
+      options: ['all'],
+    },
+    {
+      code: `
+        import { hbs } from '@glimmerx/component';
+        import foo3 from './foo3';
+        export default class Component {
+          static template = hbs\`I am using {{this.foo1.bar}} and {{this.foo3}} here, but I forgot to define foo3 even though I imported a different foo3.\`;
+
+          get foo1() {
+            return 1;
+          }
+
+          get foo2() {
+            return 2;
+          }
+        }
+      `,
+      errors: [
+        {
+          messageId: 'undefLocalMethod',
+        },
+      ],
     },
   ],
 });
