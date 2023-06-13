@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/modifier",
-  "version": "0.6.5",
+  "version": "0.6.8",
   "description": "Modifier Functionality",
   "keywords": [
     "ember-addon"
@@ -20,9 +20,9 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/core": "2.0.0-beta.17",
-    "@glimmer/modifier": "2.0.0-beta.17",
-    "ember-cli-babel": "7.26.2"
+    "@glimmer/core": "2.0.0-beta.21",
+    "@glimmer/modifier": "2.0.0-beta.21",
+    "ember-cli-babel": "^7.26.2"
   },
   "volta": {
     "node": "12.10.0",

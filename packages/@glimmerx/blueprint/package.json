@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/blueprint",
-  "version": "0.6.5",
+  "version": "0.6.8",
   "description": "Ember CLI blueprint for initializing a new GlimmerX application.",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/glimmerjs/glimmer-experimental#readme",
   "dependencies": {
-    "@glimmer/blueprint": "2.0.0-beta.17",
+    "@glimmer/blueprint": "2.0.0-beta.21",
     "ember-cli-string-utils": "^1.1.0",
     "walk-sync": "^2.0.2"
   },

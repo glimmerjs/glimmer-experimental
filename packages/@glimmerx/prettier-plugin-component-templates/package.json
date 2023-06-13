@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/prettier-plugin-component-templates",
-  "version": "0.6.5",
+  "version": "0.6.8",
   "description": "A prettier formatter for glimmer component templates",
   "main": "index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",

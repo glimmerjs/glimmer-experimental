@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/core",
-  "version": "0.6.5",
+  "version": "0.6.8",
   "description": "Core rendering functionality",
   "main": "dist/commonjs/index.js",
   "module": "dist/modules/index.js",
@@ -17,9 +17,9 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/core": "2.0.0-beta.17",
-    "@glimmer/interfaces": "0.77.3",
-    "@glimmer/manager": "0.77.3"
+    "@glimmer/core": "2.0.0-beta.21",
+    "@glimmer/interfaces": "0.84.0",
+    "@glimmer/manager": "0.84.0"
   },
   "volta": {
     "node": "12.10.0",

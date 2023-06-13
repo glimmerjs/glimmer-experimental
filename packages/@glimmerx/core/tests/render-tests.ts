@@ -63,7 +63,7 @@ export default function renderTests(
     });
 
     test('a component can render with helpers', async (assert) => {
-      const myHelper = helper(([name]: string, { greeting }: { greeting: string }) => {
+      const myHelper = helper(([name], { greeting }: { greeting: string }) => {
         return `helper ${greeting} ${name}`;
       });
 

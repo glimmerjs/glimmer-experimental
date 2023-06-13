@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/babel-preset",
-  "version": "0.6.5",
+  "version": "0.6.8",
   "description": "GlimmerX Babel Preset",
   "repository": "https://github.com/glimmerjs/glimmer.js",
   "author": "Tom Dale <tom@tomdale.net>",
@@ -10,7 +10,7 @@
     "test": "mocha -r esm"
   },
   "dependencies": {
-    "@glimmer/babel-preset": "2.0.0-beta.17"
+    "@glimmer/babel-preset": "2.0.0-beta.21"
   },
   "devDependencies": {
     "babel-plugin-tester": "^6.4.0",

@@ -2,6 +2,12 @@ var _class, _descriptor, _cantTouchThis, _hammerTime;
 
 function _initializerDefineProperty(target, property, descriptor, context) { if (!descriptor) return; Object.defineProperty(target, property, { enumerable: descriptor.enumerable, configurable: descriptor.configurable, writable: descriptor.writable, value: descriptor.initializer ? descriptor.initializer.call(context) : void 0 }); }
 
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+
+function _classPrivateFieldInitSpec(obj, privateMap, value) { _checkPrivateRedeclaration(obj, privateMap); privateMap.set(obj, value); }
+
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) { var desc = {}; Object.keys(descriptor).forEach(function (key) { desc[key] = descriptor[key]; }); desc.enumerable = !!desc.enumerable; desc.configurable = !!desc.configurable; if ('value' in desc || desc.initializer) { desc.writable = true; } desc = decorators.slice().reverse().reduce(function (desc, decorator) { return decorator(target, property, desc) || desc; }, desc); if (context && desc.initializer !== void 0) { desc.value = desc.initializer ? desc.initializer.call(context) : void 0; desc.initializer = undefined; } if (desc.initializer === void 0) { Object.defineProperty(target, property, desc); desc = null; } return desc; }
@@ -33,17 +39,16 @@ let Test = _setComponentTemplate(_createTemplateFactory(
   "id": null,
   "block": "[[[1,\"Hello World\"]],[],false,[]]",
   "moduleName": "(unknown template module)",
-  "scope": null,
   "isStrictMode": true
-}), (_class = (_cantTouchThis = new WeakMap(), _hammerTime = new WeakSet(), class Test extends Component {
+}), (_class = (_cantTouchThis = /*#__PURE__*/new WeakMap(), _hammerTime = /*#__PURE__*/new WeakSet(), class Test extends Component {
   constructor(...args) {
     super(...args);
 
-    _hammerTime.add(this);
+    _classPrivateMethodInitSpec(this, _hammerTime);
 
     _initializerDefineProperty(this, "bar", _descriptor, this);
 
-    _cantTouchThis.set(this, {
+    _classPrivateFieldInitSpec(this, _cantTouchThis, {
       writable: true,
       value: 'mc hammer'
     });

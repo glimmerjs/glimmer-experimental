@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/eslint-plugin",
-  "version": "0.6.5",
+  "version": "0.6.8",
   "description": "ESLint Plugin to enable and streamline glimmerx development",
   "main": "index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
@@ -20,7 +20,7 @@
     "mocha": "^7.1.1"
   },
   "peerDependencies": {
-    "@glimmer/syntax": "^0.77.5",
+    "@glimmer/syntax": "^0.84.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.29.0"
   },

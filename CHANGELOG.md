@@ -1,3 +1,47 @@
+## v0.6.8 (2022-09-06)
+
+#### :house: Internal
+* `@glimmerx/babel-preset`, `@glimmerx/blueprint`, `@glimmerx/component`, `@glimmerx/core`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/service`, `@glimmerx/ssr`, `examples`
+  * [#158](https://github.com/glimmerjs/glimmer-experimental/pull/158) Bump Glimmer Deps ([@chadhietala](https://github.com/chadhietala))
+
+#### Committers: 1
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+
+## v0.6.7 (2022-07-25)
+
+#### :rocket: Enhancement
+* `@glimmerx/component`, `@glimmerx/helper`, `@glimmerx/modifier`
+  * [#148](https://github.com/glimmerjs/glimmer-experimental/pull/148) Update types for extensibility ([@dfreeman](https://github.com/dfreeman))
+
+#### :house: Internal
+* `@glimmerx/babel-preset`, `@glimmerx/helper`, `@glimmerx/modifier`, `@glimmerx/service`, `examples`
+  * [#154](https://github.com/glimmerjs/glimmer-experimental/pull/154) Fix CI ([@dfreeman](https://github.com/dfreeman))
+
+#### Committers: 3
+- Chad Hietala ([@chadhietala](https://github.com/chadhietala))
+- Dan Freeman ([@dfreeman](https://github.com/dfreeman))
+- Steven Wan ([@Swannerino](https://github.com/Swannerino))
+
+## v0.6.6 (2021-12-08)
+
+#### :rocket: Enhancement
+* `@glimmerx/storybook`, `examples`
+  * [#129](https://github.com/glimmerjs/glimmer-experimental/pull/129) Bump storybook from 6.1.21 to 6.4.1 ([@tarinrickett](https://github.com/tarinrickett))
+
+#### :bug: Bug Fix
+* `@glimmerx/core`, `@glimmerx/eslint-plugin`, `@glimmerx/helper`, `@glimmerx/ssr`, `@glimmerx/webpack-loader`, `examples`
+  * [#130](https://github.com/glimmerjs/glimmer-experimental/pull/130) Change all glimmer-vm dependencies to be consitent at 0.77.6 ([@chiragpat](https://github.com/chiragpat))
+
+#### :memo: Documentation
+* `@glimmerx/prettier-plugin-component-templates`
+  * [#122](https://github.com/glimmerjs/glimmer-experimental/pull/122) Fix typo in README.md title ([@wondersloth](https://github.com/wondersloth))
+
+#### Committers: 3
+- Chirag Patel ([@chiragpat](https://github.com/chiragpat))
+- Matt Edwards ([@wondersloth](https://github.com/wondersloth))
+- [@tarinrickett](https://github.com/tarinrickett)
+
+
 ## v0.6.5 (2021-07-15)
 
 #### :rocket: Enhancement

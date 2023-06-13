@@ -1,6 +1,6 @@
 {
   "name": "@glimmerx/compiler",
-  "version": "0.6.5",
+  "version": "0.6.8",
   "description": "Compiler functionality",
   "main": "index.js",
   "repository": "https://github.com/glimmerjs/glimmer-experimental",
@@ -11,7 +11,7 @@
     "build": "webpack"
   },
   "dependencies": {
-    "@glimmer/compiler": "0.73.0"
+    "@glimmer/compiler": "0.84.0"
   },
   "volta": {
     "node": "12.10.0",
