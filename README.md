@@ -21,7 +21,7 @@ Components are defined as classes with an inline template:
 
 ```js
 // src/MyComponent.js
-import Component from '@glimmerx/component';
+import Component, { hbs } from '@glimmerx/component';
 import Button from './Button';
 
 export default class MyComponent extends Component {
